@@ -9,11 +9,10 @@ ops = {
     '^' : operator.xor,
 }
 
-operator_input = "+"
-number1 = 4
-number2 = 2
-
-print(ops[operator_input](number1,number2))
+# operator_input = "+"
+# number1 = 4
+# number2 = 2
+# print(ops[operator_input](number1,number2))
 
 
 data_list = []
