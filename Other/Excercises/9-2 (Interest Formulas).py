@@ -50,7 +50,7 @@ def get_interest_rate():
     while not interest_rate.is_integer():
         print("Error: Please enter a whole number.")
         interest_rate = get_non_negative_number("Please enter your interest rate as a whole number:")
-    return (interest_rate / 100)
+    return interest_rate / 100
 
 def get_num_years():
     'Prompts user for number of years'
