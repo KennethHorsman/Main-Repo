@@ -11,9 +11,9 @@ from datetime import datetime
 
 def main():
     'Displays the users current age'
-    age = calculate_age()
     month_as_string = month_dict[currentMonth]
     day_suffix = get_suffix()
+    age = calculate_age()
     print(f'The current date is {month_as_string.title()} {currentDay}{day_suffix}, {currentYear}.')
     print(f"You are {age} year{'s' if age > 1 else ''} old.")
 
