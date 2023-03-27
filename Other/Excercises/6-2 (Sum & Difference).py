@@ -1,4 +1,5 @@
 """
+a. Design the logic for a program that allows a user to enter 20 numbers, then displays each number and its difference from the numeric average of the numbers entered.
 b. Modify the program in Exercise 2a so that the user can enter any amount of numbers up to 20 until a sentinel value is entered.
 """
 
