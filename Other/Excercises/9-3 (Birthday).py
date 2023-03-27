@@ -54,11 +54,11 @@ def get_user_year():
 def determine_leap_year(year):
     'Determines if birth year was a leap year'
     leap_year = False
-    if year % 100:
-        if year % 400:
+    if year % 100 == 0:
+        if year % 400 == 0:
             leap_year = True
-    if not year % 100:
-        if year % 4:
+    if year % 100 != 0:
+        if year % 4 == 0:
             leap_year = True
     return leap_year
 
