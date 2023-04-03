@@ -35,7 +35,7 @@ def validate_user_date():
     get_day = True
     while get_day is True:
         day = get_user_day()
-        if day == 0 or day > month_end_dict[month]:
+        if day > month_end_dict[month]:
             print("Error: That is an invalid date for your month of birth.")
         else:
             get_day = False
@@ -82,7 +82,7 @@ def get_user_day():
     get_day = True
     while get_day is True:
         day_input = input("Please enter the day you were born: ")
-        if day_input.isnumeric() and float(day_input).is_integer() and float(day_input) <= 31:
+        if day_input.isnumeric() and float(day_input).is_integer() and float(day_input) <= 31 and float(day_input) > 0:
             get_day = False
             return int(day_input)
         print("Error: Invalid character(s) detected.")
