@@ -1,0 +1,112 @@
+FUNCTION main()
+    DISPLAY "Welcome to the slot machine!"
+    CALL slot_machine()
+    DISPLAY "Thanks for playing. Come again!"
+END FUNCTION
+
+FUNCTION slot_machine()
+    SET total_money_won to 0
+    SET total_money_lost to 0
+    SET roll_slot_machine to True
+
+    WHILE roll_slot_machine is True DO
+        SET images to CALL get_random_images()
+        SET money_inserted to CALL get_user_money()
+        SET total_length to SUM length(x) FOR x IN images + 10
+        DISPLAY "-" repeated total_length
+        DISPLAY "| " + images[0] + " | " + images[1] + " | " + images[2] + " |"
+        DISPLAY "-" repeated total_length
+
+        SET image_dict to empty dictionary
+        FOR x IN images DO
+            IF x not in image_dict THEN
+                SET image_dict[x] to 0
+            END IF
+            INCREMENT image_dict[x] by 1
+        END FOR
+
+        SET num_matches to maximum value in image_dict
+
+        IF num_matches = 3 THEN
+            SET amount_won to 3 times money_inserted
+            DISPLAY "You've won $" + amount_won formatted to 2 decimal places with commas + "!"
+        ELSE IF num_matches = 2 THEN
+            SET amount_won to 2 times money_inserted
+            DISPLAY "You've won $" + amount_won formatted to 2 decimal places with commas + "!"
+        ELSE
+            SET amount_won to 0
+            DISPLAY "Oh no! You didn't win anything that time."
+        END IF
+
+        INCREMENT total_money_won by amount_won
+        INCREMENT total_money_lost by money_inserted
+        SET grand_total to total_money_won - total_money_lost
+
+        IF CALL ask_to_play_again() is False THEN
+            SET roll_slot_machine to False
+            CALL display_total(grand_total)
+            RETURN
+        END IF
+    END WHILE
+END FUNCTION
+
+FUNCTION get_random_images()
+    SET images to ["Cherry", "Orange", "Plums", "Bell", "Melon", "Bar"]
+    RETURN list of 3 random items from images
+END FUNCTION
+
+FUNCTION get_user_money()
+    SET money_input to CALL get_non_negative_number("Enter the amount of money you'd like to insert: ")
+    RETURN money_input
+END FUNCTION
+
+FUNCTION get_non_negative_number(prompt: str) -> float
+    SET test_number to True
+    WHILE test_number is True DO
+        SET user_input to INPUT prompt, stripped of '$' and with commas removed
+        IF NOT CALL is_valid_number(user_input) THEN
+            DISPLAY "Error: Invalid character(s) detected."
+        ELSE IF user_input as float < 0 THEN
+            DISPLAY "Error: The amount of money inserted must be a non-negative number."
+        ELSE
+            SET test_number to False
+            RETURN user_input as float
+        END IF
+    END WHILE
+END FUNCTION
+
+FUNCTION is_valid_number(num: str) -> bool
+    TRY to convert num to float
+    IF conversion is successful THEN
+        RETURN True
+    ELSE
+        RETURN False
+    END IF
+END FUNCTION
+
+FUNCTION ask_to_play_again() -> bool
+    SET play_again to None
+    WHILE play_again not in (True, False) DO
+        SET play_again to INPUT "Would you like to play again? Enter 'YES' or 'NO': ", converted to uppercase
+        IF play_again = "YES" THEN
+            RETURN True
+        ELSE IF play_again = "NO" THEN
+            RETURN False
+        END IF
+    END WHILE
+
+FUNCTION display_total(grand_total: float)
+    DISPLAY "Thanks for playing!"
+    IF grand_total > 0 THEN
+        DISPLAY "You won a total of $" + grand_total formatted to 2 decimal places with commas + ". Congratulations!"
+    ELSE IF grand_total == 0 THEN
+        DISPLAY "You didn't win or lose any money."
+    ELSE
+        SET abs_grand_total to absolute value of grand_total
+        DISPLAY "You lost a total of $" + abs_grand_total formatted to 2 decimal places with commas + ". Better luck next time!"
+    END IF
+END FUNCTION
+
+IF name is equal to "main" THEN
+    CALL main()
+END IF
