@@ -123,3 +123,5 @@ def display_total(total):
 
 if __name__=="__main__":
     main()
+
+input('')

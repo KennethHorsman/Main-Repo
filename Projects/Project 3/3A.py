@@ -47,3 +47,5 @@ def is_valid_number(num: str) -> bool:
 
 if __name__=="__main__":
     main()
+
+input('')
