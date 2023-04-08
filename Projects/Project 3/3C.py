@@ -26,6 +26,7 @@ def main():
     print("Welcome to the slot machine!")
     slot_machine()
     print("Thanks for playing. Come again!")
+    input('')
 
 def slot_machine():
     "Determines if the user won money from the slot machine game"
@@ -123,5 +124,3 @@ def display_total(total):
 
 if __name__=="__main__":
     main()
-
-input('')

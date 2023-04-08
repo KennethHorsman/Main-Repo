@@ -17,7 +17,7 @@ def main():
     feet = get_number_feet()
     inches = feet * 12
     print(f"{int(feet) if feet.is_integer() else feet} feet is equivalent to {int(inches) if inches.is_integer() else inches} inches.")
-    return
+    input('')
 
 def get_number_feet():
     "Prompts user to input number of feet"
@@ -47,5 +47,3 @@ def is_valid_number(num: str) -> bool:
 
 if __name__=="__main__":
     main()
-
-input('')

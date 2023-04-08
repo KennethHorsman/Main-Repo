@@ -24,6 +24,7 @@ def main():
         guess_random_number()
         play_again = ask_to_play_again()
     print("Thanks for playing!")
+    input('')
 
 def guess_random_number():
     "Determines if users guess was correct"
@@ -80,5 +81,3 @@ def ask_to_play_again():
 
 if __name__=="__main__":
     main()
-
-input('')
