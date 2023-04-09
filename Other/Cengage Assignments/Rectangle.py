@@ -27,3 +27,19 @@ print("Perimeter of rectangle1 is " + str(rectangle1.calculatePerimeter()))
 print("Area of rectangle1 is " + str(rectangle1.calculateArea()))
 print("Perimeter of rectangle2 is " + str(rectangle2.calculatePerimeter()))
 print("Area of rectangle2 is " + str(rectangle2.calculateArea()))
+
+# EXAMPLE
+'''
+class Person:
+  def __init__(self, fname, lname):
+    self.firstname = fname
+    self.lastname = lname
+
+  def printname(self):
+    print(self.firstname, self.lastname)
+
+#Use the Person class to create an object, and then execute the printname method:
+
+x = Person("John", "Doe")
+x.printname()
+'''
