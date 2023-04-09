@@ -1,4 +1,20 @@
 '''
+------------------------------
+|         TermPaper          |
+------------------------------
+| - authorName: String       |
+| - subject: String          |
+| - letterGrade: String      |
+------------------------------
+| + setAuthorName(name: String) : void |
+| + setSubject(subject: String) : void |
+| + setLetterGrade(grade: String) : void |
+| + getAuthorName() : String |
+| + getSubject() : String |
+| + getLetterGrade() : String |
+| + __str__() : String |
+------------------------------
+
 CLASS TermPaper:
     FUNCTION init(self):
         SET author_name to empty string
@@ -22,23 +38,6 @@ CLASS TermPaper:
 
     FUNCTION get_grade(self):
         RETURN grade
-'''
-'''
-------------------------------
-|         TermPaper          |
-------------------------------
-| - authorName: String       |
-| - subject: String          |
-| - letterGrade: String      |
-------------------------------
-| + setAuthorName(name: String) : void |
-| + setSubject(subject: String) : void |
-| + setLetterGrade(grade: String) : void |
-| + getAuthorName() : String |
-| + getSubject() : String |
-| + getLetterGrade() : String |
-| + __str__() : String |
-------------------------------
 '''
 
 class TermPaper:
