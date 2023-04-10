@@ -1,4 +1,15 @@
+#pylint: disable=missing-class-docstring
+#pylint: disable=missing-function-docstring
+#pylint: disable=trailing-whitespace
+#pylint: disable=invalid-name
+
 '''
+Design a class named TermPaper that holds an author's name, 
+the subject of the paper, and an assigned letter grade. 
+Include methods to set the values for each data field and 
+display the values for each data field. Create the class diagram and 
+write the pseudocode that defines the class.
+
 ------------------------------
 |         TermPaper          |
 ------------------------------
@@ -17,12 +28,12 @@
 
 CLASS TermPaper:
     FUNCTION init(self):
-        SET author_name to empty string
+        SET author to empty string
         SET subject to empty string
         SET grade to empty string
 
     FUNCTION set_author_name(self, name):
-        SET author_name to name
+        SET author to name
 
     FUNCTION set_subject(self, subject):
         SET subject to subject
@@ -31,7 +42,7 @@ CLASS TermPaper:
         SET grade to grade
 
     FUNCTION get_author_name(self):
-        RETURN author_name
+        RETURN author
 
     FUNCTION get_subject(self):
         RETURN subject
@@ -41,35 +52,28 @@ CLASS TermPaper:
 '''
 
 class TermPaper:
-    
-    def __init__(self):
-        self.authorName = ""
-        self.subject = ""
-        self.letterGrade = ""
-
-    def setAuthorName(self, authorName):
-        self.authorName = authorName
-
-    def setSubject(self, subject):
+    def __init__(self, author=None, subject=None, grade=None):
+        self.author = author
         self.subject = subject
-
-    def setLetterGrade(self, letterGrade):
-        self.letterGrade = letterGrade
-
-    def getAuthorName(self):
-        return self.authorName
-
-    def getSubject(self):
-        return self.subject
-
-    def getLetterGrade(self):
-        return self.letterGrade
-
-    def __str__(self):
-        return "Author Name: " + self.authorName + "\nSubject: " + self.subject + "\nLetter Grade: " + self.letterGrade
-    
-myTermPaper = TermPaper()
-myTermPaper.setAuthorName("John Smith")
-myTermPaper.setSubject("History of Art")
-myTermPaper.setLetterGrade("A+")
-print(myTermPaper)
+        self.grade = grade
+        
+    def set_author(self, author):
+        self.author = author
+        
+    def set_subject(self, subject):
+        self.subject = subject
+        
+    def set_grade(self, grade):
+        self.grade = grade
+        
+    def display(self):
+        for field, value in self.__dict__.items():
+            if value is not None:
+                print(f"{field.title()}: {value}")
+        
+        
+paper = TermPaper()
+paper.set_author("Jane Smith")
+paper.set_subject("History of the American Revolution")
+paper.set_grade("A")
+paper.display()
