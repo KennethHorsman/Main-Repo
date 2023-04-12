@@ -16,68 +16,36 @@ manually, but allow the other to use the default value supplied by the construct
 Then, display each Circle's values.
 '''
 
-import math
-
 class Circle:
-    "Determines diameter & area based on given r"
+    """A class to represent a circle"""
+    
     def __init__(self, radius=1):
-        self.radius = radius
-        self.diameter = None
-        self.area = None
+        """Initialize a Circle with a given radius"""
         self.set_radius(radius)
         
     def set_radius(self, radius):
+        """Set the radius of the circle"""
         if radius <= 0:
-            raise ValueError("The radius must be greater than zero.")
-        else:
-            self.radius = radius
-            self.diameter = self.radius * 2
-            self.area = math.pi * (self.radius ** 2)
-     
+            raise ValueError("Radius must be greater than zero")
+        self.radius = radius
+        self.diameter = radius * 2
+        self.area = round(radius**2 * 3.14, 2)
+    
     def get_radius(self):
+        """Return the radius of the circle"""
         return self.radius
     
     def get_diameter(self):
+        """Return the diameter of the circle"""
         return self.diameter
     
     def get_area(self):
+        """Return the area of the circle"""
         return self.area
     
-    def display(self):
-        print("Circle:")
-        for field, value in self.__dict__.items():
-            print(f"{field.title()}: {value}")
-        print()
-        
-def is_valid_number(num):
-    try:
-        float(num)
-        return True
-    except ValueError:
-        return False
+circle1 = Circle()
+circle2 = Circle(5)
 
-def get_radius_from_user():
-    get_input = True
-    while get_input is True:
-        radius_input = input("Please enter a radius: ")
-        if is_valid_number(radius_input):
-            if float(radius_input) > 0:
-                return float(radius_input)
-        else:
-            print("The radius must be a number greater than zero.")
-        
-def print_circles():
-    circle_list = []
-    circle_list.append(Circle())
-    user_radius = get_radius_from_user()
-    circle_list.append(Circle(user_radius))
-    
-    for circle in circle_list:
-        print()
-        print(f"CIRCLE {circle_list.index(circle) + 1}")
-        print(f"Radius: {circle.get_radius():,.2f}")
-        print(f"Diameter: {circle.get_diameter():,.2f}")
-        print(f"Area: {circle.get_area():,.2f}")
-    
-print_circles()
+print(f"Circle 1: \nRadius = {circle1.get_radius()} \nDiameter = {circle1.get_diameter()} \nArea = {circle1.get_area()}")
+print(f"\nCircle 2: \nRadius = {circle2.get_radius()} \nDiameter = {circle2.get_diameter()} \nArea = {circle2.get_area()}")
 
