@@ -14,6 +14,51 @@ Create the class diagram and write the pseudocode that defines the class.
 b. Design an application that declares two Circles. Set the radius of one 
 manually, but allow the other to use the default value supplied by the constructor. 
 Then, display each Circle's values.
+
+----------------------------------------
+|               Circle                 |
+----------------------------------------
+| - radius: float                      |
+| + count: int (class variable)        |
+| - label: str                         |
+----------------------------------------
+| + __init__(radius: float = 1)        |
+| + radius() -> float                  |
+| + radius(value: float) -> None       |
+| + diameter() -> float                |
+| + area() -> float                    |
+| + display() -> None                  |
+----------------------------------------
+
+CLASS Circle:
+    count = 0
+    
+    FUNCTION __init__(self, radius=1):
+        SET self.radius to radius
+        ADD 1 to Circle.count
+        SET self.label to "Circle " + Circle.count
+    
+    FUNCTION radius(self):
+        RETURN self._radius
+        
+    FUNCTION radius(value):
+        IF value is not a positive number THEN
+            RAISE ValueError("Radius must be a positive number")
+        SET self._radius to value
+    
+    FUNCTION diameter(self):
+        RETURN self.radius * 2
+    
+    FUNCTION area(self):
+        RETURN (self.radius ** 2) * pi
+    
+    FUNCTION display(self):
+        PRINT self.label + ":\nRadius = " + self.radius + "\nDiameter = " + self.diameter + "\nArea = " + self.area
+
+circle1 = Circle()
+circle2 = Circle(5)
+circle1.display()
+circle2.display()
 '''
 
 import math
@@ -49,20 +94,12 @@ class Circle:
         """Get the area of the circle."""
         return (self.radius ** 2) * math.pi
     
-    def display(self, *props):
+    def display(self):
         """Display information about the circle."""
-        if not props:
-            print(f"{self.label}:\nRadius = {self.radius}\nDiameter = {self.diameter}\nArea = {self.area}\n")
-        else:
-            valid_props = {"radius": self.radius, "diameter": self.diameter, "area": self.area}
-            for prop in props:
-                prop = prop.lower()
-                if prop not in valid_props:
-                    raise ValueError(f"Invalid property name: {prop}")
-                print(f"{self.label}:\n{prop.capitalize()} = {valid_props[prop]}\n")
+        print(f"{self.label}:\nRadius = {self.radius}\nDiameter = {self.diameter}\nArea = {self.area}\n")
 
 if __name__=='__main__':
     circle1 = Circle()
     circle2 = Circle(5)
-    circle1.display("diameter")
+    circle1.display()
     circle2.display()
