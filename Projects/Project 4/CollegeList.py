@@ -94,7 +94,7 @@ while getinput is True:
             number = input(f"Enter which {person_dict[persontype]} you would like to edit: ")
             if number.isdigit():
                 if persontype == "C":
-                    if int(number) in range(1,len(c_list)+2):
+                    if int(number) in range(1,len(c_list)+1):
                         c_info = input("Enter 'F' to edit first name, 'L' for last name, 'A' for address, 'Z' for zipcode, 'P' for phonenumber, 'N' for SSN, 'S' for salary, or 'D' for department: ").upper()
                         if c_info in info_dict:
                             c_item = info_dict[c_info]
@@ -109,7 +109,7 @@ while getinput is True:
                     else:
                         print("Sorry, there is no college employee with that number.")
                 if persontype == "F":
-                    if int(number) in range(1,len(f_list)+2):
+                    if int(number) in range(1,len(f_list)+1):
                         f_info = input("Enter 'F' to edit first name, 'L' for last name, 'A' for address, 'Z' for zipcode, 'P' for phonenumber, 'N' for SSN, 'S' for salary, 'D' for department, or 'T' for tenured status: ").upper()
                         if f_info in info_dict:
                             f_item = info_dict[f_info]
@@ -124,7 +124,7 @@ while getinput is True:
                     else:
                         print("Sorry, there is no faculty member with that number.")
                 if persontype == "S":
-                    if int(number) in range(1,len(s_list)+2):
+                    if int(number) in range(1,len(s_list)+1):
                         s_info = input("Enter 'F' to edit first name, 'L' for last name, 'A' for address, 'Z' for zipcode, 'P' for phonenumber, 'M' for major, or 'G' for GPA: ").upper()
                         if s_info in info_dict:
                             s_item = info_dict[s_info]
@@ -140,7 +140,7 @@ while getinput is True:
                         print("Sorry, there is no student with that number.")
             else:
                 print("Error: That is not a valid number.")
-        prompt_edit = input("Would you like to edit any of the information entered? (y/n): ").upper()
+        prompt_edit = input("Would you still like to edit any of the information entered? (y/n): ").upper()
     elif prompt_edit == "N":
         print("All lists created successfully.")
         getinput = False
