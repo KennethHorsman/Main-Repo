@@ -1,3 +1,5 @@
+#pylint: disable=line-too-long
+#pylint: disable=invalid-name
 '''
 Write an application named CollegeList that implements a list 
 of four “regular” CollegeEmployee, three Faculty, and seven Students. 
@@ -25,10 +27,6 @@ print("This program creates and displays a list of up to 4 college employees, 3 
 c_list = []
 f_list = []
 s_list = []
-c_count = 0
-f_count = 0
-s_count = 0
-total_count = 0
 
 gettype = True
 while gettype is True:
@@ -36,28 +34,22 @@ while gettype is True:
     if type_input not in ("C","F","S","Q"):
         print("Error: Invalid input.")
     elif type_input =="C":
-        if c_count < 4:
-            c_count += 1
-            total_count += 1
+        if len(c_list) < 4:
             c_list.append(CollegeEmployee())
         else:
             print("Maximum number of college employee's reached.")
     elif type_input =="F":
-        if f_count < 3:
-            f_count += 1
-            total_count += 1
+        if len(f_list) < 3:
             f_list.append(Faculty())
         else:
             print("Maximum number of faculty members reached.")
     elif type_input =="S":
-        if s_count < 7:
-            s_count += 1
-            total_count += 1
+        if len(s_list) < 7:
             s_list.append(Student())
         else:
             print("Maximum number of students reached.")
     else:
-        if total_count == 0:
+        if len(c_list) + len(f_list) + len(s_list) == 0:
             print("Please enter at least 1 person.")
         else:
             gettype = False

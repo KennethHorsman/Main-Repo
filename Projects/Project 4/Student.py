@@ -8,12 +8,14 @@ to accept and display these additional facts.
 from Person import Person
 
 class Student(Person):
+    'Adds a major and GPA to a Person'
     def __init__(self):
         super().__init__()
         self.setmajor()
         self.setgpa()
-        
+
     def setmajor(self):
+        'Prompts user to enter a major'
         getmajor = True
         while getmajor is True:
             major_input = input("Enter major: ")
@@ -25,8 +27,9 @@ class Student(Person):
             else:
                 self.major = major_input.title()
                 getmajor = False
-                
+
     def setgpa(self):
+        'Prompts user to enter a GPA'
         getgpa = True
         while getgpa is True:
             gpa_input = input("Enter GPA on a 4.0 scale: ")
@@ -40,10 +43,10 @@ class Student(Person):
                     self.gpa = gpa_input
                     getgpa = False
                 else:
-                    print("That is not a valid GPA.")     
+                    print("That is not a valid GPA.")
             else:
-                print("That is not a valid GPA.")  
-        
+                print("That is not a valid GPA.")
+
     def display(self):
         super().display()
         print(f"Major: {self.major}")

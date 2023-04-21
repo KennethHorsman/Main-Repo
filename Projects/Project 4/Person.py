@@ -1,3 +1,5 @@
+#pylint: disable=line-too-long
+#pylint: disable=invalid-name
 '''
 A Person contains a first name, last name, street address, zip code, and phone number. 
 The class also includes a method that sets each data field, using a series of dialog boxes and 
@@ -5,14 +7,16 @@ a display method that displays all of a Persons information on a single line at 
 '''
 
 class Person:
+    'Base class is a Person: includes a first name, last name, street address, zip code, and phone number.'
     def __init__(self):
         self.setfirstname()
         self.setlastname()
         self.setaddress()
         self.setzipcode()
         self.setphonenumber()
-        
+
     def setfirstname(self):
+        'Prompts user to enter a first name'
         getfirstname = True
         while getfirstname is True:
             firstname_input = input("Enter first name: ")
@@ -24,8 +28,9 @@ class Person:
             else:
                 self.firstname = firstname_input.title()
                 getfirstname = False
-                
+
     def setlastname(self):
+        'Prompts user to enter a last name'
         getlastname = True
         while getlastname is True:
             lastname_input = input("Enter last name: ")
@@ -39,6 +44,7 @@ class Person:
                 getlastname = False
 
     def setaddress(self):
+        'Prompts user to enter a street address'
         getaddress = True
         while getaddress is True:
             address_input = input("Enter address: ")
@@ -50,8 +56,9 @@ class Person:
             else:
                 self.address = address_input.title()
                 getaddress = False
-                
+
     def setzipcode(self):
+        'Prompts user to enter a zipcode'
         getzipcode = True
         while getzipcode is True:
             zipcode_input = input("Enter zipcode: ")
@@ -61,12 +68,13 @@ class Person:
             elif zipcode_input == "":
                 print("Error: No input given.")
             elif len(zipcode_input.replace(" ","")) != 5:
-                print("That is not a valid zipcode.") 
+                print("That is not a valid zipcode.")
             else:
                 self.zipcode = zipcode_input
                 getzipcode = False
-                
+
     def setphonenumber(self):
+        'Prompts user to enter a phone number'
         getphonenumber = True
         while getphonenumber is True:
             phonenumber_input = input("Enter phone number: ")
@@ -89,8 +97,9 @@ class Person:
                 phonenumber_with_dashes = phonenumber_input[:3] + "-" + phonenumber_input[3:6] + "-" + phonenumber_input[6:]
                 self.phonenumber = phonenumber_with_dashes
                 getphonenumber = False
-        
+
     def display(self):
+        'Displays all of a Persons information'
         print(f"First name: {self.firstname}")
         print(f"Last name: {self.lastname}")
         print(f"Address: {self.address}")
