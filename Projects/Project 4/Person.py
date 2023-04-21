@@ -47,7 +47,7 @@ class Person:
         'Prompts user to enter a street address'
         getaddress = True
         while getaddress is True:
-            address_input = input("Enter address: ")
+            address_input = input("Enter street address: ")
             invalid_input = [x for x in address_input.replace("-","").replace(" ","") if not x.isalnum()]
             if len(invalid_input) > 0:
                 print(f"Invalid input found: {invalid_input}")

@@ -5,6 +5,14 @@ point average as well as methods that override the Person methods
 to accept and display these additional facts.
 '''
 
+def is_valid_number(number):
+    'Determines if a number is a valid number'
+    try:
+        float(number)
+        return True
+    except ValueError:
+        return False
+
 from Person import Person
 
 class Student(Person):
@@ -38,8 +46,8 @@ class Student(Person):
                 print(f"Invalid input found: {invalid_input}")
             elif gpa_input == "":
                 print("Error: No input given.")
-            elif len(gpa_input) == 3:
-                if gpa_input[1] == "." and gpa_input[0].isdigit() and gpa_input[2].isdigit():
+            elif is_valid_number(gpa_input):
+                if len(gpa_input) == 3 and 0 <= float(gpa_input) <= 4.0:
                     self.gpa = gpa_input
                     getgpa = False
                 else:
@@ -51,3 +59,4 @@ class Student(Person):
         super().display()
         print(f"Major: {self.major}")
         print(f"GPA: {self.gpa}")
+        print('')

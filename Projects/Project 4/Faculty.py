@@ -34,3 +34,4 @@ class Faculty(CollegeEmployee):
     def display(self):
         super().display()
         print(f"Tenured: {self.tenured}")
+        print('')
