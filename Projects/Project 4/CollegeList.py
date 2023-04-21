@@ -50,15 +50,15 @@ while gettype is True:
             print("Maximum number of students reached.")
     else:
         if len(c_list) + len(f_list) + len(s_list) == 0:
-            print("Please enter at least 1 person.")
+            print("Please enter information for at least 1 person.")
         else:
             gettype = False
-            for x in range(len(c_list)):
-                print(f"\n- College Employee #{x+1} -")
-                c_list[x].display()
-            for x in range(len(f_list)):
-                print(f"\n- Faculty Member #{x+1} -")
-                f_list[x].display()
-            for x in range(len(s_list)):
-                print(f"\n- Student #{x+1} -")
-                s_list[x].display()
+            for i, employee in enumerate(c_list):
+                print(f"\n- College Employee #{i+1} -")
+                employee.display()
+            for i, faculty_member in enumerate(f_list):
+                print(f"\n- Faculty Member #{i+1} -")
+                faculty_member.display()
+            for i, student in enumerate(s_list):
+                print(f"\n- Student #{i+1} -")
+                student.display()
