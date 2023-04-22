@@ -7,7 +7,7 @@ point average as well as methods that override the Person methods
 to accept and display these additional facts.
 '''
 
-from Person import Person, getalpha, getnumeric
+from Person import Person, getalpha
 
 class Student(Person):
     'Adds a major and GPA to a Person'
@@ -18,14 +18,19 @@ class Student(Person):
 
     def setmajor(self):
         'Prompts user to enter a major'
-        self.major = getalpha("Enter a major: ")
+        self.major = getalpha("Enter major: ")
 
     def setgpa(self):
         'Prompts user to enter a GPA'
         test_input = True
         while test_input is True:
-            user_input = getnumeric("Enter GPA: ")
-            if not len(user_input) == 3 or (user_input[0] and user_input[2]).isnumeric() and user_input[1] == ".":
+            user_input = input("Enter GPA on a 4.0 scale: ")
+            invalid_input = [x for x in user_input.replace(".","") if not x.isnumeric()]
+            if len(invalid_input) > 0:
+                print(f"Please try again. Invalid input found: {invalid_input}")
+            elif user_input == "":
+                print("Please try again. No input given.")
+            elif not len(user_input) == 3 or not ((user_input[0] and user_input[2]).isnumeric() and user_input[1] == "."):
                 print("Please try again. That is not a valid GPA.")
             else:
                 test_input = False

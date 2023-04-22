@@ -23,15 +23,15 @@ class CollegeEmployee(Person):
         while test_input is True:
             user_input = getnumeric("Enter SSN without dashes: ")
             if len(user_input) != 9:
-                print("Please try again. That is not a valid phone number.")
+                print("Please try again. That is not a valid SSN.")
             else:
                 test_input = False
                 self.ssn = user_input[:3] + "-" + user_input[3:5] + "-" + user_input[5:]
 
     def setsalary(self):
         'Prompts user to enter an annual salary'
-        user_input = getnumeric("Enter salary without any symbols: ")
-        self.salary = f"${float(user_input):,.2f}"
+        user_input = getnumeric("Enter salary with no symbols: ")
+        self.salary = f"${float(user_input):,}"
 
     def setdepartment(self):
         'Prompts user to enter a department'
