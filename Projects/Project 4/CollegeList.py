@@ -64,6 +64,8 @@ while gettype is True:
                 print(f"- Student #{i+1} -")
                 student.display()
 
+"All of the code below is an added feature I made to allow the user to edit any of the information entered."
+
 person_dict = {
     "C" : ["college employee", c_list, ["N","S","D"]],
     "F" : ["faculty member", f_list, ["N","S","D","T"]],
