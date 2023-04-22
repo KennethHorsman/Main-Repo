@@ -1,3 +1,5 @@
+#pylint: disable=line-too-long
+#pylint: disable=invalid-name
 '''
 Student descends from Person. In addition to the fields available 
 in Person, a Student contains a major field of study and a grade 
@@ -5,15 +7,7 @@ point average as well as methods that override the Person methods
 to accept and display these additional facts.
 '''
 
-def is_valid_number(number):
-    'Determines if a number is a valid number'
-    try:
-        float(number)
-        return True
-    except ValueError:
-        return False
-
-from Person import Person
+from Person import Person, getalpha, getnumeric
 
 class Student(Person):
     'Adds a major and GPA to a Person'
@@ -24,36 +18,18 @@ class Student(Person):
 
     def setmajor(self):
         'Prompts user to enter a major'
-        getmajor = True
-        while getmajor is True:
-            major_input = input("Enter major: ")
-            invalid_input = [x for x in major_input.replace("-","").replace(" ","") if not x.isalpha()]
-            if len(invalid_input) > 0:
-                print(f"Invalid input found: {invalid_input}")
-            elif major_input == "":
-                print("Error: No input given.")
-            else:
-                self.major = major_input.title()
-                getmajor = False
+        self.major = getalpha("Enter a major: ")
 
     def setgpa(self):
         'Prompts user to enter a GPA'
-        getgpa = True
-        while getgpa is True:
-            gpa_input = input("Enter GPA on a 4.0 scale: ")
-            invalid_input = [x for x in gpa_input.replace(".","") if not x.isnumeric()]
-            if len(invalid_input) > 0:
-                print(f"Invalid input found: {invalid_input}")
-            elif gpa_input == "":
-                print("Error: No input given.")
-            elif is_valid_number(gpa_input):
-                if len(gpa_input) == 3 and 0 <= float(gpa_input) <= 4.0:
-                    self.gpa = gpa_input
-                    getgpa = False
-                else:
-                    print("That is not a valid GPA.")
+        test_input = True
+        while test_input is True:
+            user_input = getnumeric("Enter GPA: ")
+            if not len(user_input) == 3 or (user_input[0] and user_input[2]).isnumeric() and user_input[1] == ".":
+                print("Please try again. That is not a valid GPA.")
             else:
-                print("That is not a valid GPA.")
+                test_input = False
+                self.gpa = user_input
 
     def display(self):
         super().display()

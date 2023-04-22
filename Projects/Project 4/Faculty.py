@@ -17,19 +17,19 @@ class Faculty(CollegeEmployee):
 
     def settenuredstatus(self):
         'Prompts user to enter whether the Faculty member is tenured.'
-        getstatus = True
-        while getstatus is True:
+        test_input = True
+        while test_input is True:
             tenured_input = input("If tenured, enter 'Y'. Otherwise, enter 'N': ").upper()
             if tenured_input == "":
                 print("Error: No input given.")
             elif tenured_input != "Y" and tenured_input != "N":
-                print("Error: Please only enter 'Y' or 'N'.")
+                print("Error: Please only enter one of the below options.")
             elif tenured_input == "Y":
+                test_input = False
                 self.tenured = True
-                getstatus = False
             else:
+                test_input = False
                 self.tenured = False
-                getstatus = False
 
     def display(self):
         super().display()

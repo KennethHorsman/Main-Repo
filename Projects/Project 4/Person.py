@@ -1,13 +1,55 @@
 #pylint: disable=line-too-long
 #pylint: disable=invalid-name
+#pylint: disable=inconsistent-return-statements
 '''
 A Person contains a first name, last name, street address, zip code, and phone number. 
 The class also includes a method that sets each data field, using a series of dialog boxes and 
 a display method that displays all of a Persons information on a single line at the command line on the screen.
 '''
 
+# FUNCTIONS
+def getalpha(prompt):
+    'Tests if a string is alphabetic'
+    test_input = True
+    while test_input is True:
+        user_input = input(prompt)
+        invalid_input = [x for x in user_input.replace("-","").replace(" ","") if not x.isalpha()]
+        if len(invalid_input) > 0:
+            print(f"Please try again. Invalid input found: {invalid_input}")
+        elif user_input == "":
+            print("Please try again. No input given.")
+        else:
+            return user_input.title()
+
+def getalnum(prompt):
+    'Tests if a string is alphanumeric'
+    test_input = True
+    while test_input is True:
+        user_input = input(prompt)
+        invalid_input = [x for x in user_input.replace("-","").replace(" ","") if not x.isalnum()]
+        if len(invalid_input) > 0:
+            print(f"Please try again. Invalid input found: {invalid_input}")
+        elif user_input == "":
+            print("Please try again. No input given.")
+        else:
+            return user_input.title()
+
+def getnumeric(prompt):
+    'Tests if a string is numeric'
+    test_input = True
+    while test_input is True:
+        user_input = input(prompt)
+        invalid_input = [x for x in user_input if not x.isnumeric()]
+        if len(invalid_input) > 0:
+            print(f"Please try again. Invalid input found: {invalid_input}")
+        elif user_input == "":
+            print("Please try again. No input given.")
+        else:
+            return user_input
+
+# CLASSES
 class Person:
-    'Base class is a Person: includes a first name, last name, street address, zip code, and phone number.'
+    'A person includes a first name, last name, street address, zip code, and phone number.'
     def __init__(self):
         self.setfirstname()
         self.setlastname()
@@ -17,86 +59,37 @@ class Person:
 
     def setfirstname(self):
         'Prompts user to enter a first name'
-        getfirstname = True
-        while getfirstname is True:
-            firstname_input = input("Enter first name: ")
-            invalid_input = [x for x in firstname_input.replace("-","").replace(" ","") if not x.isalpha()]
-            if len(invalid_input) > 0:
-                print(f"Invalid input found: {invalid_input}")
-            elif firstname_input == "":
-                print("Error: No input given.")
-            else:
-                self.firstname = firstname_input.title()
-                getfirstname = False
+        self.firstname = getalpha("Enter first name: ")
 
     def setlastname(self):
         'Prompts user to enter a last name'
-        getlastname = True
-        while getlastname is True:
-            lastname_input = input("Enter last name: ")
-            invalid_input = [x for x in lastname_input.replace("-","").replace(" ","") if not x.isalpha()]
-            if len(invalid_input) > 0:
-                print(f"Invalid input found: {invalid_input}")
-            elif lastname_input == "":
-                print("Error: No input given.")
-            else:
-                self.lastname = lastname_input.title()
-                getlastname = False
+        self.lastname = getalpha("Enter last name: ")
 
     def setaddress(self):
         'Prompts user to enter a street address'
-        getaddress = True
-        while getaddress is True:
-            address_input = input("Enter street address: ")
-            invalid_input = [x for x in address_input.replace("-","").replace(" ","") if not x.isalnum()]
-            if len(invalid_input) > 0:
-                print(f"Invalid input found: {invalid_input}")
-            elif address_input == "":
-                print("Error: No input given.")
-            else:
-                self.address = address_input.title()
-                getaddress = False
+        self.address = getalnum("Enter street address: ")
 
     def setzipcode(self):
         'Prompts user to enter a zipcode'
-        getzipcode = True
-        while getzipcode is True:
-            zipcode_input = input("Enter zipcode: ")
-            invalid_input = [x for x in zipcode_input.replace("-","").replace(" ","") if not x.isnumeric()]
-            if len(invalid_input) > 0:
-                print(f"Invalid input found: {invalid_input}")
-            elif zipcode_input == "":
-                print("Error: No input given.")
-            elif len(zipcode_input.replace(" ","")) != 5:
-                print("That is not a valid zipcode.")
+        test_input = True
+        while test_input is True:
+            user_input = getnumeric("Enter zipcode: ")
+            if len(user_input) != 5:
+                print("Please try again. That is not a valid zipcode.")
             else:
-                self.zipcode = zipcode_input
-                getzipcode = False
+                test_input = False
+                self.zipcode = user_input
 
     def setphonenumber(self):
         'Prompts user to enter a phone number'
-        getphonenumber = True
-        while getphonenumber is True:
-            phonenumber_input = input("Enter phone number: ")
-            invalid_input = [x for x in phonenumber_input.replace("-","") if not x.isnumeric()]
-            if len(invalid_input) > 0:
-                print(f"Invalid input found: {invalid_input}")
-            elif phonenumber_input == "":
-                print("Error: No input given.")
-            elif len(phonenumber_input) != 10 and len(phonenumber_input) != 12:
-                print("That is not a valid phone number.") 
-            elif len(phonenumber_input) == 12:
-                testdigits = phonenumber_input[:3] + phonenumber_input[4:7] + phonenumber_input[9:]
-                testdashes = phonenumber_input[3] + phonenumber_input[7]
-                if testdigits.isdigit() and testdashes == "--":
-                    self.phonenumber = phonenumber_input
-                    getphonenumber = False
-                else:
-                    print("That is not a valid phone number.")
+        test_input = True
+        while test_input is True:
+            user_input = getnumeric("Enter phone number without dashes: ")
+            if len(user_input) != 10:
+                print("Please try again. That is not a valid phone number.")
             else:
-                phonenumber_with_dashes = phonenumber_input[:3] + "-" + phonenumber_input[3:6] + "-" + phonenumber_input[6:]
-                self.phonenumber = phonenumber_with_dashes
-                getphonenumber = False
+                test_input = False
+                self.phonenumber = user_input[:3] + "-" + user_input[3:6] + "-" + user_input[6:]
 
     def display(self):
         'Displays all of a Persons information'

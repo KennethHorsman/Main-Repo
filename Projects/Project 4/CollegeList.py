@@ -1,6 +1,5 @@
 #pylint: disable=line-too-long
 #pylint: disable=invalid-name
-#pylint: disable=pointless-string-statement
 '''
 Write an application named CollegeList that implements a list 
 of four “regular” CollegeEmployee, three Faculty, and seven Students. 
@@ -64,8 +63,6 @@ while gettype is True:
                 print(f"- Student #{i+1} -")
                 student.display()
 
-"All of the code below is an added feature I made to allow the user to edit any of the information entered."
-
 person_dict = {
     "C" : ["college employee", c_list, ["N","S","D"]],
     "F" : ["faculty member", f_list, ["N","S","D","T"]],
@@ -96,27 +93,30 @@ while getinput is True:
             if len(person_list) == 0:
                 print(f"Sorry, there is no {person_dict[persontype][0]} to edit.")
             else:
-                number = input(f"Enter which {person_dict[persontype][0]} you would like to edit: ")
-                if number.isdigit():
-                    if int(number) in range(1,len(person_list)+1):
-                        print("- List of keys -")
-                        for key, value in info_dict.items():
-                            print(f"'{key}' for {value[1]}")
-                        repeatoption = True
-                        while repeatoption is True:
-                            info_key = input("Enter one of the above keys: ").upper()
-                            if info_key in ['F','L','A','Z','P'] or info_key in person_dict[persontype][2]:
-                                repeatoption = False
-                                method_call = info_dict[info_key][0]
-                                getattr(person_list[int(number)-1], method_call)()
-                                print(f"{person_dict[persontype][0].capitalize()} #{number} has been updated to the following:")
-                                person_list[int(number)-1].display()
-                            else:
-                                print(f"Error: That is not a valid key for a {person_dict[persontype][0]}.")
+                repeatoption_number = True
+                while repeatoption_number is True:
+                    number = input(f"Enter which {person_dict[persontype][0]} you would like to edit: ")
+                    if number.isdigit():
+                        if int(number) in range(1,len(person_list)+1):
+                            repeatoption_number = False
+                            repeatoption_key = True
+                            print("- List of keys -")
+                            for key, value in info_dict.items():
+                                print(f"'{key}' for {value[1]}")
+                            while repeatoption_key is True:
+                                info_key = input("Enter one of the above keys: ").upper()
+                                if info_key in ['F','L','A','Z','P'] or info_key in person_dict[persontype][2]:
+                                    repeatoption_key = False
+                                    method_call = info_dict[info_key][0]
+                                    getattr(person_list[int(number)-1], method_call)()
+                                    print(f"{person_dict[persontype][0].capitalize()} #{number} has been updated to the following:")
+                                    person_list[int(number)-1].display()
+                                else:
+                                    print(f"Error: That is not a valid key for a {person_dict[persontype][0]}.")
+                        else:
+                            print("Error: here is no college employee with that number.")
                     else:
-                        print("Sorry, there is no college employee with that number.")
-                else:
-                    print("Error: That is not a valid number.")
+                        print("Error: That is not a valid number.")
         else:
             print("Error: That is not a valid key.")
         prompt_edit = input("Would you still like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
