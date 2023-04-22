@@ -55,34 +55,33 @@ while gettype is True:
         else:
             gettype = False
             for i, employee in enumerate(c_list):
-                print(f"\n- College Employee #{i+1} -")
+                print(f"- College Employee #{i+1} -")
                 employee.display()
             for i, faculty_member in enumerate(f_list):
-                print(f"\n- Faculty Member #{i+1} -")
+                print(f"- Faculty Member #{i+1} -")
                 faculty_member.display()
             for i, student in enumerate(s_list):
-                print(f"\n- Student #{i+1} -")
+                print(f"- Student #{i+1} -")
                 student.display()
 
-"All the below code is just something I was messing around with, it's not required for the project. I don't know how to make it more compact or efficient."
-
 person_dict = {
-    "C" : "college employee",
-    "F" : "faculty member",
-    "S" : "student"
+    "C" : ["college employee", c_list, ["N","S","D"]],
+    "F" : ["faculty member", f_list, ["N","S","D","T"]],
+    "S" : ["student", s_list, ["M","G"]]
 }
 
 info_dict = {
-    "F" : 'setfirstname',
-    "L" : 'setlastname',
-    "A" : 'setaddress',
-    "Z" : 'setzipcode',
-    "P" : 'setphonenumber',
-    "N" : 'setssn',
-    "D" : 'setdepartment',
-    "T" : 'settenuredstatus',
-    "M" : 'setmajor',
-    "G" : 'setgpa'
+    "F" : ['setfirstname', 'first name'],
+    "L" : ['setlastname', 'last name'],
+    "A" : ['setaddress', 'address'],
+    "Z" : ['setzipcode', 'zipcode'],
+    "P" : ['setphonenumber', 'phone number'],
+    "N" : ['setssn', 'SSN'],
+    "S" : ["setsalary", 'salary'],
+    "D" : ['setdepartment', 'department'],
+    "T" : ['settenuredstatus', 'tenured status'],
+    "M" : ['setmajor', 'major',],
+    "G" : ['setgpa', 'GPA']
 }
 
 prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
@@ -91,58 +90,37 @@ while getinput is True:
     if prompt_edit == "Y":
         persontype = input("Enter 'C' for college employee, 'F' for faculty member, or 'S' for student: ").upper()
         if persontype in ("C","F","S"):
-            number = input(f"Enter which {person_dict[persontype]} you would like to edit: ")
-            if number.isdigit():
-                if persontype == "C":
-                    if int(number) in range(1,len(c_list)+1):
-                        c_info = input("Enter 'F' to edit first name, 'L' for last name, 'A' for address, 'Z' for zipcode, 'P' for phonenumber, 'N' for SSN, 'S' for salary, or 'D' for department: ").upper()
-                        if c_info in info_dict:
-                            c_item = info_dict[c_info]
-                            if callable(getattr(c_list[int(number)-1], c_item)):
-                                getattr(c_list[int(number)-1], c_item)()
-                                print(f"\nCollege employee #{number} has been updated to the following:")
-                                c_list[int(number)-1].display()
+            person_list = person_dict[persontype][1]
+            if len(person_list) == 0:
+                print(f"Sorry, there is no {person_dict[persontype][0]} to edit.")
+            else:
+                number = input(f"Enter which {person_dict[persontype][0]} you would like to edit: ")
+                if number.isdigit():
+                    if int(number) in range(1,len(person_list)+1):
+                        print("- List of keys -")
+                        for key, value in info_dict.items():
+                            print(f"'{key}' for {value[1]}")
+                        repeatoption = True
+                        while repeatoption is True:
+                            info_key = input("Enter one of the above keys: ").upper()
+                            if info_key in ['F','L','A','Z','P'] or info_key in person_dict[persontype][2]:
+                                repeatoption = False
+                                method_call = info_dict[info_key][0]
+                                getattr(person_list[int(number)-1], method_call)()
+                                print(f"{person_dict[persontype][0].capitalize()} #{number} has been updated to the following:")
+                                person_list[int(number)-1].display()
                             else:
-                                print("Error: This change cannot be made.") # This code should never be accesed but I'll put it here anyways
-                        else:
-                            print("Error: Please only enter one of the below options.")
+                                print("Error: That is not a valid key.")
                     else:
                         print("Sorry, there is no college employee with that number.")
-                if persontype == "F":
-                    if int(number) in range(1,len(f_list)+1):
-                        f_info = input("Enter 'F' to edit first name, 'L' for last name, 'A' for address, 'Z' for zipcode, 'P' for phonenumber, 'N' for SSN, 'S' for salary, 'D' for department, or 'T' for tenured status: ").upper()
-                        if f_info in info_dict:
-                            f_item = info_dict[f_info]
-                            if callable(getattr(f_list[int(number)-1], f_item)):
-                                getattr(f_list[int(number)-1], f_item)()
-                                print(f"\nFaculty member #{number} has been updated to the following:")
-                                f_list[int(number)-1].display()
-                            else:
-                                print("Error: This change cannot be made.")
-                        else:
-                            print("Error: Please only enter one of the below options.")
-                    else:
-                        print("Sorry, there is no faculty member with that number.")
-                if persontype == "S":
-                    if int(number) in range(1,len(s_list)+1):
-                        s_info = input("Enter 'F' to edit first name, 'L' for last name, 'A' for address, 'Z' for zipcode, 'P' for phonenumber, 'M' for major, or 'G' for GPA: ").upper()
-                        if s_info in info_dict:
-                            s_item = info_dict[s_info]
-                            if callable(getattr(s_list[int(number)-1], s_item)):
-                                getattr(s_list[int(number)-1], s_item)()
-                                print(f"\nStudent #{number} has been updated to the following:")
-                                s_list[int(number)-1].display()
-                            else:
-                                print("Error: This change cannot be made.")
-                        else:
-                            print("Error: Please only enter one of the below options.")
-                    else:
-                        print("Sorry, there is no student with that number.")
-            else:
-                print("Error: That is not a valid number.")
-        prompt_edit = input("Would you still like to edit any of the information entered? (y/n): ").upper()
+                else:
+                    print("Error: That is not a valid number.")
+        else:
+            print("Error: That is not a valid key.")
+        prompt_edit = input("Would you still like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
     elif prompt_edit == "N":
         print("All lists created successfully.")
         getinput = False
     else:
-        print("Error: Please only enter one of the below options.")
+        print("Error: That is not a valid option.")
+        prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()

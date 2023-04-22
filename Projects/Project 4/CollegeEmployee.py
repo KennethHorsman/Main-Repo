@@ -85,4 +85,3 @@ class CollegeEmployee(Person):
         print(f"Social Security Number: {self.ssn}")
         print(f"Annual salary: {self.salary}")
         print(f"Department: {self.department}")
-        print('')

@@ -59,4 +59,3 @@ class Student(Person):
         super().display()
         print(f"Major: {self.major}")
         print(f"GPA: {self.gpa}")
-        print('')
