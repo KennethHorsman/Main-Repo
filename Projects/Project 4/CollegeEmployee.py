@@ -31,7 +31,7 @@ class CollegeEmployee(Person):
     def setsalary(self):
         'Prompts user to enter an annual salary'
         user_input = getnumeric("Enter salary with no symbols: ")
-        self.salary = f"${float(user_input):,}"
+        self.salary = f"${int(user_input):,}"
 
     def setdepartment(self):
         'Prompts user to enter a department'

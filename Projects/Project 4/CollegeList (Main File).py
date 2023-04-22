@@ -22,54 +22,18 @@ from Faculty import Faculty
 from Student import Student
 from CollegeEmployee import CollegeEmployee
 
-print("This program creates and displays a list of up to 4 college employees, 3 faculty members, and 7 students.")
-
 c_list = []
 f_list = []
 s_list = []
-
-gettype = True
-while gettype is True:
-    type_input = input("Enter 'C' for college employee, 'F' for faculty, 'S' for student, or 'Q' to quit: ").upper()
-    if type_input not in ("C","F","S","Q"):
-        print("Error: Invalid input.")
-    elif type_input =="C":
-        if len(c_list) < 4:
-            c_list.append(CollegeEmployee())
-        else:
-            print("Maximum number of college employee's reached.")
-    elif type_input =="F":
-        if len(f_list) < 3:
-            f_list.append(Faculty())
-        else:
-            print("Maximum number of faculty members reached.")
-    elif type_input =="S":
-        if len(s_list) < 7:
-            s_list.append(Student())
-        else:
-            print("Maximum number of students reached.")
-    else:
-        if len(c_list) + len(f_list) + len(s_list) == 0:
-            print("Please enter information for at least 1 person.")
-        else:
-            gettype = False
-            for i, employee in enumerate(c_list):
-                print(f"- College Employee #{i+1} -")
-                employee.display()
-            for i, faculty_member in enumerate(f_list):
-                print(f"- Faculty Member #{i+1} -")
-                faculty_member.display()
-            for i, student in enumerate(s_list):
-                print(f"- Student #{i+1} -")
-                student.display()
+total_persons = len(c_list) + len(f_list) + len(s_list)
 
 person_dict = {
-    "C" : ["college employee", c_list, ["N","S","D"]],
-    "F" : ["faculty member", f_list, ["N","S","D","T"]],
-    "S" : ["student", s_list, ["M","G"]]
+    "C" : ["college employee", c_list, ["N","S","D"], CollegeEmployee, 4],
+    "F" : ["faculty member", f_list, ["N","S","D","T"], Faculty, 3],
+    "S" : ["student", s_list, ["M","G"], Student, 7]
 }
 
-info_dict = {
+key_dict = {
     "F" : ['setfirstname', 'first name'],
     "L" : ['setlastname', 'last name'],
     "A" : ['setaddress', 'address'],
@@ -83,46 +47,73 @@ info_dict = {
     "G" : ['setgpa', 'GPA']
 }
 
+print("This program creates and displays a list of up to 4 college employees, 3 faculty members, and 7 students.")
+get_person = True
+while get_person is True:
+    person_key = input("Enter 'C' for college employee, 'F' for faculty, 'S' for student, or 'Q' to quit: ").upper()
+    if person_key not in ("C","F","S","Q"):
+        print("Please try again. Invalid key entered.")
+    elif person_key != "Q":
+        person_list = person_dict[person_key][1]
+        method_call = person_dict[person_key][3]
+        person_list.append(method_call())
+    else:
+        get_person = False
+        # Find a way to use lists to shorten this into one section
+        
+        for i, employee in enumerate(c_list):
+            print(f"\n- College Employee #{i+1} -")
+            employee.display()
+            print("\n")
+        for i, faculty_member in enumerate(f_list):
+            print(f"\n- Faculty Member #{i+1} -")
+            faculty_member.display()
+            print("\n")
+        for i, student in enumerate(s_list):
+            print(f"\n- Student #{i+1} -")
+            student.display()
+            print("\n")
+
 prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
 getinput = True
 while getinput is True:
     if prompt_edit == "Y":
-        persontype = input("Enter 'C' for college employee, 'F' for faculty member, or 'S' for student: ").upper()
-        if persontype in ("C","F","S"):
-            person_list = person_dict[persontype][1]
-            if len(person_list) == 0:
-                print(f"Sorry, there is no {person_dict[persontype][0]} to edit.")
+        person_key_edit = input("Enter 'C' for college employee, 'F' for faculty member, or 'S' for student: ").upper()
+        if person_key_edit in ("C","F","S"):
+            person_list_edit = person_dict[person_key_edit][1]
+            if len(person_list_edit) == 0:
+                print(f"Sorry, there is no {person_dict[person_key_edit][0]} to edit.")
             else:
                 repeatoption_number = True
                 while repeatoption_number is True:
-                    number = input(f"Enter which {person_dict[persontype][0]} you would like to edit: ")
+                    number = input(f"Enter which {person_dict[person_key_edit][0]} you would like to edit: ")
                     if number.isdigit():
-                        if int(number) in range(1,len(person_list)+1):
+                        if int(number) in range(1,len(person_list_edit)+1):
                             repeatoption_number = False
                             repeatoption_key = True
                             print("- List of keys -")
-                            for key, value in info_dict.items():
+                            for key, value in key_dict.items():
                                 print(f"'{key}' for {value[1]}")
                             while repeatoption_key is True:
                                 info_key = input("Enter one of the above keys: ").upper()
-                                if info_key in ['F','L','A','Z','P'] or info_key in person_dict[persontype][2]:
+                                if info_key in ['F','L','A','Z','P'] or info_key in person_dict[person_key_edit][2]:
                                     repeatoption_key = False
-                                    method_call = info_dict[info_key][0]
-                                    getattr(person_list[int(number)-1], method_call)()
-                                    print(f"{person_dict[persontype][0].capitalize()} #{number} has been updated to the following:")
-                                    person_list[int(number)-1].display()
+                                    method_call_edit = key_dict[info_key][0]
+                                    getattr(person_list_edit[int(number)-1], method_call_edit)()
+                                    print(f"\n{person_dict[person_key_edit][0].capitalize()} #{number} has been updated to the following:")
+                                    person_list_edit[int(number)-1].display()
                                 else:
-                                    print(f"Error: That is not a valid key for a {person_dict[persontype][0]}.")
+                                    print(f"Error: That is not a valid key for a {person_dict[person_key_edit][0]}.")
                         else:
-                            print("Error: here is no college employee with that number.")
+                            print("Sorry, there is no college employee with that number.")
                     else:
-                        print("Error: That is not a valid number.")
+                        print("Please try again. That is not a valid number.")
         else:
-            print("Error: That is not a valid key.")
+            print("Please try again. That is not a valid key.")
         prompt_edit = input("Would you still like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
     elif prompt_edit == "N":
-        print("List(s) created successfully.")
+        print("List created successfully.")
         getinput = False
     else:
-        print("Error: That is not a valid option.")
+        print("Please try again. That is not a valid option.")
         prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
