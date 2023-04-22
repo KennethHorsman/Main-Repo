@@ -112,7 +112,7 @@ while getinput is True:
                                 print(f"{person_dict[persontype][0].capitalize()} #{number} has been updated to the following:")
                                 person_list[int(number)-1].display()
                             else:
-                                print("Error: That is not a valid key.")
+                                print(f"Error: That is not a valid key for a {person_dict[persontype][0]}.")
                     else:
                         print("Sorry, there is no college employee with that number.")
                 else:
@@ -121,7 +121,7 @@ while getinput is True:
             print("Error: That is not a valid key.")
         prompt_edit = input("Would you still like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
     elif prompt_edit == "N":
-        print("All lists created successfully.")
+        print("List(s) created successfully.")
         getinput = False
     else:
         print("Error: That is not a valid option.")
