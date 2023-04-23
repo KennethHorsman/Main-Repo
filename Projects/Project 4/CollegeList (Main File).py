@@ -63,9 +63,14 @@ while get_person is True:
     if person_key not in ("C","F","S","Q"):
         print("Please try again. Invalid key entered.")
     elif person_key != "Q":
+        max_persons = person_dict[person_key][4]
         person_list = person_dict[person_key][1]
-        method_call = person_dict[person_key][3]
-        person_list.append(method_call())
+        if len(person_list) < max_persons:
+            method_call = person_dict[person_key][3]
+            person_list.append(method_call())
+        else:
+            phrase_to_use = person_dict[person_key][0]
+            print(f"Maxium number of {phrase_to_use}s reached.")
     else:
         if len(c_list) + len(f_list) + len(s_list) == 0:
             print("Please enter information for at least one person.")
@@ -78,38 +83,42 @@ prompt_edit = input("Would you like to edit any of the information entered? Ente
 getinput = True
 while getinput is True:
     if prompt_edit == "Y":
-        person_key_edit = input("Enter 'C' for college employee, 'F' for faculty member, or 'S' for student: ").upper()
-        if person_key_edit in ("C","F","S"):
-            person_list_edit = person_dict[person_key_edit][1]
-            if len(person_list_edit) == 0:
-                print(f"Sorry, there is no {person_dict[person_key_edit][0]} to edit.")
-            else:
-                repeatoption_number = True
-                while repeatoption_number is True:
-                    number = input(f"Enter which {person_dict[person_key_edit][0]} you would like to edit: ")
-                    if number.isdigit():
-                        if int(number) in range(1,len(person_list_edit)+1):
-                            repeatoption_number = False
-                            repeatoption_key = True
-                            print("- List of keys -")
-                            for key, value in key_dict.items():
-                                print(f"'{key}' for {value[1]}")
-                            while repeatoption_key is True:
-                                info_key = input("Enter one of the above keys: ").upper()
-                                if info_key in ['F','L','A','Z','P'] or info_key in person_dict[person_key_edit][2]:
-                                    repeatoption_key = False
-                                    method_call_edit = key_dict[info_key][0]
-                                    getattr(person_list_edit[int(number)-1], method_call_edit)()
-                                    print(f"\n{person_dict[person_key_edit][0].capitalize()} #{number} has been updated to the following:")
-                                    person_list_edit[int(number)-1].display()
-                                else:
-                                    print(f"Error: That is not a valid key for a {person_dict[person_key_edit][0]}.")
+        repeatoption_personkey = True
+        while repeatoption_personkey is True:
+            person_key = input("Enter 'C' for college employee, 'F' for faculty member, or 'S' for student: ").upper()
+            if person_key in ("C","F","S"):
+                person_list = person_dict[person_key][1]
+                phrase_to_use = person_dict[person_key][0]
+                if len(person_list) == 0:
+                    print(f"Sorry, there is no {phrase_to_use} to edit.")
+                else:
+                    repeatoption_personkey = False
+                    repeatoption_number = True
+                    while repeatoption_number is True:
+                        number = input(f"Enter which {phrase_to_use} you would like to edit: ")
+                        if number.isdigit():
+                            if int(number) in range(1,len(person_list)+1):
+                                print("- List of keys -")
+                                for key, value in key_dict.items():
+                                    print(f"'{key}' for {value[1]}")
+                                repeatoption_number = False
+                                repeatoption_infokey = True
+                                while repeatoption_infokey is True:
+                                    info_key = input("Enter one of the above keys: ").upper()
+                                    if info_key in ['F','L','A','Z','P'] or info_key in person_dict[person_key][2]:
+                                        repeatoption_infokey = False
+                                        method_call = key_dict[info_key][0]
+                                        getattr(person_list[int(number)-1], method_call)()
+                                        print(f"\n{phrase_to_use.capitalize()} #{number} has been updated to the following:")
+                                        person_list[int(number)-1].display()
+                                    else:
+                                        print(f"Error: That is not a valid key for a {person_dict[person_key][0]}.")
+                            else:
+                                print(f"Sorry, there is no {phrase_to_use} with that number.")
                         else:
-                            print("Sorry, there is no college employee with that number.")
-                    else:
-                        print("Please try again. That is not a valid number.")
-        else:
-            print("Please try again. That is not a valid key.")
+                            print("Please try again. That is not a valid number.")
+            else:
+                print("Please try again. That is not a valid key.")
         prompt_edit = input("Would you still like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
     elif prompt_edit == "N":
         print("List created successfully.")
