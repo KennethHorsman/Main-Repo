@@ -22,18 +22,27 @@ from Faculty import Faculty
 from Student import Student
 from CollegeEmployee import CollegeEmployee
 
+def display_list_objects(list_objects, object_type):
+    'Displays the attributes of an object'
+    if list_objects:
+        for i, obj in enumerate(list_objects):
+            print(f"\n- {object_type} #{i+1} -")
+            obj.display()
+        print()
+
 c_list = []
 f_list = []
 s_list = []
-total_persons = len(c_list) + len(f_list) + len(s_list)
 
 person_dict = {
+    # Key : Phrase to use, list of objects, applicable keys, method call, max number of objects
     "C" : ["college employee", c_list, ["N","S","D"], CollegeEmployee, 4],
     "F" : ["faculty member", f_list, ["N","S","D","T"], Faculty, 3],
     "S" : ["student", s_list, ["M","G"], Student, 7]
 }
 
 key_dict = {
+    # Key : method call, phrase to use
     "F" : ['setfirstname', 'first name'],
     "L" : ['setlastname', 'last name'],
     "A" : ['setaddress', 'address'],
@@ -58,21 +67,12 @@ while get_person is True:
         method_call = person_dict[person_key][3]
         person_list.append(method_call())
     else:
-        get_person = False
-        # Find a way to use lists to shorten this into one section
-        
-        for i, employee in enumerate(c_list):
-            print(f"\n- College Employee #{i+1} -")
-            employee.display()
-            print("\n")
-        for i, faculty_member in enumerate(f_list):
-            print(f"\n- Faculty Member #{i+1} -")
-            faculty_member.display()
-            print("\n")
-        for i, student in enumerate(s_list):
-            print(f"\n- Student #{i+1} -")
-            student.display()
-            print("\n")
+        if len(c_list) + len(f_list) + len(s_list) == 0:
+            print("Please enter information for at least one person.")
+        else:
+            get_person = False
+            for key, value in person_dict.items():
+                display_list_objects(value[1], value[0].title())
 
 prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
 getinput = True

@@ -30,7 +30,7 @@ class Student(Person):
                 print(f"Please try again. Invalid input found: {invalid_input}")
             elif user_input == "":
                 print("Please try again. No input given.")
-            elif not len(user_input) == 3 or not ((user_input[0] and user_input[2]).isnumeric() and user_input[1] == "."):
+            elif not len(user_input) == 3 or not (0.0 <= float(user_input) <= 4.0) or not ((user_input[0] and user_input[2]).isnumeric() and user_input[1] == "."):
                 print("Please try again. That is not a valid GPA.")
             else:
                 test_input = False
