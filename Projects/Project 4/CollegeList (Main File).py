@@ -22,6 +22,7 @@ from Faculty import Faculty
 from Student import Student
 from CollegeEmployee import CollegeEmployee
 
+# Helper Function
 def display_list_objects(list_objects, object_type):
     'Displays the attributes of an object'
     if list_objects:
@@ -30,19 +31,20 @@ def display_list_objects(list_objects, object_type):
             obj.display()
         print()
 
+# Declarations
 c_list = []
 f_list = []
 s_list = []
 
 person_dict = {
-    # Key : Phrase to use, list of objects, applicable keys, method call, max number of objects
+    'Key : phrase to use, list of objects, applicable keys, method call, max number of objects'
     "C" : ["college employee", c_list, ["N","S","D"], CollegeEmployee, 4],
     "F" : ["faculty member", f_list, ["N","S","D","T"], Faculty, 3],
     "S" : ["student", s_list, ["M","G"], Student, 7]
 }
 
 key_dict = {
-    # Key : method call, phrase to use
+    'Key : method call, phrase to use'
     "F" : ['setfirstname', 'first name'],
     "L" : ['setlastname', 'last name'],
     "A" : ['setaddress', 'address'],
@@ -56,6 +58,7 @@ key_dict = {
     "G" : ['setgpa', 'GPA']
 }
 
+# Main Program - Creates list of persons based off user input
 print("This program creates and displays a list of up to 4 college employees, 3 faculty members, and 7 students.")
 get_person = True
 while get_person is True:
@@ -79,6 +82,7 @@ while get_person is True:
             for key, value in person_dict.items():
                 display_list_objects(value[1], value[0].title())
 
+# Allows the user to edit any of the info they've previously entered
 prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
 getinput = True
 while getinput is True:
