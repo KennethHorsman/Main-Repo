@@ -18,9 +18,9 @@ under the appropriate heading of “College Employees,” “Faculty,” or “S
 display an appropriate message under the appropriate heading.
 '''
 
+from CollegeEmployee import CollegeEmployee
 from Faculty import Faculty
 from Student import Student
-from CollegeEmployee import CollegeEmployee
 
 # Helper Function
 def display_list_objects(list_objects, object_type):
@@ -59,7 +59,7 @@ key_dict = {
 }
 
 # Main Program - Creates list of persons based off user input
-print("This program creates and displays a list of up to 4 college employees, 3 faculty members, and 7 students.")
+print("This program creates and displays a list of up to 4 college employees, 3 faculty members, and 7 students in the U.S.")
 get_person = True
 while get_person is True:
     person_key = input("Enter 'C' for college employee, 'F' for faculty, 'S' for student, or 'Q' to quit: ").upper()
