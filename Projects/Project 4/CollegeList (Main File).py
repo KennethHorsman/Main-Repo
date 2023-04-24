@@ -90,7 +90,7 @@ while getinput is True:
                 person_list = person_dict[person_key][1]
                 phrase_to_use = person_dict[person_key][0]
                 if len(person_list) == 0:
-                    print(f"Sorry, there is no {phrase_to_use} to edit.")
+                    print(f"Please try again. There is no {phrase_to_use} to edit.")
                 else:
                     repeatoption_personkey = False
                     repeatoption_number = True
@@ -111,10 +111,14 @@ while getinput is True:
                                         getattr(person_list[int(number)-1], method_call)()
                                         print(f"\n{phrase_to_use.capitalize()} #{number} has been updated to the following:")
                                         person_list[int(number)-1].display()
+                                        print()
                                     else:
-                                        print(f"Error: That is not a valid key for a {person_dict[person_key][0]}.")
+                                        if info_key in key_dict:
+                                            print(f"Please try again. That is not a valid key for a {person_dict[person_key][0]}.")
+                                        else:
+                                            print("Please try again. That is not a valid key.")
                             else:
-                                print(f"Sorry, there is no {phrase_to_use} with that number.")
+                                print(f"Please try again. There is no {phrase_to_use} with that number.")
                         else:
                             print("Please try again. That is not a valid number.")
             else:
