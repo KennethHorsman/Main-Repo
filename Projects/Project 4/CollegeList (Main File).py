@@ -98,7 +98,7 @@ while getinput is True:
 
     if prompt_edit == "Y":
         ask_to_display = True # Only if the user chooses to edit the information entered, they will recieve a prompt at the end to display the revised information
-        repeatoption_personkey = True # I set separate flags for each input in order to allow individual questions to be repeated if invalid input is given
+        repeatoption_personkey = True # I set separate flags for each input below in order to allow individual questions to be repeated if invalid input is given
 
         while repeatoption_personkey is True:
             person_key = input("Enter 'C' for college employee, 'F' for faculty member, or 'S' for student: ").upper()
@@ -167,19 +167,19 @@ while getinput is True:
             elif display_again == "N":
                 ask_to_display = False
 
-            # If the user did not enter 'Y' or 'N' when prompted to display the revsied list...
+            # If the user did not enter 'Y' or 'N' when prompted to display the revised list...
             else:
                 print("Please try again. That is not a valid option.")
 
         college_employees = len(person_dict["C"][3]) # Now it's calculating the number of each person type by getting the length of each list of objects in the dictionary
         faculty_members = len(person_dict["F"][3])
         students = len(person_dict["S"][3])
-        print(f"List created successfully. There {'are' if college_employees != 1 else 'is'} " # F strings used to display each number of persons created with proper grammar
+        print(f"List created successfully. There {'are' if college_employees != 1 else 'is'} " # F strings used to display each number of persons created, with proper grammar
               f"{college_employees} college employee{'s' if college_employees != 1 else ''}, "
               f"{faculty_members} faculty member{'s' if faculty_members != 1 else ''}, "
               f"and {students} student{'s' if students != 1 else ''}.")
 
-    # If user did not enter 'Y' or 'N' when prompted to edit...
+    # If user did not enter 'Y' or 'N' when prompted to edit any information...
     else:
         print("Please try again. That is not a valid option.")
         prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
