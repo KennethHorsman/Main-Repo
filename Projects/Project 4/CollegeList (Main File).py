@@ -32,19 +32,15 @@ def display_list_objects(list_objects, object_type):
         print()
 
 # Declarations
-c_list = []
-f_list = []
-s_list = []
-
 person_dict = {
-    'Key : phrase to use, list of objects, applicable keys, method call, max number of objects'
-    "C" : ["college employee", c_list, ["N","S","D"], CollegeEmployee, 4],
-    "F" : ["faculty member", f_list, ["N","S","D","T"], Faculty, 3],
-    "S" : ["student", s_list, ["M","G"], Student, 7]
+    # Key : method call, phrase to use, applicable keys, max number of persons, list of objects
+    "C" : [CollegeEmployee, "college employee", ["N","S","D"], [], 4],
+    "F" : [Faculty, "faculty member", ["N","S","D","T"], [], 3],
+    "S" : [Student, "student", ["M","G"], [], 7,]
 }
 
 key_dict = {
-    'Key : method call, phrase to use'
+    # Key : method call, phrase to use
     "F" : ['setfirstname', 'first name'],
     "L" : ['setlastname', 'last name'],
     "A" : ['setaddress', 'address'],
@@ -60,55 +56,71 @@ key_dict = {
 
 # Main Program - Creates list of persons based off user input
 print("This program creates and displays a list of up to 4 college employees, 3 faculty members, and 7 students in the U.S.")
+
 get_person = True
 while get_person is True:
     person_key = input("Enter 'C' for college employee, 'F' for faculty, 'S' for student, or 'Q' to quit: ").upper()
+
     if person_key not in ("C","F","S","Q"):
         print("Please try again. Invalid key entered.")
+
     elif person_key != "Q":
         max_persons = person_dict[person_key][4]
-        person_list = person_dict[person_key][1]
+        person_list = person_dict[person_key][3]
         if len(person_list) < max_persons:
-            method_call = person_dict[person_key][3]
+            method_call = person_dict[person_key][0]
             person_list.append(method_call())
         else:
-            phrase_to_use = person_dict[person_key][0]
+            phrase_to_use = person_dict[person_key][1]
             print(f"Maxium number of {phrase_to_use}s reached.")
+
     else:
-        if len(c_list) + len(f_list) + len(s_list) == 0:
+        if sum(len(value[1]) for value in person_dict.values()) == 0:
             print("Please enter information for at least one person.")
         else:
             get_person = False
             for key, value in person_dict.items():
-                display_list_objects(value[1], value[0].title())
+                display_list_objects(value[3], value[1].title())
 
 # Allows the user to edit any of the info they've previously entered
 prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
+
+ask_to_display = False
 getinput = True
 while getinput is True:
+
     if prompt_edit == "Y":
+        ask_to_display = True
         repeatoption_personkey = True
+
         while repeatoption_personkey is True:
             person_key = input("Enter 'C' for college employee, 'F' for faculty member, or 'S' for student: ").upper()
+
             if person_key in ("C","F","S"):
-                person_list = person_dict[person_key][1]
-                phrase_to_use = person_dict[person_key][0]
+                person_list = person_dict[person_key][3]
+                phrase_to_use = person_dict[person_key][1]
+
                 if len(person_list) == 0:
                     print(f"Please try again. There is no {phrase_to_use} to edit.")
                 else:
                     repeatoption_personkey = False
                     repeatoption_number = True
+
                     while repeatoption_number is True:
                         number = input(f"Enter which {phrase_to_use} you would like to edit: ")
+
                         if number.isdigit():
                             if int(number) in range(1,len(person_list)+1):
                                 print("- List of keys -")
                                 for key, value in key_dict.items():
                                     print(f"'{key}' for {value[1]}")
+
                                 repeatoption_number = False
                                 repeatoption_infokey = True
+
                                 while repeatoption_infokey is True:
                                     info_key = input("Enter one of the above keys: ").upper()
+
                                     if info_key in ['F','L','A','Z','P'] or info_key in person_dict[person_key][2]:
                                         repeatoption_infokey = False
                                         method_call = key_dict[info_key][0]
@@ -118,19 +130,43 @@ while getinput is True:
                                         print()
                                     else:
                                         if info_key in key_dict:
-                                            print(f"Please try again. That is not a valid key for a {person_dict[person_key][0]}.")
+                                            print(f"Please try again. That is not a valid key for a {phrase_to_use}.")
                                         else:
                                             print("Please try again. That is not a valid key.")
+
                             else:
                                 print(f"Please try again. There is no {phrase_to_use} with that number.")
+
                         else:
                             print("Please try again. That is not a valid number.")
+
             else:
                 print("Please try again. That is not a valid key.")
+
         prompt_edit = input("Would you still like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
+
     elif prompt_edit == "N":
-        print("List created successfully.")
         getinput = False
+
+        while ask_to_display is True:
+            display_again = input("Would you like to display the revised list of persons? Enter 'Y' for yes or 'N' for no: ").upper()
+            if display_again == "Y":
+                ask_to_display = False
+                for key, value in person_dict.items():
+                    display_list_objects(value[3], value[1].title())
+            elif display_again == "N":
+                ask_to_display = False
+            else:
+                print("Please try again. That is not a valid option.")
+
+        college_employees = len(person_dict["C"][3])
+        faculty_members = len(person_dict["F"][3])
+        students = len(person_dict["S"][3])
+        print(f"List created successfully. There {'are' if college_employees != 1 else 'is'} "
+              f"{college_employees} college employee{'s' if college_employees != 1 else ''}, "
+              f"{faculty_members} faculty member{'s' if faculty_members != 1 else ''}, "
+              f"and {students} student{'s' if students != 1 else ''}.")
+
     else:
         print("Please try again. That is not a valid option.")
         prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
