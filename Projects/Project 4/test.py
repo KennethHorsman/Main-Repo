@@ -24,15 +24,3 @@
 # # printing result
 # print("The evaluated result is : " + str(res))
 
-from CollegeEmployee import CollegeEmployee
-from Faculty import Faculty
-from Student import Student
-
-person_dict = {
-    # Key: method call, phrase to use, applicable keys, list of objects, max number of objects'
-    "C" : [CollegeEmployee, "college employee", ["N","S","D"], [], 4],
-    "F" : [Faculty, "faculty member", ["N","S","D","T"], [], 3],
-    "S" : [Student, "student", ["M","G"], [], 7,]
-}
-
-print(person_dict)

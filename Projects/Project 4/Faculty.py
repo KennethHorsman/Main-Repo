@@ -21,9 +21,9 @@ class Faculty(CollegeEmployee):
         while test_input is True:
             tenured_input = input("If tenured, enter 'Y'. Otherwise, enter 'N': ").upper()
             if tenured_input == "":
-                print("Error: No input given.")
+                print("Please try again. No input given.")
             elif tenured_input != "Y" and tenured_input != "N":
-                print("Error: Please only enter one of the below options.")
+                print("Please try again. That is not a valid option.")
             elif tenured_input == "Y":
                 test_input = False
                 self.tenured = True
