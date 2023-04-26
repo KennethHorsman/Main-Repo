@@ -155,8 +155,7 @@ while getinput is True:
     elif prompt_edit == "N":
         getinput = False
 
-        # If the user made an edit...
-        while ask_to_display is True:
+        while ask_to_display is True: # If the user made an edit...
             display_again = input("Would you like to display the revised list of persons? Enter 'Y' for yes or 'N' for no: ").upper()
 
             if display_again == "Y":
@@ -167,8 +166,7 @@ while getinput is True:
             elif display_again == "N":
                 ask_to_display = False
 
-            # If the user did not enter 'Y' or 'N' when prompted to display the revised list...
-            else:
+            else: # If the user did not enter 'Y' or 'N' when prompted to display the revised list...
                 print("Please try again. That is not a valid option.")
 
         college_employees = len(person_dict["C"][3]) # Now it's calculating the number of each person type by getting the length of each list of objects in the dictionary
@@ -179,7 +177,6 @@ while getinput is True:
               f"{faculty_members} faculty member{'s' if faculty_members != 1 else ''}, "
               f"and {students} student{'s' if students != 1 else ''}.")
 
-    # If user did not enter 'Y' or 'N' when prompted to edit any information...
-    else:
+    else: # If user did not enter 'Y' or 'N' when prompted to edit any information...
         print("Please try again. That is not a valid option.")
         prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
