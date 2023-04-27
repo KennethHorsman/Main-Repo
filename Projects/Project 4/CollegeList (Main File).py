@@ -1,5 +1,6 @@
 #pylint: disable=line-too-long
 #pylint: disable=invalid-name
+#pylint: disable=inconsistent-return-statements
 '''
 Write an application named CollegeList that implements a list 
 of four “regular” CollegeEmployee, three Faculty, and seven Students. 
@@ -22,7 +23,24 @@ from CollegeEmployee import CollegeEmployee
 from Faculty import Faculty
 from Student import Student
 
-# Helper Functions
+def main():
+    'Allows user to create and edit a list of persons, which will then be displayed.'
+    prompting_edit = True
+    edits_made = False
+
+    while prompting_edit:
+        if get_edit():
+            edits_made = True
+            person_type = get_person_type
+            person_number = get_person_number(person_type)
+            edit_key = get_edit_key(person_type)
+            edit_and_display(person_type, person_number, edit_key)
+        else:
+            prompting_edit = False
+
+    finish_up(edits_made)
+
+### HELPER FUNCTION ###
 def display_list_objects(list_objects, object_type):
     '''Displays the attributes of an object.
     
@@ -36,7 +54,7 @@ def display_list_objects(list_objects, object_type):
         print() # Prints an empty line as a separator
 
 
-# Declarations
+### DICTIONARIES ###
 person_dict = {
     # Key : method call, phrase to use, applicable keys, list of objects, max number of persons
     "C" : [CollegeEmployee, "college employee", ["N","S","D"], [], 4],
@@ -60,7 +78,7 @@ key_dict = {
 }
 
 
-# Main Program - Creates list of persons based off user input
+# CONVERT TO FUNCTIONS
 print("This program creates and displays a list of up to 4 college employees, 3 faculty members, and 7 students in the U.S.")
 
 get_person = True
@@ -85,98 +103,194 @@ while get_person is True:
             print("Please enter information for at least one person.")
         else:
             get_person = False
+            print("List of Persons:")
             for key, value in person_dict.items(): # Items returns (key,value) pairs of a dictionary, all of which are looped through here
                 display_list_objects(value[3], value[1].title()) # Calls the display function for each object appended to each list, setting 'phrase to use' as the title
 
+### EDITING FUNCTIONS ###
 
-# Allows the user to edit any of the info they've previously entered
-prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
+def get_edit():
+    'Asks user if they want to edit any information in the list of persons.'
+    getting_input = True
+    while getting_input:
+        prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ")
+        if prompt_edit == 'Y':
+            return True
+        if prompt_edit == 'N':
+            return False
+        print("Please try again. That is not a valid option.")
 
-ask_to_display = False
-getinput = True
-while getinput is True:
+def get_person_type():
+    'Asks user which person type they want to edit.'
+    getting_input = True
+    while getting_input:
+        person_type = input("Enter 'C' for college employee, 'F' for faculty member, or 'S' for student: ").upper()
+        if person_type in ("C","F","S"):
+            list_to_use = person_dict[person_type][3]
+            phrase_to_use = person_dict[person_type][1]
+            if len(list_to_use) == 0:
+                print(f"Please try again. There is no {phrase_to_use} to edit.")
+            else:
+                return person_type
+        else:
+            print("Please try again. That is not a valid option.")
 
-    if prompt_edit == "Y":
-        ask_to_display = True # Only if the user chooses to edit the information entered, they will recieve a prompt at the end to display the revised information
-        repeatoption_personkey = True # I set separate flags for each input below in order to allow individual questions to be repeated if invalid input is given
+def get_person_number(person_type):
+    'Asks user the number of the person they want to edit.'
+    list_to_use = person_dict[person_type][3]
+    phrase_to_use = person_dict[person_type][1]
+    
+    person_number = input(f"Enter which {phrase_to_use} you would like to edit: ")
+    if person_number.isdigit():
+        if int(person_number) in range(1,len(list_to_use)+1):
+            return int(person_number)
+        print(f"Please try again. There is no {phrase_to_use} with that number.")
+    else:
+        print("Please try again. That is not a valid number.")
 
-        while repeatoption_personkey is True:
-            person_key = input("Enter 'C' for college employee, 'F' for faculty member, or 'S' for student: ").upper()
+def get_edit_key(person_type):
+    'Asks user which information they want to edit.'
+    phrase_to_use = person_dict[person_type][1]
 
-            if person_key in ("C","F","S"):
-                person_list = person_dict[person_key][3]
-                phrase_to_use = person_dict[person_key][1]
-
-                if len(person_list) == 0:
-                    print(f"Please try again. There is no {phrase_to_use} to edit.")
-                else:
-                    repeatoption_personkey = False
-                    repeatoption_number = True
-
-                    while repeatoption_number is True:
-                        number = input(f"Enter which {phrase_to_use} you would like to edit: ")
-
-                        if number.isdigit(): # Checks to see if the user entered a whole number
-                            if int(number) in range(1,len(person_list)+1): # Checks to see if the number is within the range of the applicable list of persons
-                                repeatoption_number = False
-                                repeatoption_infokey = True
-                                print("- List of keys -")
-                                for key, value in key_dict.items():
-                                    print(f"'{key}' for {value[1]}") # Displays the key and its 'phrase to use'
-
-                                while repeatoption_infokey is True:
-                                    info_key = input("Enter one of the above keys: ").upper()
-
-                                    if info_key in ['F','L','A','Z','P'] or info_key in person_dict[person_key][2]: # Checks if user entered a default key or one specific to the person type
-                                        repeatoption_infokey = False
-                                        method_call = key_dict[info_key][0]
-                                        getattr(person_list[int(number)-1], method_call)() #Finds the value of the specific object, what method to call on it, and then calls the method
-                                        print(f"\n{phrase_to_use.capitalize()} #{number} has been updated to the following:") # Capitalize calls .upper() on the first letter only
-                                        person_list[int(number)-1].display() # Calls the display method for that specific object
-                                        print()
-                                    else:
-                                        if info_key in key_dict: # If the key given is in the dictionary but not applicable to that person type...
-                                            print(f"Please try again. That is not a valid key for a {phrase_to_use}.")
-                                        else: # If the key given is not in the dictionary at all...
-                                            print("Please try again. That is not a valid key.")
-
-                            else: # If the number given when asked for which person to edit is not within the range of the list of objects for that person type...
-                                print(f"Please try again. There is no {phrase_to_use} with that number.")
-
-                        else: # If the number given when asked for which person to edit is not a whole number...
-                            print("Please try again. That is not a valid number.")
-
-            else: # If the user did not enter 'C' or 'F' or 'S' when prompted to choose which person type to edit...
+    print("- List of Keys -")
+    for key, value in key_dict.items():
+        print(f"'{key}' for {value[1]}")
+    getting_input = True
+    while getting_input:
+        edit_key = input("Enter one of the above keys: ").upper()
+        if edit_key in ['F','L','A','Z','P'] or edit_key in person_dict[person_type][2]:
+            return edit_key
+        else:
+            if edit_key in key_dict:
+                print(f"Please try again. That is not a valid key for a {phrase_to_use}.")
+            else:
                 print("Please try again. That is not a valid key.")
 
-        # Once the edit has been completed, the user can choose to make more edits or quit
-        prompt_edit = input("Would you still like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
+def edit_and_display(person_type, person_number, edit_key):
+    "Allows user to make the edit, then displays the updated information for that specific person."
+    list_to_use = person_dict[person_type][3]
+    phrase_to_use = person_dict[person_type][1]
+    method_call = key_dict[edit_key][0]
 
-    elif prompt_edit == "N":
-        getinput = False
+    getattr(list_to_use[person_number-1], method_call)()
+    print(f"\n{phrase_to_use.capitalize()} #{person_number} has been updated to the following:")
+    list_to_use[person_number-1].display()
+    print()
 
-        while ask_to_display is True: # If the user made an edit...
-            display_again = input("Would you like to display the revised list of persons? Enter 'Y' for yes or 'N' for no: ").upper()
+def finish_up(edits_made):
+    'Displays the revised list of persons if edits were made, and displays the total number of each person type created.'
+    college_employees = len(person_dict["C"][3]) 
+    faculty_members = len(person_dict["F"][3])
+    students = len(person_dict["S"][3])
 
-            if display_again == "Y":
-                ask_to_display = False
-                for key, value in person_dict.items():
-                    display_list_objects(value[3], value[1].title()) # Repeating the same thing after the user entered 'Q' in the beginning
+    if edits_made:
+        print("Revised List of Persons:")
+        for value in person_dict.values():
+            display_list_objects(value[3], value[1].title())
 
-            elif display_again == "N":
-                ask_to_display = False
+    print(f"There {'are' if college_employees != 1 else 'is'} " # F strings used to display each number of persons created, with proper grammar
+            f"{college_employees} college employee{'s' if college_employees != 1 else ''}, "
+            f"{faculty_members} faculty member{'s' if faculty_members != 1 else ''}, "
+            f"and {students} student{'s' if students != 1 else ''}.")
 
-            else: # If the user did not enter 'Y' or 'N' when prompted to display the revised list...
-                print("Please try again. That is not a valid option.")
+if __name__=="__main__":
+    main()
 
-        college_employees = len(person_dict["C"][3]) # Now it's calculating the number of each person type by getting the length of each list of objects in the dictionary
-        faculty_members = len(person_dict["F"][3])
-        students = len(person_dict["S"][3])
-        print(f"List created successfully. There {'are' if college_employees != 1 else 'is'} " # F strings used to display each number of persons created, with proper grammar
-              f"{college_employees} college employee{'s' if college_employees != 1 else ''}, "
-              f"{faculty_members} faculty member{'s' if faculty_members != 1 else ''}, "
-              f"and {students} student{'s' if students != 1 else ''}.")
 
-    else: # If user did not enter 'Y' or 'N' when prompted to edit any information...
-        print("Please try again. That is not a valid option.")
-        prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
+
+
+
+
+
+
+# # Allows the user to edit any of the info they've previously entered
+# prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
+
+# ask_to_display = False
+# getinput = True
+# while getinput is True:
+
+#     if prompt_edit == "Y":
+#         ask_to_display = True # Only if the user chooses to edit the information entered, they will recieve a prompt at the end to display the revised information
+#         repeatoption_personkey = True # I set separate flags for each input below in order to allow individual questions to be repeated if invalid input is given
+
+#         while repeatoption_personkey is True:
+#             person_key = input("Enter 'C' for college employee, 'F' for faculty member, or 'S' for student: ").upper()
+
+#             if person_key in ("C","F","S"):
+#                 person_list = person_dict[person_key][3]
+#                 phrase_to_use = person_dict[person_key][1]
+
+#                 if len(person_list) == 0:
+#                     print(f"Please try again. There is no {phrase_to_use} to edit.")
+#                 else:
+#                     repeatoption_personkey = False
+#                     repeatoption_number = True
+
+#                     while repeatoption_number is True:
+#                         number = input(f"Enter which {phrase_to_use} you would like to edit: ")
+
+#                         if number.isdigit(): # Checks to see if the user entered a whole number
+#                             if int(number) in range(1,len(person_list)+1): # Checks to see if the number is within the range of the applicable list of persons
+#                                 repeatoption_number = False
+#                                 repeatoption_infokey = True
+#                                 print("- List of keys -")
+#                                 for key, value in key_dict.items():
+#                                     print(f"'{key}' for {value[1]}") # Displays the key and its 'phrase to use'
+
+#                                 while repeatoption_infokey is True:
+#                                     info_key = input("Enter one of the above keys: ").upper()
+
+#                                     if info_key in ['F','L','A','Z','P'] or info_key in person_dict[person_key][2]: # Checks if user entered a default key or one specific to the person type
+#                                         repeatoption_infokey = False
+#                                         method_call = key_dict[info_key][0]
+#                                         getattr(person_list[int(number)-1], method_call)() #Finds the value of the specific object, what method to call on it, and then calls the method
+#                                         print(f"\n{phrase_to_use.capitalize()} #{number} has been updated to the following:") # Capitalize calls .upper() on the first letter only
+#                                         person_list[int(number)-1].display() # Calls the display method for that specific object
+#                                         print()
+#                                     else:
+#                                         if info_key in key_dict: # If the key given is in the dictionary but not applicable to that person type...
+#                                             print(f"Please try again. That is not a valid key for a {phrase_to_use}.")
+#                                         else: # If the key given is not in the dictionary at all...
+#                                             print("Please try again. That is not a valid key.")
+
+#                             else: # If the number given when asked for which person to edit is not within the range of the list of objects for that person type...
+#                                 print(f"Please try again. There is no {phrase_to_use} with that number.")
+
+#                         else: # If the number given when asked for which person to edit is not a whole number...
+#                             print("Please try again. That is not a valid number.")
+
+#             else: # If the user did not enter 'C' or 'F' or 'S' when prompted to choose which person type to edit...
+#                 print("Please try again. That is not a valid key.")
+
+#         # Once the edit has been completed, the user can choose to make more edits or quit
+#         prompt_edit = input("Would you still like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
+
+#     elif prompt_edit == "N":
+#         getinput = False
+
+#         while ask_to_display is True: # If the user made an edit...
+#             display_again = input("Would you like to display the revised list of persons? Enter 'Y' for yes or 'N' for no: ").upper()
+
+#             if display_again == "Y":
+#                 ask_to_display = False
+#                 for key, value in person_dict.items():
+#                     display_list_objects(value[3], value[1].title()) # Repeating the same thing after the user entered 'Q' in the beginning
+
+#             elif display_again == "N":
+#                 ask_to_display = False
+
+#             else: # If the user did not enter 'Y' or 'N' when prompted to display the revised list...
+#                 print("Please try again. That is not a valid option.")
+
+#         college_employees = len(person_dict["C"][3]) # Now it's calculating the number of each person type by getting the length of each list of objects in the dictionary
+#         faculty_members = len(person_dict["F"][3])
+#         students = len(person_dict["S"][3])
+#         print(f"List created successfully. There {'are' if college_employees != 1 else 'is'} " # F strings used to display each number of persons created, with proper grammar
+#               f"{college_employees} college employee{'s' if college_employees != 1 else ''}, "
+#               f"{faculty_members} faculty member{'s' if faculty_members != 1 else ''}, "
+#               f"and {students} student{'s' if students != 1 else ''}.")
+
+#     else: # If user did not enter 'Y' or 'N' when prompted to edit any information...
+#         print("Please try again. That is not a valid option.")
+#         prompt_edit = input("Would you like to edit any of the information entered? Enter 'Y' for yes or 'N' for no: ").upper()
