@@ -86,7 +86,6 @@ def getphonenumber():
             phonenumber = user_input[:3] + "-" + user_input[3:6] + "-" + user_input[6:]
     return phonenumber
 
-
 ### CLASS ###
 class Person:
     'A person includes a first name, last name, street address, zip code, and phone number.'
