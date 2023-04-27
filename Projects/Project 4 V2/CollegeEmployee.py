@@ -9,6 +9,7 @@ to accept and display all CollegeEmployee data.
 
 from Person import Person, getalpha, getnumeric
 
+### FUNCTIONS ###
 def getssn():
     'Prompts user to enter an SSN'
     test_input = True
