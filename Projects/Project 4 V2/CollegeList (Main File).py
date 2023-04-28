@@ -257,5 +257,5 @@ PERSON_LIST_INDEX = 3 # The list of objects each person is appended to
 MAX_PERSONS_INDEX = 4 # The maximum number of persons for that type
 
 
-if __name__=="__main__": # Instead of calling all the functions in the main program, requiring them to be pre-defined, it only runs main()
+if __name__=="__main__": # Instead of calling all the functions in the main program, requiring them to be pre-defined, I use this and only call main()
     main()
