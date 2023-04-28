@@ -224,14 +224,14 @@ def finish_up(edits_made):
             f"{faculty_members} faculty member{'s' if faculty_members != 1 else ''}, "
             f"and {students} student{'s' if students != 1 else ''}.")
 
-####################
+####################m
 ### DECLARATIONS ###
 ####################
 person_dict = {
     # Key : method call, phrase to use, applicable keys, list of objects, max number of persons
     "C" : [CollegeEmployee, "college employee", ["N","S","D"], [], 4],
     "F" : [Faculty, "faculty member", ["N","S","D","T"], [], 3],
-    "S" : [Student, "student", ["M","G"], [], 7,]
+    "S" : [Student, "student", ["M","G"], [], 1,]
 }
 
 key_dict = {
