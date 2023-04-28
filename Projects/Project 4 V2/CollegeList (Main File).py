@@ -33,9 +33,11 @@ def main(): # Using a main function allows me to display my code top down
 
     while prompting_creation: # This flag allows user to keep creating persons until they enter Q
         selection = get_person_or_quit()
+
         if selection != "Q":
             if validate_person_type(selection): # Function determines whether the person limit has been reached for their selection
                 create_person(selection) # If not (above func return true / valid), creates person using the type they selected
+
         else:
             prompting_creation = False
 
@@ -47,14 +49,17 @@ def main(): # Using a main function allows me to display my code top down
             person_type = get_person_type() # Same as get_person_or_quit() but without Q
             person_number = get_person_number(person_type) # Identifies the specific person to edit
             edit_key = get_edit_key(person_type) # Identifies the attribute they want to edit
+
             edit_and_display(person_type, person_number, edit_key) # Uses all the above variables as parameters to make the edit & display result
+
         else:
             prompting_edit = False
 
     finish_up(edits_made) # Totals the final number of persons and displays a final, revised list only if edits_made is true
 
-
+#################
 ### FUNCTIONS ###
+#################
 def get_person_or_quit():
     'Asks user to enter which type of person they would like to add to the list, or quit'
     getting_input = True
@@ -65,8 +70,10 @@ def get_person_or_quit():
 
         if person_type not in ("C","F","S","Q"):
             print("Please try again. That is not a valid option.")
+
         elif person_type == "Q" and sum(len(value[PERSON_LIST_INDEX]) for value in person_dict.values()) == 0: # If no persons created and they try to quit...
             print("Please enter information for at least one person.")
+
         else:
             return person_type
 
@@ -80,7 +87,8 @@ def validate_person_type(person_type):
     if len(list_to_use) == max_persons: # If the list that the persons are appended to has reached its respective max number...
         print(f"Please try again. Maximum number of {phrase_to_use}s reached.") # Having a phrase for each person type allows custom messages
         return False
-    return True
+
+    return True # I don't need a second if statement because the above statement has a return
 
 
 def create_person(person_type):
@@ -121,7 +129,7 @@ def get_edit():
         if prompt_edit == 'N':
             return False
 
-        print("Please try again. That is not a valid option.") # IF the input is not 'y' or 'n', this is automatically accessed
+        print("Please try again. That is not a valid option.") # If the input is not 'y' or 'n', this is automatically accessed
 
 
 def get_person_type():
@@ -134,8 +142,10 @@ def get_person_type():
         if person_type in ("C","F","S"):
             list_to_use = person_dict[person_type][PERSON_LIST_INDEX]
             phrase_to_use = person_dict[person_type][PHRASE_INDEX]
+
             if len(list_to_use) == 0: # Checks if the selected person type was ever created
                 print(f"Please try again. There is no {phrase_to_use} to edit.")
+
             else:
                 return person_type
 
@@ -151,10 +161,14 @@ def get_person_number(person_type):
 
     while getting_input:
         person_number = input(f"Enter which {phrase_to_use} you would like to edit: ")
+
         if person_number.isdigit(): # Checks if the number they entered was a whole, positive number
+
             if int(person_number) in range(1,len(list_to_use)+1): # Converts it to an int to check if it's in the range of the length of that person type's list
                 return int(person_number) # If it is, returns it as an integer so it doesn't have to be converted anywhere else
+
             print(f"Please try again. There is no {phrase_to_use} with that number.")
+
         else:
             print("Please try again. That is not a valid number.")
 
@@ -170,10 +184,13 @@ def get_edit_key(person_type):
 
     while getting_input:
         edit_key = input("Enter one of the above keys: ").upper()
+
         if edit_key in DEFAULT_KEYS or edit_key in person_dict[person_type][KEY_INDEX]: # Checks if input is a person's attribute or one specific to that person type
             return edit_key
+
         if edit_key in key_dict: # If it's in the dictionary, but not specific to the person type...
             print(f"Please try again. That is not a valid key for a {phrase_to_use}.")
+
         else:
             print("Please try again. That is not a valid key.")
 
@@ -188,7 +205,7 @@ def edit_and_display(person_type, person_number, edit_key):
     getattr(specific_object, method_call)() # Essentially accesses the value of the object, what method to call on it (as str) then calls it with () outside
     print(f"\n{phrase_to_use.capitalize()} #{person_number} has been updated to the following:") # Capitalize applies .upper to the first letter only
     specific_object.display()
-    print() 
+    print()
 
 
 def finish_up(edits_made):
@@ -201,14 +218,15 @@ def finish_up(edits_made):
         print("Revised List of Persons:")
         for value in person_dict.values(): # Same as what happens in the display_all function
             display_list_objects(value[PERSON_LIST_INDEX], value[PHRASE_INDEX].title())
-            
+
     print(f"\nList created successfully. There {'are' if college_employees != 1 else 'is'} " # This just allows a statement to not be on one long line
             f"{college_employees} college employee{'s' if college_employees != 1 else ''}, " # f-strings with if-statements allow proper grammar based on variables
             f"{faculty_members} faculty member{'s' if faculty_members != 1 else ''}, "
             f"and {students} student{'s' if students != 1 else ''}.")
 
-
-### DICTIONARIES ###
+####################
+### DECLARATIONS ###
+####################
 person_dict = {
     # Key : method call, phrase to use, applicable keys, list of objects, max number of persons
     "C" : [CollegeEmployee, "college employee", ["N","S","D"], [], 4],
@@ -231,15 +249,12 @@ key_dict = {
     "G" : ['setgpa', 'GPA']
 }
 
-
-### CONSTANTS ###
 DEFAULT_KEYS = ["F","L","A","Z","P"] # These are the attributes of the person class
 METHOD_INDEX = 0 # The method used to create a person or edit a specific sttribute
 PHRASE_INDEX = 1 # Phrase to use for custom messages depending on person type (key)
 KEY_INDEX = 2 # Each persont type has their own additional set of keys applicable specifically to them
 PERSON_LIST_INDEX = 3 # The list of objects each person is appended to
 MAX_PERSONS_INDEX = 4 # The maximum number of persons for that type
-
 
 
 if __name__=="__main__": # Instead of calling all the functions in the main program, requiring them to be pre-defined, it only runs main()
