@@ -41,7 +41,7 @@ def main(): # Using a main function allows me to display my code top down
 
     display_all_persons() # Once they choose to quit creating persons, this function displays them all at once
 
-    while prompting_edit:
+    while prompting_edit: # This flag allows edits to be made until the user enters 'N'
         if get_edit(): # Returns a boolean indicating whether they choose to edit or not
             edits_made = True # This flag is used to tell the finish_up function whether or not the user made edits
             person_type = get_person_type() # Same as get_person_or_quit() but without Q
@@ -96,8 +96,8 @@ def display_all_persons():
 
     print("List of Persons:")
     for value in person_dict.values(): # Loops through the value of each key in the dictionary
-        display_list_objects(value[PERSON_LIST_INDEX], value[PHRASE_INDEX].title()) # Uses display func with parameters being specific values from the dict
-    print()
+        display_list_objects(value[PERSON_LIST_INDEX], value[PHRASE_INDEX].title()) # Uses display func with parameters as specific values from the dict
+    print() # Simply prints a blank line for aesthetic purposes
 
 
 def display_list_objects(list_objects, object_title):
@@ -188,7 +188,7 @@ def edit_and_display(person_type, person_number, edit_key):
     getattr(specific_object, method_call)() # Essentially accesses the value of the object, what method to call on it (as str) then calls it with () outside
     print(f"\n{phrase_to_use.capitalize()} #{person_number} has been updated to the following:") # Capitalize applies .upper to the first letter only
     specific_object.display()
-    print() # Simply prints a blank line as a separator
+    print() 
 
 
 def finish_up(edits_made):
@@ -197,15 +197,15 @@ def finish_up(edits_made):
     faculty_members = len(person_dict["F"][PERSON_LIST_INDEX])
     students = len(person_dict["S"][PERSON_LIST_INDEX])
 
-    print(f"\nList created successfully. There {'are' if college_employees != 1 else 'is'} " # This just allows a statement to not be on one long line
-            f"{college_employees} college employee{'s' if college_employees != 1 else ''}, " # f-strings with if-statements allow proper grammar based on variables
-            f"{faculty_members} faculty member{'s' if faculty_members != 1 else ''}, "
-            f"and {students} student{'s' if students != 1 else ''}.")
-
     if edits_made: # Only if the parameter is true...
         print("Revised List of Persons:")
         for value in person_dict.values(): # Same as what happens in the display_all function
             display_list_objects(value[PERSON_LIST_INDEX], value[PHRASE_INDEX].title())
+            
+    print(f"\nList created successfully. There {'are' if college_employees != 1 else 'is'} " # This just allows a statement to not be on one long line
+            f"{college_employees} college employee{'s' if college_employees != 1 else ''}, " # f-strings with if-statements allow proper grammar based on variables
+            f"{faculty_members} faculty member{'s' if faculty_members != 1 else ''}, "
+            f"and {students} student{'s' if students != 1 else ''}.")
 
 
 ### DICTIONARIES ###
