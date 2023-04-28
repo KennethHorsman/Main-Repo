@@ -96,27 +96,27 @@ class Person:
         self.zipcode = zipcode if zipcode is not None else getzipcode()
         self.phonenumber = phonenumber if phonenumber is not None else getphonenumber()
 
-    def setfirstname(self, firstname):
+    def setfirstname(self):
         "Sets a firstname manually"
-        self.firstname = firstname
+        self.firstname = getfirstname()
 
-    def setlastname(self, lastname):
+    def setlastname(self):
         "Sets a lastname manually"
-        self.lastname = lastname
+        self.lastname = getlastname()
 
-    def setaddress(self, address):
+    def setaddress(self):
         "Sets a street address manually"
-        self.address = address
+        self.address = getaddress()
 
-    def setzipcode(self, zipcode):
+    def setzipcode(self):
         "Sets a zipcode manually"
-        self.zipcode = zipcode
+        self.zipcode = getzipcode()
 
-    def setphonenumber(self, phonenumber):
+    def setphonenumber(self):
         "Sets a phone number manually"
-        self.phonenumber = phonenumber
+        self.phonenumber = getphonenumber()
 
     def display(self):
         'Displays all of a Persons information'
         for key, value in self.__dict__.items():
-            print(f"{key}: {value}")
+            print(f"{key.title()}: {value}")

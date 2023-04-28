@@ -54,7 +54,7 @@ def main():
     finish_up(edits_made)
 
 
-### MAIN FUNCTIONS ###
+### FUNCTIONS ###
 def get_person_or_quit():
     'Asks user to enter which type of person they would like to add to the list, or quit'
     getting_input = True
@@ -87,20 +87,9 @@ def create_person(person_type):
     'Allows user to create a new person of the specified type.'
     list_to_use = person_dict[person_type][PERSON_LIST_INDEX]
     method_call = person_dict[person_type][METHOD_INDEX]
-    applicable_keys = person_dict[person_type][KEY_INDEX]
-    arguments_to_use = []
-    arguments_value = []
 
-    for key in DEFAULT_KEYS:
-        arguments_to_use.append(key)
-    for key in applicable_keys:
-        arguments_to_use.append(key)
+    list_to_use.append(method_call())
 
-    for key in arguments_to_use:
-        function_call = key_dict[key][METHOD_INDEX]
-        arguments_value.append(function_call())
-
-    list_to_use.append(method_call(*arguments_value))
 
 def display_all_persons():
     'Displays all persons created.'
@@ -112,7 +101,11 @@ def display_all_persons():
 
 
 def display_list_objects(list_objects, object_type):
-    'Displays the attributes of an object.'
+    '''Displays the attributes of an object.
+    
+    list_objects = specified list of objects to loop through
+    object_type = title of the list of objects
+    '''
 
     if list_objects:
         for index, obj in enumerate(list_objects): # Enumerate loops through the list of objects with {index, object} pairs
@@ -120,7 +113,6 @@ def display_list_objects(list_objects, object_type):
             obj.display() # Calls the display method for each object it loops through
 
 
-### EDITING FUNCTIONS ###
 def get_edit():
     'Asks user if they want to edit any information in the list of persons.'
     getting_input = True
@@ -196,7 +188,7 @@ def edit_and_display(person_type, person_number, edit_key):
     phrase_to_use = person_dict[person_type][PHRASE_INDEX]
     method_call = key_dict[edit_key][METHOD_INDEX]
 
-    getattr(list_to_use[person_number-1], str(method_call))()
+    getattr(list_to_use[person_number-1], method_call)()
     print(f"\n{phrase_to_use.capitalize()} #{person_number} has been updated to the following:")
     list_to_use[person_number-1].display()
     print()
@@ -218,145 +210,8 @@ def finish_up(edits_made):
         for value in person_dict.values():
             display_list_objects(value[PERSON_LIST_INDEX], value[PHRASE_INDEX].title())
 
-### INFORMATION FUNCTIONS ###
-def getalpha(prompt):
-    'Tests if a string is alphabetic'
-    test_input = True
-    while test_input is True:
-        user_input = input(prompt)
-        invalid_input = [x for x in user_input.replace("-","").replace(" ","") if not x.isalpha()]
-        if len(invalid_input) > 0:
-            print(f"Please try again. Invalid input found: {invalid_input}")
-        elif user_input == "":
-            print("Please try again. No input given.")
-        else:
-            return user_input.title()
 
-def getalnum(prompt):
-    'Tests if a string is alphanumeric'
-    test_input = True
-    while test_input is True:
-        user_input = input(prompt)
-        invalid_input = [x for x in user_input.replace("-","").replace(" ","") if not x.isalnum()]
-        if len(invalid_input) > 0:
-            print(f"Please try again. Invalid input found: {invalid_input}")
-        elif user_input == "":
-            print("Please try again. No input given.")
-        else:
-            return user_input.title()
-
-def getnumeric(prompt):
-    'Tests if a string is numeric'
-    test_input = True
-    while test_input is True:
-        user_input = input(prompt)
-        invalid_input = [x for x in user_input if not x.isnumeric()]
-        if len(invalid_input) > 0:
-            print(f"Please try again. Invalid input found: {invalid_input}")
-        elif user_input == "":
-            print("Please try again. No input given.")
-        else:
-            return user_input
-
-def setfirstname():
-    'Prompts user to enter a first name'
-    firstname = getalpha("Enter first name: ")
-    return firstname
-
-def setlastname():
-    'Prompts user to enter a last name'
-    lastname = getalpha("Enter last name: ")
-    return lastname
-
-def setaddress():
-    'Prompts user to enter a street address'
-    address = getalnum("Enter street address: ")
-    return address
-
-def setzipcode():
-    'Prompts user to enter a zipcode'
-    test_input = True
-    while test_input is True:
-        user_input = getnumeric("Enter zipcode: ")
-        if len(user_input) != 5:
-            print("Please try again. That is not a valid zipcode.")
-        else:
-            test_input = False
-            zipcode = user_input
-    return zipcode
-
-def setphonenumber():
-    'Prompts user to enter a phone number'
-    test_input = True
-    while test_input is True:
-        user_input = getnumeric("Enter phone number without dashes: ")
-        if len(user_input) != 10:
-            print("Please try again. That is not a valid phone number.")
-        else:
-            test_input = False
-            phonenumber = user_input[:3] + "-" + user_input[3:6] + "-" + user_input[6:]
-    return phonenumber
-
-def setmajor():
-    'Prompts user to enter a major'
-    major = getalpha("Enter major: ")
-    return major
-
-def setgpa():
-    'Prompts user to enter a GPA'
-    test_input = True
-    while test_input is True:
-        user_input = input("Enter GPA on a 4.0 scale: ")
-        invalid_input = [x for x in user_input.replace(".","") if not x.isnumeric()]
-        if len(invalid_input) > 0:
-            print(f"Please try again. Invalid input found: {invalid_input}")
-        elif user_input == "":
-            print("Please try again. No input given.")
-        elif not len(user_input) == 3 or not (0.0 <= float(user_input) <= 4.0) or not ((user_input[0] and user_input[2]).isnumeric() and user_input[1] == "."):
-            print("Please try again. That is not a valid GPA.")
-        else:
-            test_input = False
-            gpa = user_input
-    return gpa
-
-def setssn():
-    'Prompts user to enter an SSN'
-    test_input = True
-    while test_input is True:
-        user_input = getnumeric("Enter SSN without dashes: ")
-        if len(user_input) != 9:
-            print("Please try again. That is not a valid SSN.")
-        else:
-            test_input = False
-            ssn = user_input[:3] + "-" + user_input[3:5] + "-" + user_input[5:]
-    return ssn
-
-def setsalary():
-    'Prompts user to enter an annual salary'
-    user_input = getnumeric("Enter salary with no symbols: ")
-    salary = f"${int(user_input):,}"
-    return salary
-
-def setdepartment():
-    'Prompts user to enter a department'
-    department = getalpha("Enter department: ")
-    return department
-
-def settenuredstatus():
-    'Prompts user to enter whether the Faculty member is tenured.'
-    test_input = True
-    while test_input is True:
-        tenured_input = input("If tenured, enter 'Y'. Otherwise, enter 'N': ").upper()
-        if tenured_input == "":
-            print("Please try again. No input given.")
-        elif tenured_input != "Y" and tenured_input != "N":
-            print("Please try again. That is not a valid option.")
-        elif tenured_input == "Y":
-            return True
-        else:
-            return False
-
-### DECLARATIONS###
+### DICTIONARIES ###
 person_dict = {
     # Key : method call, phrase to use, applicable keys, list of objects, max number of persons
     "C" : [CollegeEmployee, "college employee", ["N","S","D"], [], 4],
@@ -366,19 +221,21 @@ person_dict = {
 
 key_dict = {
     # Key : method call, phrase to use
-    "F" : [setfirstname, 'first name'],
-    "L" : [setlastname, 'last name'],
-    "A" : [setaddress, 'address'],
-    "Z" : [setzipcode, 'zipcode'],
-    "P" : [setphonenumber, 'phone number'],
-    "N" : [setssn, 'SSN'],
-    "S" : [setsalary, 'salary'],
-    "D" : [setdepartment, 'department'],
-    "T" : [settenuredstatus, 'tenured status'],
-    "M" : [setmajor, 'major',],
-    "G" : [setgpa, 'GPA']
+    "F" : ['setfirstname', 'first name'],
+    "L" : ['setlastname', 'last name'],
+    "A" : ['setaddress', 'address'],
+    "Z" : ['setzipcode', 'zipcode'],
+    "P" : ['setphonenumber', 'phone number'],
+    "N" : ['setssn', 'SSN'],
+    "S" : ["setsalary", 'salary'],
+    "D" : ['setdepartment', 'department'],
+    "T" : ['settenuredstatus', 'tenured status'],
+    "M" : ['setmajor', 'major',],
+    "G" : ['setgpa', 'GPA']
 }
 
+
+### CONSTANTS ###
 DEFAULT_KEYS = ["F","L","A","Z","P"]
 METHOD_INDEX = 0
 PHRASE_INDEX = 1

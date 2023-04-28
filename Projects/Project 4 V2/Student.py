@@ -41,14 +41,14 @@ class Student(Person):
         self.major = major if major is not None else getmajor()
         self.gpa = gpa if gpa is not None else getgpa()
 
-    def setmajor(self, major):
+    def setmajor(self):
         'Sets a major manually'
-        self.major = major
+        self.major = getmajor()
 
-    def setgpa(self, gpa):
+    def setgpa(self):
         'Sets a gpa manually'
-        self.gpa = gpa
+        self.gpa = getgpa()
 
     def display(self):
         for key, value in self.__dict__.items():
-            print(f"{key}: {value}")
+            print(f"{key.title()}: {value}")
