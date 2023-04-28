@@ -31,9 +31,9 @@ class Faculty(CollegeEmployee):
         super().__init__()
         self.tenured = tenured if tenured is not None else gettenuredstatus()
 
-    def settenuredstatus(self, tenured):
+    def settenuredstatus(self):
         'Sets a tenured status manually'
-        self.tenured = tenured
+        self.tenured = gettenuredstatus()
 
     def display(self):
         super().display()

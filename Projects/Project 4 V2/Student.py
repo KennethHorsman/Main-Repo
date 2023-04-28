@@ -15,7 +15,6 @@ def getmajor():
     major = getalpha("Enter major: ")
     return major
 
-### CLASSES ###
 def getgpa():
     'Prompts user to enter a GPA'
     test_input = True

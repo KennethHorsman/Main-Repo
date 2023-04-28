@@ -38,21 +38,21 @@ class CollegeEmployee(Person):
     'Adds an SSN, salary, and department to a Person'
     def __init__(self, ssn=None, salary=None, department=None):
         super().__init__()
-        self.ssn = ssn
-        self.salary = salary
-        self.department = department
+        self.ssn = ssn if ssn is not None else getssn()
+        self.salary = salary if salary is not None else getsalary()
+        self.department = department if department is not None else getdepartment()
 
-    def setssn(self,ssn):
+    def setssn(self):
         'Sets an ssn manually'
-        self.ssn = ssn
+        self.ssn = getssn()
 
-    def setsalary(self, salary):
+    def setsalary(self):
         'Sets a salary manually'
-        self.salary = salary
+        self.salary = getsalary()
 
-    def setdepartment(self, department):
+    def setdepartment(self):
         'Sets a department manually'
-        self.department = department
+        self.department = getdepartment()
 
     def display(self):
         super().display()
