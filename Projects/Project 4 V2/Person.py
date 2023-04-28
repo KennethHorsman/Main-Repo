@@ -118,5 +118,8 @@ class Person:
 
     def display(self):
         'Displays all of a Persons information'
-        for key, value in self.__dict__.items():
-            print(f"{key.title()}: {value}")
+        print(f"First name: {self.firstname}")
+        print(f"Last name: {self.lastname}")
+        print(f"Address: {self.address}")
+        print(f"Zipcode: {self.zipcode}")
+        print(f"Phonenumber: {self.phonenumber}")

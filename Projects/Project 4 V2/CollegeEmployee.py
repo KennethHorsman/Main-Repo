@@ -55,5 +55,7 @@ class CollegeEmployee(Person):
         self.department = department
 
     def display(self):
-        for key, value in self.__dict__.items():
-            print(f"{key}: {value}")
+        super().display()
+        print(f"Social Security Number: {self.ssn}")
+        print(f"Annual salary: {self.salary}")
+        print(f"Department: {self.department}")

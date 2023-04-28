@@ -50,5 +50,6 @@ class Student(Person):
         self.gpa = getgpa()
 
     def display(self):
-        for key, value in self.__dict__.items():
-            print(f"{key.title()}: {value}")
+        super().display()
+        print(f"Major: {self.major}")
+        print(f"GPA: {self.gpa}")

@@ -36,5 +36,5 @@ class Faculty(CollegeEmployee):
         self.tenured = tenured
 
     def display(self):
-        for key, value in self.__dict__.items():
-            print(f"{key}: {value}")
+        super().display()
+        print(f"Tenured: {self.tenured}")
