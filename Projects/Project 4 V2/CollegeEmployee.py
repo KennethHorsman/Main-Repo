@@ -36,10 +36,10 @@ def getdepartment():
 ### CLASSES ###
 class CollegeEmployee(Person):
     'Adds an SSN, salary, and department to a Person'
-    def __init__(self, ssn=None, salary=None, department=None): # Setting a default value makes the arguments optional
+    def __init__(self, ssn=None, salary=None, department=None): 
         super().__init__() # Initalizes the Person class and inherits all of its properties
-        self.ssn = ssn if ssn is not None else getssn() # If no value is given, it automatically runs the above functions to obtain the value
-        self.salary = salary if salary is not None else getsalary() # Setting it up this way allows the class to recieve data from different sources instead of assuming it needs to ask for input
+        self.ssn = ssn if ssn is not None else getssn() 
+        self.salary = salary if salary is not None else getsalary() 
         self.department = department if department is not None else getdepartment()
 
     def setssn(self):

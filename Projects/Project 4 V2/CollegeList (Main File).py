@@ -23,7 +23,7 @@ from CollegeEmployee import CollegeEmployee
 from Faculty import Faculty
 from Student import Student
 
-def main(): # Using a main function allows me to display my code top down
+def main(): # Using a main function setup allows me to display my code top down, and shows the basic logic of the program
     'Allows user to create and edit a list of persons, which will then be displayed.'
     prompting_creation = True
     prompting_edit = True
@@ -70,7 +70,7 @@ def get_person_or_quit():
         if person_type not in ("C","F","S","Q"):
             print("Please try again. That is not a valid option.")
 
-        elif person_type == "Q" and sum(len(value[PERSON_LIST_INDEX]) for value in person_dict.values()) == 0: # If no persons created and they try to quit...
+        elif person_type == "Q" and sum(len(value[PERSON_LIST_INDEX]) for value in person_dict.values()) == 0: # Sums the length of all lists of objects in the dict
             print("Please enter information for at least one person.")
 
         else:
@@ -94,7 +94,9 @@ def create_person(person_type):
     'Allows user to create a new person of the specified type.'
     list_to_use = person_dict[person_type][PERSON_LIST_INDEX]
     method_call = person_dict[person_type][METHOD_INDEX]
+    phrase_to_use = person_dict[person_type][PHRASE_INDEX]
 
+    print(f"You are now creating a {phrase_to_use}.")
     list_to_use.append(method_call()) # Since the classes are imported, they're callable. Once the object is created, it's appended to the respective list
 
 
@@ -227,14 +229,14 @@ def finish_up(edits_made):
 ### DECLARATIONS ###
 person_dict = {
     # Key : method call, phrase to use, applicable keys, list of objects, max number of persons
-    "C" : [CollegeEmployee, "college employee", ["N","S","D"], [], 4],
+    "C" : [CollegeEmployee, "college employee", ["N","S","D"], [], 4], # These methods can be called directly b/c they're imported
     "F" : [Faculty, "faculty member", ["N","S","D","T"], [], 3],
     "S" : [Student, "student", ["M","G"], [], 7,]
 }
 
 key_dict = {
     # Key : method call, phrase to use
-    "F" : ['setfirstname', 'first name'],
+    "F" : ['setfirstname', 'first name'], # Thse methods are not imported, so we used getattr
     "L" : ['setlastname', 'last name'],
     "A" : ['setaddress', 'address'],
     "Z" : ['setzipcode', 'zipcode'],
@@ -255,5 +257,5 @@ PERSON_LIST_INDEX = 3 # The list of objects each person is appended to
 MAX_PERSONS_INDEX = 4 # The maximum number of persons for that type
 
 
-if __name__=="__main__": # Instead of calling all the functions in the main program, requiring them to be pre-defined, I use this and only call main()
+if __name__=="__main__": # Instead of calling all the functions in the main program, I use this and only call main()
     main()
