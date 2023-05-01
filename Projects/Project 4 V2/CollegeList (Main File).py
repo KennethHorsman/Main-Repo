@@ -228,8 +228,8 @@ def finish_up(edits_made):
 person_dict = {
     # Key : method call, phrase to use, applicable keys, list of objects, max number of persons
     "C" : [CollegeEmployee, "college employee", ["N","S","D"], [], 4],
-    "F" : [Faculty, "faculty member", ["N","S","D","T"], [], 1],
-    "S" : [Student, "student", ["M","G"], [], 1,]
+    "F" : [Faculty, "faculty member", ["N","S","D","T"], [], 3],
+    "S" : [Student, "student", ["M","G"], [], 7,]
 }
 
 key_dict = {
