@@ -29,7 +29,7 @@ def main(): # Using a main function allows me to display my code top down
     prompting_edit = True
     edits_made = False
 
-    print("This program allows the user to create and edit a list of 4 college employees, 3 faculty members, and 7 students.")
+    print("This program allows the user to create and edit a list of 4 college employees, 3 faculty members, and 7 students in the U.S.")
 
     while prompting_creation: # This flag allows user to keep creating persons until they enter Q
         selection = get_person_or_quit()
@@ -228,7 +228,7 @@ def finish_up(edits_made):
 person_dict = {
     # Key : method call, phrase to use, applicable keys, list of objects, max number of persons
     "C" : [CollegeEmployee, "college employee", ["N","S","D"], [], 4],
-    "F" : [Faculty, "faculty member", ["N","S","D","T"], [], 3],
+    "F" : [Faculty, "faculty member", ["N","S","D","T"], [], 1],
     "S" : [Student, "student", ["M","G"], [], 1,]
 }
 
