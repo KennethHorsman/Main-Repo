@@ -113,8 +113,8 @@ def display_list_objects(list_objects, object_title):
     'Displays the attributes of an object.'
 
     if list_objects: # If the specified list has anything in it...
-        for index, obj in enumerate(list_objects): # Enumerate loops through the list of objects with {index, object} pairs
-            print(f"\n- {object_title} #{index+1} -") # Displays the provided title of each object with an incrementing index for each object
+        for index, obj in enumerate(list_objects): # Enumerate loops through the list of objects with {index, object} pairs that automatically increment
+            print(f"\n- {object_title} #{index+1} -") # Displays the provided title of each object with its index converted to one-based indexing
             obj.display() # Calls the display method - from its class - for each object it loops through
 
 
