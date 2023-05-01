@@ -57,9 +57,8 @@ def main(): # Using a main function allows me to display my code top down
 
     finish_up(edits_made) # Totals the final number of persons and displays a final, revised list only if edits_made is true
 
-#################
+
 ### FUNCTIONS ###
-#################
 def get_person_or_quit():
     'Asks user to enter which type of person they would like to add to the list, or quit'
     getting_input = True
@@ -224,9 +223,8 @@ def finish_up(edits_made):
             f"{faculty_members} faculty member{'s' if faculty_members != 1 else ''}, "
             f"and {students} student{'s' if students != 1 else ''}.")
 
-####################m
+
 ### DECLARATIONS ###
-####################
 person_dict = {
     # Key : method call, phrase to use, applicable keys, list of objects, max number of persons
     "C" : [CollegeEmployee, "college employee", ["N","S","D"], [], 4],
