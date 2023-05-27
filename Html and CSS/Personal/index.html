@@ -3,14 +3,67 @@
     <title> Title </title>
   </head>
   <body>
-    <p> <a href="#h2"> Skip to h2 </a><p>
-    <h1> Header 1 </h1> 
-    <p> <b>Text in bold</b> <br /> 
-    <i>Text in <abbr title="Slanted">italic</abbr></i></p>
-    <h2 id="h2"> Header 2 </h2>
+    <p> <a href="#h1"> Skip to h1 </a><p>
+    <h1 id="h1"> Header 1 </h1> 
+    <p> <b>Text in bold</b> and 
+    <i>text in <abbr title="Slanted">italic</abbr></i><br />
+    CO<sub>2</sub> has nothing to do with the 4<sup>th</sup> of July<br />
+    <del>Ignore this</del> and 
+    <ins> look at this instead </ins> </p>
+    <hr />
+    <h2> Header 2 </h2>
     <ol>
       <li> Ordered </li>
       <ul>
-        <li> Unordered </ul>
+        <li> Unordered </li>
+      </ul>
+    </ol>
+    <dt> Definition term </dt>
+    <dd> Definition </dd>
+    <h3> Header 3 </h3>
+    <p><a href="https://www.horsereality.com" target="_blank"> Horse Reality </a></p>
+    <p><a href="mailto:kenneth.h1195@gmail.com"> Email myself</a></p>
+    <p><q>This is a quote</q>, <cite>Cited from this place</cite>,
+      <blockquote>and this is a blockquote</blockquote></p>
+    <h4> Header 4 </h4>
+      <form action="http://127.0.0.1:3000/Html%20and%20CSS/Personal/index.html#h1" method="post">
+        <p>10 digit Username:
+          <input type="text" name="username" size="10" maxlength="10" />
+        </p>
+        <p> Password:
+          <input type="password" name="password" size="18" />
+        </p>
+        <p>
+          <textarea name="comments" cols="26" rows="4">Enter comments...</textarea>
+        </p>
+      </form>
+    <h5> Header 5 </h5>
+    <img src="dancing-chick-gifs-tenor.gif" /> This image is inside text
+    <h6> Header 6 </h6>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th scope="col">Column 1</th>
+          <th scope="col">Column 2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Row 1</th>
+          <td rowspan="2"> Cell 1</td>
+          <td> Cell 2</td>
+        </tr>
+        <tr>
+          <th scope="row">Row 2</th>
+          <td>Cell 3</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <td></td>
+        <td>Result 1</td>
+        <td>Result 2</td>
+      </tfoot>
+    </table>
   </body>
 </html>
