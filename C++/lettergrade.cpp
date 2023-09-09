@@ -3,13 +3,37 @@
 #include <iostream>
 using namespace std;
 
+bool isConvertibleToDouble(const string& str) { 
+
+   try {
+      stod(str); 
+      return true;
+   } 
+
+   catch (...) { 
+      return false;
+   }
+
+}
+
 int main() {
 
-   int score;
+   string input;
+   double score;
+   bool checkInput = true;
    char letterGrade;
 
-   cout << "Enter your score: ";
-   cin >> score;
+   while (checkInput) {
+      cout << "Enter your score: ";
+      cin >> input;
+
+      if(isConvertibleToDouble(input) && stod(input) <= 100 && stod(input) >= 0) break; // Is there a cleaner/shorter way to check range?
+      else if(!isConvertibleToDouble(input)) cout << "Error: Value entered is not a number." << endl;
+      else if(stod(input) > 100 || stod(input) < 0) cout << "Error: Value entered must in range 0 - 100." << endl;
+   
+   }
+
+   score = stod(input);
 
    if (score >= 90 && score <= 100) { 
       letterGrade = 'A'; 
@@ -26,4 +50,5 @@ int main() {
    cout << "Your grade is: " << letterGrade << endl;
 
    return 0;
+   
 }
