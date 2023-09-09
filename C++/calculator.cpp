@@ -4,47 +4,50 @@
 #include <string>
 using namespace std;
 
-bool isConvertibleToDouble(const string& str) {;
+bool isConvertibleToDouble(const string& str) {
+
    try {
       stod(str);
       return true;
+   } 
 
-   } catch (...) {
+   catch (...) {
       return false;
    }
-   }
+
+}
 
 int main() {
 
    string string1, string2;
-   double value1, value2;
+   double value1, value2, result;
    bool checkInput =  true;
-   double result;
    char operation;
 
    while (checkInput) {
       cout << "Enter first value: ";
       cin >> string1;
-      if (isConvertibleToDouble(string1)) break;
-      if (!isConvertibleToDouble(string1)) cout << "Error: Value entered is not a number." << endl;
-   }
 
+      if (isConvertibleToDouble(string1)) break;
+      else cout << "Error: Value entered is not a number." << endl;
+   }
 
    while (checkInput) {
       cout << "Enter operation (+ - * /): ";
       cin >> operation;
+
       if (operation == '+' || operation == '-' || operation == '*' || operation == '/') break;
       else cout << "Error: Operation invalid." << endl;
    }
 
-
    while (checkInput) {
       cout << "Enter second value: ";
       cin >> string2;
-      if (isConvertibleToDouble(string2)) break;
-      if (!isConvertibleToDouble(string2)) cout << "Error: Value entered is not a number." << endl;
-   }
 
+      if (isConvertibleToDouble(string2) && stod(string2) != 0) break;
+      else if (!isConvertibleToDouble(string2)) cout << "Error: Value entered is not a number." << endl;
+      else if (stod(string2) == 0) cout << "Error: Cannot divide by zero." << endl;
+   }
 
    value1 = stod(string1);
    value2 = stod(string2);
