@@ -19,7 +19,11 @@ int main() {
       case(1):
       case(2):
          passed = true;
+         break;
 
+      default:
+         break;
+   
    if (passed) {
       cout << "You passed!\n";
    }
