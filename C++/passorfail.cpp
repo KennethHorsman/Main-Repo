@@ -11,13 +11,9 @@ int main() {
    cout << "Enter your score: ";
    cin >> score;
 
-   passed = (score >= 50) ? true : false;
+   passed = (score >= 60) ? true : false;
    
-   if (passed) {
-      cout << "You passed!" << endl;
-   } else {
-      cout << "You failed!" << endl;
-   }
+   cout << (passed ? "You passed!" : "You failed!") << endl;
 
    return 0;
 }
