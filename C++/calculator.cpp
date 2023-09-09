@@ -1,23 +1,53 @@
 // A calculator program that takes an operator (+, -, *, /) as input to perform a specified arithmetic operation.
 
 #include <iostream>
+#include <string>
 using namespace std;
+
+bool isConvertibleToDouble(const string& str) {;
+   try {
+      stod(str);
+      return true;
+
+   } catch (...) {
+      return false;
+   }
+   }
 
 int main() {
 
-   double value1;
-   double value2;
+   string string1, string2;
+   double value1, value2;
+   bool checkInput =  true;
    double result;
    char operation;
 
-   cout << "Enter first value: ";
-   cin >> value1;
+   while (checkInput) {
+      cout << "Enter first value: ";
+      cin >> string1;
+      if (isConvertibleToDouble(string1)) break;
+      if (!isConvertibleToDouble(string1)) cout << "Error: Value entered is not a number." << endl;
+   }
 
-   cout << "Enter operation (+ - * /): ";
-   cin >> operation;
 
-   cout << "Enter second value: ";
-   cin >> value2;
+   while (checkInput) {
+      cout << "Enter operation (+ - * /): ";
+      cin >> operation;
+      if (operation == '+' || operation == '-' || operation == '*' || operation == '/') break;
+      else cout << "Error: Operation invalid." << endl;
+   }
+
+
+   while (checkInput) {
+      cout << "Enter second value: ";
+      cin >> string2;
+      if (isConvertibleToDouble(string2)) break;
+      if (!isConvertibleToDouble(string2)) cout << "Error: Value entered is not a number." << endl;
+   }
+
+
+   value1 = stod(string1);
+   value2 = stod(string2);
 
    switch(operation) {
 
@@ -25,22 +55,22 @@ int main() {
          result = value1 + value2;
          cout << value1 << " + " << value2 << " = " << result << endl;
          break;
+         
       case('-'):
          result = value1 - value2;
          cout << value1 << " - " << value2 << " = " << result << endl;
          break;
+
       case('*'):
          result = value1 * value2;
          cout << value1 << " * " << value2 << " = " << result << endl;
          break;
+
       case('/'):
          result = value1 / value2;
          cout << value1 << " / " << value2 << " = " << result << endl;
          break;
-      default:
-         cout << "ERROR: Invalid operation." << endl;
-         break;
-         
+
    }
 
    return 0;
