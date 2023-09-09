@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-bool isConvertibleToDouble(const string& str) {
+bool isConvertibleToDouble(const string& str) { // passes object 'str' by reference as a constant string
 
    try {
       stod(str);
