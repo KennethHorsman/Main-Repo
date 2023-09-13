@@ -2,21 +2,23 @@
 #pylint: disable=invalid-name
 #pylint: disable=inconsistent-return-statements
 '''
-Write an application named CollegeList that implements a list 
-of four “regular” CollegeEmployee, three Faculty, and seven Students. 
+Write an application named CollegeList that implements a list
+of four “regular” CollegeEmployee, three Faculty, and seven Students.
 
-1. Prompt the user to specify which type of persons data will be entered (C, F, or S), 
-or allow the user to quit (Q). While the user chooses to continue (that is, does not quit), 
-accept data entry for the appropriate type of Person. 
+1. Prompt the user to specify which type of persons data will be entered (C, F, or S),
+or allow the user to quit (Q). While the user chooses to continue (that is, does not quit),
+accept data entry for the appropriate type of Person.
 
-2. If the user attempts to enter data for more than four CollegeEmployees, 
-three Faculty, or seven Students, display an error message. 
+2. If the user attempts to enter data for more than four CollegeEmployees,
+three Faculty, or seven Students, display an error message.
 
-3. When the user quits, display a report on the screen listing each group of Persons 
-under the appropriate heading of “College Employees,” “Faculty,” or “Students.” 
+3. When the user quits, display a report on the screen listing each group of Persons
+under the appropriate heading of “College Employees,” “Faculty,” or “Students.”
 
-4. If the user has not entered data for one or more types of Persons during a session, 
+4. If the user has not entered data for one or more types of Persons during a session,
 display an appropriate message under the appropriate heading.
+
+CHALLENGE: Only display applicable keys, dont ask which person if only one, allow dashes in phone number
 '''
 
 from CollegeEmployee import CollegeEmployee
