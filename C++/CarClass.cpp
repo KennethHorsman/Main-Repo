@@ -27,7 +27,7 @@ public:
     }
 
     // Method to display information about the car
-    void displayInfo() const {
+    void DisplayInfo() const {
         cout << "Car Information: " << make << " " << model << endl;
     }
 
@@ -49,37 +49,29 @@ Car CreateCar() {
 
 int main() {
    bool askToUpdate = true;
+   string userInput;
 
    cout << "This program gathers and displays information for one car." << endl;
 
    Car myCar = CreateCar();
-   myCar.displayInfo();
+   myCar.DisplayInfo();
 
    while (askToUpdate) {
-    cout << "Would you like to update your car information?" << endl;
-   }
-   cout << "Would you like to update your car information?" << endl;
-    // Loop here
+        cout << "Would you like to update your car information? Enter 'Y' or 'N'." << endl;
+        cin >> userInput;
 
+        if (userInput.length() > 1) cout << "Invalid input given." << endl;
+        else {
+            userInput = toupper(userInput[0]);
 
-
-
-
-   // // Creating a Car object with a string model and string make
-   // Car my_car("Civic", "Honda");
-
-   // // Using public method to display information
-   // my_car.displayInfo();  // Output: Car Information: Honda Civic
-
-   // // Changing the car using setter methods and variables instead
-   // string newModel = "Accord";
-   // string newMake = "Toyota
-   // ";
-   // my_car.setModel(newModel);
-   // my_car.setMake(newMake);
-
-   // // Displaying updated information using getters instead
-   // cout << "New Car Information: " << my_car.getMake() << " " << my_car.getModel() << endl;
+            if (userInput == "Y") {
+                myCar = CreateCar();
+                myCar.DisplayInfo();
+            }
+            else if (userInput == "N") askToUpdate = false;
+            else cout << "Invalid input given." << endl;
+        }
+    }
 
     return 0;
 }
