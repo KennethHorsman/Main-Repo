@@ -65,12 +65,17 @@
     "**/Thumbs.db": true,
     ".vscode": true,
     "C++/CarClass": true,
-    "C++/build": true
+    "C++/build": true,
+    "C++/build/Debug": true
   },
   "hide-files.files": [
     ".vscode",
     "C++/CarClass",
     "C++/build",
-    "C++/build/Debug"
-  ]
+    "C++/build/Debug",
+    "C++/tempCodeRunnerFile.cpp"
+  ],
+  "files.associations": {
+    "iosfwd": "cpp"
+  }
 }

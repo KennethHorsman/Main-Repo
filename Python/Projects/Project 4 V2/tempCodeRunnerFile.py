@@ -1,0 +1,1 @@
+self.firstname = firstname if firstname is not None

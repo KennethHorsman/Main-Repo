@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/workspaces/FRCC/C++",
-      "program": "/workspaces/FRCC/C++/build/Debug/outDebug",
+      "cwd": "/workspaces/FRCC-Group-Project-2/C++",
+      "program": "/workspaces/FRCC-Group-Project-2/C++/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
