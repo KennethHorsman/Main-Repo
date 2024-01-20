@@ -66,14 +66,18 @@
     ".vscode": true,
     "C++/CarClass": true,
     "C++/build": true,
-    "C++/build/Debug": true
+    "C++/build/Debug": true,
+    "C++/tempCodeRunnerFile.cpp": true,
+    "C++/test": true
   },
   "hide-files.files": [
     ".vscode",
     "C++/CarClass",
     "C++/build",
     "C++/build/Debug",
-    "C++/tempCodeRunnerFile.cpp"
+    "C++/tempCodeRunnerFile.cpp",
+    "C++/test",
+    "C++/calculator"
   ],
   "files.associations": {
     "iosfwd": "cpp"
