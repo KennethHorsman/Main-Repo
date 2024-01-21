@@ -2,22 +2,22 @@
 using namespace std;
 
 int main() {
-   int initialValue;
-	int finalValue;
-   int i;
-   int j;
-
-   cin >> initialValue;
-	cin >> finalValue;
+   int numRows;
+   int numColumns;
+   int currentRow;
+   int currentRowInteger;
+   int currentColumn;
+   char currentColumnLetter;
    
-   for (i = initialValue; i <= finalValue; ++i) {
-      for (j = 0; j < i; ++j) {
-         cout << "%";
+   cin >> numRows;
+   cin >> numColumns;
+
+   for (currentRow = 1, currentRowInteger = 1; currentRow <= numRows; ++currentRow, ++currentRowInteger) {
+      for (currentColumn = 1, currentColumnLetter = 'A'; currentColumn <= numColumns; ++ currentColumn, ++currentColumnLetter) {
+         cout << currentRowInteger << currentColumnLetter << " ";
       }
       cout << endl;
    }
-         
-      
 
    return 0;
 }

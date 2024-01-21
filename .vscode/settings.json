@@ -63,23 +63,9 @@
     "**/CVS": true,
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
-    ".vscode": true,
-    "C++/CarClass": true,
-    "C++/build": true,
-    "C++/build/Debug": true,
-    "C++/tempCodeRunnerFile.cpp": true,
-    "C++/test": true,
-    "C++/calculator": true
+    "C++/CarClass": true
   },
-  "hide-files.files": [
-    ".vscode",
-    "C++/CarClass",
-    "C++/build",
-    "C++/build/Debug",
-    "C++/tempCodeRunnerFile.cpp",
-    "C++/test",
-    "C++/calculator"
-  ],
+  "hide-files.files": [],
   "files.associations": {
     "iosfwd": "cpp"
   }
