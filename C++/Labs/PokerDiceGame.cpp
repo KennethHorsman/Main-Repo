@@ -3,10 +3,8 @@ three of a kind, four of a kind, five of a kind, full house, and straight. Follo
 
 Step 1 (3 pts). Complete the CheckSingles() function. Return the sum of all values that match parameter goal. 
 Update the FindHighScore() function using a loop to call CheckSingles() six times with parameters being 1 - 6. 
-Return the highest score from all function calls. Submit for grading to confirm two tests pass.
-
-If input is: 2 4 1 5 4
-The output is: High score: 8
+Return the highest score from all function calls. 
+If input is: 2 4 1 5 4, the output is: High score: 8
 
 Step 2 (3 pts). Complete the CheckThreeOfKind(), CheckFourOfKind(), and CheckFiveOfKind() functions. 
 Hint: Since the values are in ascending order, same values are stored in consecutive index locations. 
@@ -15,17 +13,14 @@ Return 40 from CheckFourOfKind() if the dice contain at least four of the same v
 Return 50 from CheckFiveOfKind() if the dice contain five identical values. Ex: (5, 5, 5, 5, 5). 
 Update the FindHighScore() function to call the three functions and return the highest score from all function calls. 
 Submit for grading to confirm five tests pass.
-
-If input is: 2 4 4 5 4
-The output is: High score: 30
+If input is: 2 4 4 5 4, the output is: High score: 30
 
 Step 3 (2 pts). Complete the CheckFullHouse() function to return 35 if the dice contain a full house (a pair and three of a kind). 
 Ex: (1, 1, 3, 3, 3). Note: Five of a kind also satisfies the definition of a full house since (4, 4, 4, 4, 4) includes a pair of 4s and three 4s. 
 Update the FindHighScore() function to call CheckFullHouse() and return the highest score from all function calls. 
-Submit for grading to confirm seven tests pass.
 
 Step 4 (2 pts). Complete the CheckStraight() function to return 45 if the dice contain a straight of (1, 2, 3, 4, 5) or (2, 3, 4, 5, 6). 
-Update the FindHighScore() function to call CheckStraight() and return the highest score from all function calls. Submit for grading to confirm all tests pass. */
+Update the FindHighScore() function to call CheckStraight() and return the highest score from all function calls. */
 
 #include <iostream>
 #include <vector>
