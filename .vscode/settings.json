@@ -67,6 +67,7 @@
   },
   "hide-files.files": [],
   "files.associations": {
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "iostream": "cpp"
   }
 }
