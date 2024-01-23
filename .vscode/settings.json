@@ -65,7 +65,9 @@
     "**/Thumbs.db": true,
     "C++/CarClass": true
   },
-  "hide-files.files": [],
+  "hide-files.files": [
+    "C++/Labs/PokerDiceGame"
+  ],
   "files.associations": {
     "iosfwd": "cpp",
     "iostream": "cpp"

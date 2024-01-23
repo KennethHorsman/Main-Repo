@@ -61,12 +61,12 @@ int GetMostRepetitions(vector<int>& diceValues) {
 
 
 // Add all occurences of goal value
-int CheckSingles(vector<int>& diceValues, int goal) {
+int CheckSingles(vector<int>& diceValues, int valueToFind) {
    int sum = 0;
    
-   for (int i = 0; i < 5; ++i) {
-      if (diceValues.at(i) == goal) {
-         sum += goal;
+   for (int diceValuesIndex = 0; diceValuesIndex < 5; ++diceValuesIndex) {
+      if (diceValues.at(diceValuesIndex) == valueToFind) {
+         sum += valueToFind;
       }
    }
    return sum;
@@ -107,7 +107,7 @@ int CheckFiveOfKind(vector<int>& diceValues) {
 // Check for full house (score = 35)
 int CheckFullHouse(vector<int>& diceValues) {
    bool twoUniqueValues = false, threeRepetitions = false;
-   set<int> testSet(diceValues.begin(), diceValues.end());
+   set<int> testSet(diceValues.begin(), diceValues.end()); // Sets can only hold unique values
    
    if (GetMostRepetitions(diceValues) == 3) {
       threeRepetitions = true;
@@ -131,8 +131,16 @@ int CheckFullHouse(vector<int>& diceValues) {
 
 // Check for straight (score = 45)
 int CheckStraight(vector<int>& diceValues) {
-   // FIXME: DOES NOT CHECK IF THERE IS A GAP IN NUMBERS
-   if (GetMostRepetitions(diceValues) == 1) {
+   bool sequentialNumbers = true;
+
+   for (int diceValuesIndex = 0; diceValuesIndex < 4; ++diceValuesIndex) {
+      if (diceValues.at(diceValuesIndex) != diceValues.at(diceValuesIndex + 1) - 1) {
+         sequentialNumbers = false;
+         break;
+      }
+   }
+
+   if (sequentialNumbers) {
       return 45;
    }
    else {
@@ -143,6 +151,7 @@ int CheckStraight(vector<int>& diceValues) {
 // Find high score
 int FindHighScore(vector<int>& diceValues) {
    int currentCount, highestCount; 
+   highestCount = 0;
 
    if (CheckFiveOfKind(diceValues) == 50) {
       return highestCount = 50;
@@ -178,7 +187,14 @@ int main() {
 
    // Fill array with five values from input
    for(int diceValuesIndex = 0; diceValuesIndex < 5; ++diceValuesIndex) {
+      cout << "Enter a value for die " << diceValuesIndex + 1 << ": ";
       cin >> diceValues.at(diceValuesIndex);
+      if (cin.fail() || diceValues.at(diceValuesIndex) > 6) { // Since the variable is an int, cin will only accept an int
+         cout << "Invalid number entered." << endl;
+         cin.clear(); // Clears the error flag to allow future cin operatoins
+         cin.ignore(numeric_limits<streamsize>::max(), '\n'); // This code ignores all the characters in the buffer & creates a new line
+         --diceValuesIndex; 
+      }
    }
 
    // Place values in ascending order
