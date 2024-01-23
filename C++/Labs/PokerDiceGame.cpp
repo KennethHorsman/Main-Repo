@@ -42,9 +42,9 @@ int updateHighestCount(int currentCount, int highestCount) {
 int GetMostRepetitions(vector<int>& diceValues) {
    int currentCount = 0, highestCount = 0;
    
-   for (int i = 1; i <= 6; ++i) {
-      for (int j = 0; j < 5; ++j) {
-         if (diceValues.at(j) == i) {
+   for (int valueToFind = 1; valueToFind <= 6; ++valueToFind) {
+      for (int diceValuesIndex = 0; diceValuesIndex < 5; ++diceValuesIndex) {
+         if (diceValues.at(diceValuesIndex) == valueToFind) {
             currentCount += 1;
          }
       }
@@ -107,12 +107,11 @@ int CheckFiveOfKind(vector<int>& diceValues) {
 // Check for full house (score = 35)
 int CheckFullHouse(vector<int>& diceValues) {
    bool twoUniqueValues = false, threeRepetitions = false;
+   set<int> testSet(diceValues.begin(), diceValues.end());
    
    if (GetMostRepetitions(diceValues) == 3) {
       threeRepetitions = true;
    }
-   
-   set<int> testSet(diceValues.begin(), diceValues.end());
    
    if (testSet.size() == 2) {
       twoUniqueValues = true;
@@ -132,6 +131,7 @@ int CheckFullHouse(vector<int>& diceValues) {
 
 // Check for straight (score = 45)
 int CheckStraight(vector<int>& diceValues) {
+   // FIXME: DOES NOT CHECK IF THERE IS A GAP IN NUMBERS
    if (GetMostRepetitions(diceValues) == 1) {
       return 45;
    }
@@ -142,32 +142,31 @@ int CheckStraight(vector<int>& diceValues) {
 
 // Find high score
 int FindHighScore(vector<int>& diceValues) {
-   int currentCount, highestCount, i;
-   highestCount = 0;
-   
-   for (i = 1; i <= 6; ++i) {
-      currentCount = CheckSingles(diceValues, i);
-      highestCount = updateHighestCount(currentCount, highestCount);
-   }
-   
-   if (CheckThreeOfKind(diceValues) == 30) {
-      highestCount = updateHighestCount(30, highestCount);
-   }
-   
-   if (CheckFourOfKind(diceValues) == 40) {
-      highestCount = updateHighestCount(40, highestCount);
-   }
-   
+   int currentCount, highestCount; 
+
    if (CheckFiveOfKind(diceValues) == 50) {
-      highestCount = updateHighestCount(50, highestCount);
-   }
-   
-   if (CheckFullHouse(diceValues) == 35) {
-      highestCount = updateHighestCount(35, highestCount);
+      return highestCount = 50;
    }
    
    if (CheckStraight(diceValues) == 45) {
-      highestCount = updateHighestCount(45, highestCount);
+      return highestCount = 45;
+   }
+   
+   if (CheckFourOfKind(diceValues) == 40) {
+      return highestCount = 40;
+   }
+   
+   if (CheckFullHouse(diceValues) == 35) {
+      return highestCount = 35;
+   }
+   
+   if (CheckThreeOfKind(diceValues) == 30) {
+      return highestCount = 30;
+   }
+   
+   for (int valueToFind = 1; valueToFind <= 6; ++valueToFind) {
+      currentCount = CheckSingles(diceValues, valueToFind);
+      highestCount = updateHighestCount(currentCount, highestCount);
    }
    
    return highestCount;
@@ -178,8 +177,8 @@ int main() {
    int highScore = 0;
 
    // Fill array with five values from input
-   for(int i = 0; i < 5; ++i) {
-      cin >> diceValues.at(i);
+   for(int diceValuesIndex = 0; diceValuesIndex < 5; ++diceValuesIndex) {
+      cin >> diceValues.at(diceValuesIndex);
    }
 
    // Place values in ascending order
