@@ -30,17 +30,17 @@ using namespace std;
 
 
 // Update highest count
-int updateHighestCount(int currentCount, int highestCount) {
-   if (currentCount > highestCount) {
-      highestCount = currentCount;
+int updatehighScore(int currentCount, int highScore) {
+   if (currentCount > highScore) {
+      highScore = currentCount;
    }
-   return highestCount;
+   return highScore;
 }
 
 
 // Find the highest number of times an element was repeated
 int GetMostRepetitions(vector<int>& diceValues) {
-   int currentCount = 0, highestCount = 0;
+   int currentCount = 0, highScore = 0;
    
    for (int valueToFind = 1; valueToFind <= 6; ++valueToFind) {
       for (int diceValuesIndex = 0; diceValuesIndex < 5; ++diceValuesIndex) {
@@ -49,14 +49,14 @@ int GetMostRepetitions(vector<int>& diceValues) {
          }
       }
       
-      if (currentCount > highestCount) {
-         highestCount = currentCount;
+      if (currentCount > highScore) {
+         highScore = currentCount;
       }
       
       currentCount = 0;
    }
    
-   return highestCount;
+   return highScore;
 }
 
 
@@ -150,35 +150,35 @@ int CheckStraight(vector<int>& diceValues) {
 
 // Find high score
 int FindHighScore(vector<int>& diceValues) {
-   int currentCount, highestCount; 
-   highestCount = 0;
+   int currentCount, highScore; 
+   highScore = 0;
 
    if (CheckFiveOfKind(diceValues) == 50) {
-      return highestCount = 50;
+      return highScore = 50;
    }
    
    if (CheckStraight(diceValues) == 45) {
-      return highestCount = 45;
+      return highScore = 45;
    }
    
    if (CheckFourOfKind(diceValues) == 40) {
-      return highestCount = 40;
+      return highScore = 40;
    }
    
    if (CheckFullHouse(diceValues) == 35) {
-      return highestCount = 35;
+      return highScore = 35;
    }
    
    if (CheckThreeOfKind(diceValues) == 30) {
-      return highestCount = 30;
+      return highScore = 30;
    }
    
    for (int valueToFind = 1; valueToFind <= 6; ++valueToFind) {
       currentCount = CheckSingles(diceValues, valueToFind);
-      highestCount = updateHighestCount(currentCount, highestCount);
+      highScore = updatehighScore(currentCount, highScore);
    }
    
-   return highestCount;
+   return highScore;
 }
 
 int main() {
