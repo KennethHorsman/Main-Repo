@@ -12,7 +12,7 @@ Output: Element found at index 3 */
 #include <algorithm> // required for cin.ignore(numeric_limits<streamsize>::max(), '\n');
 using namespace std;
 
-int BinarySearch(vector<int>& numbers, int target, int numbersSize) { // Not sure if you meant 3 args as in two targets or this
+int BinarySearch(int numbers[], int target, int numbersSize) { // Not sure if you meant 3 args as in two targets or this
     int leftSide = 0, rightSide = numbersSize -1; // establishes first and last index of search
     
     while (leftSide <= rightSide) { // if the value is not present, leftSide will become greater than rightSide via the calculation below
@@ -33,7 +33,7 @@ int BinarySearch(vector<int>& numbers, int target, int numbersSize) { // Not sur
 
 int main() {
     int numbers[] = {1,3,5,7,19}; // using a vector since they seem to have benefits over an array
-    int numbersSize = numbers.size(), target, targetIndex;
+    int numbersSize = sizeof(numbers), target, targetIndex;
     bool targetGiven = false;
     
     while (!targetGiven) { // used pre-set bool as a flag to indicate whether the user has submit a valid target value
