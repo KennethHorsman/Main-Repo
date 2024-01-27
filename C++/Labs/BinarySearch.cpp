@@ -7,8 +7,8 @@ Input: nums[] = [1, 3, 5, 7, 19] target = 7
 Output: Element found at index 3 */
 
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include <vector> // required for vector<int> numbers
+#include <algorithm> // required for "cin.ignore(numeric_limits<streamsize>::max(), '\n');" and sort function
 using namespace std;
 
 int BinarySearch(vector<int>& numbers, int target, int numbersSize) { // Not sure if you meant 3 args as in two targets or this
