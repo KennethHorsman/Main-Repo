@@ -40,8 +40,9 @@ int main() {
     for (int numbersIndex = 0; numbersIndex < numbersSize; ++numbersIndex) { // loops for each element of the vector "numbers"
         cin >> numbers[numbersIndex];
         if (cin.fail()) { // Since the variable is an int, cin will only accept an int
-            cin.clear(); // Clears the error flag to allow future cin operatoins
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // This code ignores all the characters in the buffer & creates a new line
+            cin.clear(); // Clears the error flag to allow future cin operations
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); /* Ignores the maxiumum number of characters that can be read by an input stream
+            and stops after it reaches the newline that is created at the end of the cin operation, allowing future cin operations */
             --numbersIndex; // Returns to the same index instead of incrementing
         }
     }
