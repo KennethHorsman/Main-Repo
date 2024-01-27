@@ -1,3 +1,4 @@
+// Kenneth Horsman
 /* Given a sorted array of n integers nums[] = [1, 3, 5, 7, 19] and a target values of 7 & 11, 
 determine if the target exists in the array in logarithmic time using the binary search algorithm. 
 If target exists in the array, print the index of it. If the target does not exist print Element not found.
