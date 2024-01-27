@@ -9,7 +9,7 @@ Output: Element found at index 3 */
 
 #include <iostream>
 #include <vector> // required for vector<int> numbers
-#include <algorithm> // required for "cin.ignore(numeric_limits<streamsize>::max(), '\n');" and sort function
+#include <algorithm> // required for cin.ignore(numeric_limits<streamsize>::max(), '\n');
 using namespace std;
 
 int BinarySearch(vector<int>& numbers, int target, int numbersSize) { // Not sure if you meant 3 args as in two targets or this
@@ -32,40 +32,28 @@ int BinarySearch(vector<int>& numbers, int target, int numbersSize) { // Not sur
 }
 
 int main() {
-    vector<int> numbers(5);
-    int numbersSize = numbers.size();
-    int target, targetIndex;
+    int numbers[] = {1,3,5,7,19}; // using a vector since they seem to have benefits over an array
+    int numbersSize = numbers.size(), target, targetIndex;
     bool targetGiven = false;
-    
-    for (int numbersIndex = 0; numbersIndex < numbersSize; ++numbersIndex) { // loops for each element of the vector "numbers"
-        cin >> numbers[numbersIndex];
-        if (cin.fail()) { // Since the variable is an int, cin will only accept an int
-            cin.clear(); // Clears the error flag to allow future cin operations
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); /* Ignores the maxiumum number of characters that can be read by an input stream
-            and stops after it reaches the newline that is created at the end of the cin operation, allowing future cin operations */
-            --numbersIndex; // Returns to the same index instead of incrementing
-        }
-    }
     
     while (!targetGiven) { // used pre-set bool as a flag to indicate whether the user has submit a valid target value
         cin >> target;
-        if (cin.fail()) { 
-            cin.clear(); 
-            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        if (cin.fail()) { // Since the variable is an int, cin will only successfully accept an int
+            cin.clear(); // Clears the error flag to allow future cin operations
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); /* Ignores the maxiumum number of characters that can be read by an input stream
+            and stops after it reaches the newline that is created at the end of the cin operation, allowing future cin operations */
         }
         else {
             targetGiven = true; // changing the bool exits the loop
         }
     }
     
-    sort(numbers.begin(), numbers.end()); // Sorts in ascending order
-    
     targetIndex = BinarySearch(numbers, target, numbersSize);
     if (targetIndex != -1) {
-        cout << "Element found at index " << targetIndex << endl;
+        cout << "Element found at index " << targetIndex;
     }
     else {
-        cout << "Element not found" << endl;
+        cout << "Element not found in the array";
     }
     
     return 0;
