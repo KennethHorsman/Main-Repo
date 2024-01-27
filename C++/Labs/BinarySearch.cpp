@@ -32,8 +32,8 @@ int BinarySearch(int numbers[], int target, int numbersSize) { // Not sure if yo
 }
 
 int main() {
-    int numbers[] = {1,3,5,7,19}; // using a vector since they seem to have benefits over an array
-    int numbersSize = sizeof(numbers), target, targetIndex;
+    int numbers[] = {1,3,5,7,19}; // Since the values and size are pre-defined, use an array (which is better for performance than a vector)
+    int numbersSize = 5, target, targetIndex;
     bool targetGiven = false;
     
     while (!targetGiven) { // used pre-set bool as a flag to indicate whether the user has submit a valid target value
