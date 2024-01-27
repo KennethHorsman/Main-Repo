@@ -12,7 +12,7 @@ Output: Element found at index 3 */
 #include <algorithm> // required for cin.ignore(numeric_limits<streamsize>::max(), '\n');
 using namespace std;
 
-int BinarySearch(int numbers[], int target, int numbersSize) { // Not sure if you meant 3 args as in two targets or this
+int BinarySearch(int numbers[], int target, int numbersSize) {
     int leftSide = 0, rightSide = numbersSize -1; // establishes first and last index of search
     
     while (leftSide <= rightSide) { // if the value is not present, leftSide will become greater than rightSide via the calculation below
