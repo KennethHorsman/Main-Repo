@@ -1,3 +1,8 @@
+/*
+Team Members: Kenneth Horsman, Aaron Villalobos
+Description: Bubble Sort Practice
+*/
+
 #include <iostream>
 using namespace std;
 
@@ -6,9 +11,9 @@ void BubbleSort(int numbers[], int numbersSize) {
 
     for (int i=0; i<numbersSize-1; ++i) {
         for (int index = 0; index < numbersSize -1; ++index) {
-            if (numbers[index] > numbers[index+1]) { // If curr index more than next index
-                temp = numbers[index];
-                numbers[index] = numbers[index + 1];
+            if (numbers[index] > numbers[index+1]) { // If curr index's value more than the next...
+                temp = numbers[index]; // Store curr index's value in temp
+                numbers[index] = numbers[index + 1]; //
                 numbers[index + 1] = temp;
             }
         }
