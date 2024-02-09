@@ -10,59 +10,41 @@
 #include <iostream>
 #include <time.h>
 
-#include "SortTester.cpp" // Default included SortTester.h instead, which caused an error
+#include "SortTester.cpp" // Default included SortTester.h instead, which caused an error when using VSCode but not in ZyBooks
 
 using namespace std;
 
-/*  function bubbleSort(array)
-    n = length of array
-    sorted = false
-    lowToHigh = true  // Flag to indicate whether to sort from low to high or high to low
-
-    while not sorted
-        sorted = true
-        newLastSwapIndex = 0
-
-        if lowToHigh
-            for i from 1 to n-1  // Sort from low to high
-                if array[i] < array[i-1]
-                    swap array[i] and array[i-1]
-                    sorted = false
-                    newLastSwapIndex = i  // Update the last swap index
-
-        else
-            for i from n-1 to 1  // Sort from high to low
-                if array[i] < array[i-1]
-                    swap array[i] and array[i-1]
-                    sorted = false
-                    newLastSwapIndex = i  // Update the last swap index
-
-        // If no swaps were made, the array is already sorted
-        if sorted
-            break
-
-        n = newLastSwapIndex  // Reduce the range for the next pass
-        lowToHigh = not lowToHigh  // Toggle the sorting direction for the next pass */
-
-
 bool singleBubblePass(SortTester &tester, unsigned int size, unsigned int passNum) {
-	bool sorted = false, lowToHigh = true;
+    bool sorted = true;
+    bool lowToHigh = passNum % 2 == 1; // Determine sorting direction
+    int newLastSwapIndex = 0;
 
-	while (!sorted) {
-		sorted = true;
-		int lastSwapIndex = 0;
+    if (lowToHigh) {
+        for (unsigned int index = 0; index < size - 1; ++index) {
+            if (tester.compare(index, index + 1) > 0) {
+                tester.swap(index, index + 1);
+                sorted = false;
+                newLastSwapIndex = index;  // Update the last swap index
+            }
+        }
+    } else {
+        for (unsigned int index = size - 1; index > 0; --index) {
+            if (tester.compare(index, index - 1) < 0) {
+                tester.swap(index, index - 1);
+                sorted = false;
+                newLastSwapIndex = index;  // Update the last swap index
+            }
+        }
+    }
 
-		if (lowToHigh) {
-			for (int index = 0; index < size - 1; ++index) {
-				if (tester[index] < )
-			}
-		}
+    // Check if the last element is in its correct position
+    if (tester.compare(size - 1, size - 2) >= 0) {
+        size = newLastSwapIndex + 1;  // Reduce the range for the next pass
+    }
 
-	}
-
-
-	return sorted;
+    return sorted;  // Return true if the pass completed without any swaps
 }
+
 
 int main() {
 	unsigned int size = 10;
