@@ -8,9 +8,11 @@ using namespace std;
 class FoodItem {
    public:
       // TODO: Declare default constructor
+      FoodItem myFoodItem;
 
       // TODO: Declare second constructor with parameters
       // to initialize private data members
+      FoodItem(const string &name, double fat = 0.0, double carbs = 0.0, double protein = 0.0);
 
       string GetName();
 
