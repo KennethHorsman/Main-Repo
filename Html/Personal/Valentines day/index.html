@@ -183,12 +183,14 @@ document.getElementById('noBtn').addEventListener('click', function() {
   currentIndex = (currentIndex + 1) % backgroundImages.length;
   document.body.style.backgroundImage = 'url(' + backgroundImages[currentIndex] + ')';
 
-  // Generate random position for the GIF
-  var randomX = Math.floor(Math.random() * window.innerWidth);
-  var randomY = Math.floor(Math.random() * window.innerHeight);
+  // Calculate random position around the middle of the page
+  var centerX = window.innerWidth / 2;
+  var centerY = window.innerHeight / 2;
+  var randomX = centerX + Math.floor(Math.random() * 100) - 50; // Adjust the range as needed
+  var randomY = centerY + Math.floor(Math.random() * 100) - 50; // Adjust the range as needed
   
   var img = document.createElement('img');
-  img.src = 'angry.gif'; // Replace 'no_gif.gif' with your GIF
+  img.src = 'angry.gif'; // Replace 'angry.gif' with your GIF
   img.classList.add('floating-img');
   img.style.top = randomY + 'px';
   img.style.left = randomX + 'px';
@@ -199,6 +201,7 @@ document.getElementById('noBtn').addEventListener('click', function() {
     img.remove();
   }, 2000);
 });
+
 </script>
 </body>
 </html>
