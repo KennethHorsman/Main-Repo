@@ -183,19 +183,19 @@ document.getElementById('noBtn').addEventListener('click', function() {
   currentIndex = (currentIndex + 1) % backgroundImages.length;
   document.body.style.backgroundImage = 'url(' + backgroundImages[currentIndex] + ')';
 
-  // Calculate random position around the middle of the page
-  var centerX = window.innerWidth / 2;
-  var centerY = window.innerHeight / 2;
-  var randomOffsetX = Math.floor(Math.random() * 100) - 50; // Adjust the range as needed
-  var randomOffsetY = Math.floor(Math.random() * 100) - 50; // Adjust the range as needed
-  var randomX = centerX + randomOffsetX;
-  var randomY = centerY + randomOffsetY;
+  // Get the position of the "No" button
+  var buttonRect = document.getElementById('noBtn').getBoundingClientRect();
+  var buttonCenterX = buttonRect.left + buttonRect.width / 2;
+  var buttonCenterY = buttonRect.top + buttonRect.height / 2;
   
   var img = document.createElement('img');
   img.src = 'angry.gif'; // Replace 'angry.gif' with your GIF
   img.classList.add('floating-img');
-  img.style.top = randomY + 'px';
-  img.style.left = randomX + 'px';
+  
+  // Position the GIF centered over the button
+  img.style.top = buttonCenterY - img.height / 2 + 'px';
+  img.style.left = buttonCenterX - img.width / 2 + 'px';
+  
   document.body.appendChild(img);
   
   // Remove the GIF after 2 seconds (2000 milliseconds)
@@ -203,7 +203,6 @@ document.getElementById('noBtn').addEventListener('click', function() {
     img.remove();
   }, 2000);
 });
-
 
 </script>
 </body>
