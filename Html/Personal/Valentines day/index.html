@@ -182,7 +182,6 @@ document.getElementById('noBtn').addEventListener('click', function() {
   // Cycle through background images
   currentIndex = (currentIndex + 1) % backgroundImages.length;
   document.body.style.backgroundImage = 'url(' + backgroundImages[currentIndex] + ')';
-
   // Generate random position for the GIF
   var randomX = Math.floor(Math.random() * window.innerWidth);
   var randomY = Math.floor(Math.random() * window.innerHeight);
@@ -199,6 +198,7 @@ document.getElementById('noBtn').addEventListener('click', function() {
     img.remove();
   }, 2000);
 });
+
 </script>
 </body>
 </html>
