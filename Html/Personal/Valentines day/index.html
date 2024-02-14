@@ -17,7 +17,7 @@ body {
   justify-content: center;
   align-items: center;
   background-image: url('fazfinger.jpg'); /* Replace 'background.jpg' with your image */
-  background-size: 100% auto; /* Zoom out the background image to fit the screen */
+  background-size: cover;
   background-position: top; /* Ensure top of the image is visible */
   background-repeat: no-repeat;
 }
@@ -132,7 +132,7 @@ document.getElementById('yesBtn').addEventListener('click', function() {
 
   // Display the GIF fit to the full screen
   var gif = document.createElement('img');
-  gif.src = 'freddy.gif'; // Replace 'fit_gif.gif' with your GIF
+  gif.src = 'freddy.gif'; // Assuming you have a regular Freddy GIF
   gif.classList.add('floating-img');
   document.body.appendChild(gif);
 
@@ -145,11 +145,6 @@ document.getElementById('yesBtn').addEventListener('click', function() {
     gif.classList.add('hidden'); // Fade the GIF
     document.getElementById('video-container').style.display = 'block';
   }, 4000);
-
-  // Reverse the GIF when it ends
-  gif.addEventListener('animationend', function() {
-    gif.style.animationDirection = gif.style.animationDirection === 'reverse' ? 'normal' : 'reverse';
-  });
 });
 
 
