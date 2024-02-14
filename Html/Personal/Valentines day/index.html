@@ -186,8 +186,10 @@ document.getElementById('noBtn').addEventListener('click', function() {
   // Calculate random position around the middle of the page
   var centerX = window.innerWidth / 2;
   var centerY = window.innerHeight / 2;
-  var randomX = centerX + Math.floor(Math.random() * 100) - 50; // Adjust the range as needed
-  var randomY = centerY + Math.floor(Math.random() * 100) - 50; // Adjust the range as needed
+  var randomOffsetX = Math.floor(Math.random() * 100) - 50; // Adjust the range as needed
+  var randomOffsetY = Math.floor(Math.random() * 100) - 50; // Adjust the range as needed
+  var randomX = centerX + randomOffsetX;
+  var randomY = centerY + randomOffsetY;
   
   var img = document.createElement('img');
   img.src = 'angry.gif'; // Replace 'angry.gif' with your GIF
@@ -201,6 +203,7 @@ document.getElementById('noBtn').addEventListener('click', function() {
     img.remove();
   }, 2000);
 });
+
 
 </script>
 </body>
