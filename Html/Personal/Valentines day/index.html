@@ -138,12 +138,26 @@ document.getElementById('yesBtn').addEventListener('click', function() {
 
   // Play the audio
   var audio = document.getElementById('audio');
-  audio.play();
+  audio.play().then(function() {
+    // Audio started playing successfully
+  }).catch(function(error) {
+    // Audio playback failed
+    console.error('Audio playback failed:', error);
+  });
 
   // Hide the GIF after 4 seconds and play the video
   setTimeout(function() {
     gif.classList.add('hidden'); // Fade the GIF
     document.getElementById('video-container').style.display = 'block';
+
+    // Play the video
+    var video = document.getElementById('video');
+    video.play().then(function() {
+      // Video started playing successfully
+    }).catch(function(error) {
+      // Video playback failed
+      console.error('Video playback failed:', error);
+    });
   }, 4000);
 });
 
