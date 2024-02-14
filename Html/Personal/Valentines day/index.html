@@ -183,19 +183,27 @@ document.getElementById('noBtn').addEventListener('click', function() {
   currentIndex = (currentIndex + 1) % backgroundImages.length;
   document.body.style.backgroundImage = 'url(' + backgroundImages[currentIndex] + ')';
 
-  // Get the position of the "No" button
-  var buttonRect = document.getElementById('noBtn').getBoundingClientRect();
-  var buttonCenterX = buttonRect.left + buttonRect.width / 2;
-  var buttonCenterY = buttonRect.top + buttonRect.height / 2;
-  
+  // Define the size of the window where the GIF can move around
+  var windowWidth = window.innerWidth / 2; // Half the width of the window
+  var windowHeight = window.innerHeight / 2; // Half the height of the window
+
+  // Generate random position for the GIF within the smaller window
+  var randomX = Math.floor(Math.random() * windowWidth);
+  var randomY = Math.floor(Math.random() * windowHeight);
+
+  // Calculate the center of the window
+  var windowCenterX = window.innerWidth / 2;
+  var windowCenterY = window.innerHeight / 2;
+
+  // Offset the random position to be centered around the window center
+  randomX += windowCenterX - windowWidth / 2;
+  randomY += windowCenterY - windowHeight / 2;
+
   var img = document.createElement('img');
   img.src = 'angry.gif'; // Replace 'angry.gif' with your GIF
   img.classList.add('floating-img');
-  
-  // Position the GIF centered over the button
-  img.style.top = buttonCenterY - img.height / 2 + 'px';
-  img.style.left = buttonCenterX - img.width / 2 + 'px';
-  
+  img.style.top = randomY + 'px';
+  img.style.left = randomX + 'px';
   document.body.appendChild(img);
   
   // Remove the GIF after 2 seconds (2000 milliseconds)
