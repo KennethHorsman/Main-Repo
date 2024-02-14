@@ -113,6 +113,11 @@ h1 {
   <source src="cheering.mp3" type="audio/mpeg"> <!-- Replace 'audio.mp3' with your MP3 file -->
   Your browser does not support the audio element.
 </audio>
+<!-- Add a second audio element for the looped audio -->
+<audio id="loopedAudio" preload="auto">
+  <source src="video.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 
 <script>
 var backgroundImages = [
@@ -123,6 +128,14 @@ var backgroundImages = [
 ];
 var currentIndex = 0;
 
+function synchronizeLoopedAudio() {
+  var video = document.getElementById('video');
+  var loopedAudio = document.getElementById('loopedAudio');
+  
+  // Update the current time of the looped audio to match the video
+  loopedAudio.currentTime = video.currentTime % loopedAudio.duration;
+}
+
 document.getElementById('yesBtn').addEventListener('click', function() {
   // Hide the container
   document.querySelector('.container').style.display = 'none';
@@ -132,11 +145,11 @@ document.getElementById('yesBtn').addEventListener('click', function() {
 
   // Display the GIF fit to the full screen
   var gif = document.createElement('img');
-  gif.src = 'freddy.gif'; // Assuming you have a regular Freddy GIF
+  gif.src = 'freddy.gif';
   gif.classList.add('floating-img');
   document.body.appendChild(gif);
 
-  // Play the audio
+  // Play the first audio
   var audio = document.getElementById('audio');
   audio.play().then(function() {
     // Audio started playing successfully
@@ -147,7 +160,7 @@ document.getElementById('yesBtn').addEventListener('click', function() {
 
   // Hide the GIF after 4 seconds and play the video
   setTimeout(function() {
-    gif.classList.add('hidden'); // Fade the GIF
+    gif.classList.add('hidden');
     document.getElementById('video-container').style.display = 'block';
 
     // Play the video
@@ -159,6 +172,9 @@ document.getElementById('yesBtn').addEventListener('click', function() {
       console.error('Video playback failed:', error);
     });
   }, 4000);
+  
+  // Event listener to synchronize looped audio with the video
+  document.getElementById('video').addEventListener('timeupdate', synchronizeLoopedAudio);
 });
 
 
