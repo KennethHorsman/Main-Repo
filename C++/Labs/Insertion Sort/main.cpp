@@ -65,16 +65,16 @@ int main() {
 	}
 
 	if (tester.areComparesBinary()) {
-	   cout<<"PASSED Binary Insertion Sort (15 pts)"<<endl;
+		cout<<"PASSED Binary Insertion Sort (15 pts)"<<endl;
 	}
 	else {
-	   cout<<"FAILED Binary Insertion Sort"<<endl;
+		cout<<"FAILED Binary Insertion Sort"<<endl;
 	}
 
 	if (tester.isSortStable()) {
-	   cout<<"PASSED Extra Credit - sort is stable (5pts)"<<endl;
+		cout<<"PASSED Extra Credit - sort is stable (5pts)"<<endl;
 	}
 	else {
-	   cout<<"Sort is not stable - swap occured among entries with same value"<<endl;
+		cout<<"Sort is not stable - swap occured among entries with same value"<<endl;
 	}
 }
