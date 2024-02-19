@@ -6,30 +6,30 @@
 using namespace std;
 
 class Book {
-   public:
-      void SetTitle(string userTitle);
+    public:
+        void SetTitle(string userTitle);
 
-      string GetTitle();
+        string GetTitle();
 
-      void SetAuthor(string userAuthor);
+        void SetAuthor(string userAuthor);
 
-      string GetAuthor();
+        string GetAuthor();
 
-      void SetPublisher(string userPublisher);
+        void SetPublisher(string userPublisher);
 
-      string GetPublisher();
+        string GetPublisher();
 
-      void SetPublicationDate(string userPublicationDate);
+        void SetPublicationDate(string userPublicationDate);
 
-      string GetPublicationDate();
+        string GetPublicationDate();
 
-      void PrintInfo();
+        void PrintInfo();
 
-   protected:
-      string title;
-      string author;
-      string publisher;
-      string publicationDate;
+    protected:
+        string title;
+        string author;
+        string publisher;
+        string publicationDate;
 };
 
 #endif

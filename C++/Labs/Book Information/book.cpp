@@ -2,41 +2,41 @@
 #include <iostream>
 
 void Book::SetTitle(string userTitle) {
-   title = userTitle;
+    title = userTitle;
 }
 
-string Book::GetTitle() {
-   return title;
+    string Book::GetTitle() {
+    return title;
 }
 
-void Book::SetAuthor(string userAuthor) {
-   author = userAuthor;
+    void Book::SetAuthor(string userAuthor) {
+    author = userAuthor;
 }
 
-string Book::GetAuthor() {
-   return author;
+    string Book::GetAuthor() {
+    return author;
 }
 
-void Book::SetPublisher(string userPublisher) {
-   publisher = userPublisher;
+    void Book::SetPublisher(string userPublisher) {
+    publisher = userPublisher;
 }
 
-string Book::GetPublisher() {
-   return publisher;
+    string Book::GetPublisher() {
+    return publisher;
 }
 
-void Book::SetPublicationDate(string userPublicationDate) {
-   publicationDate = userPublicationDate;
+    void Book::SetPublicationDate(string userPublicationDate) {
+    publicationDate = userPublicationDate;
 }
 
-string Book::GetPublicationDate() {
-   return publicationDate;
+    string Book::GetPublicationDate() {
+    return publicationDate;
 }
 
-void Book::PrintInfo() {
-   cout << "Book Information: " << endl;
-   cout << "   Book Title: " << title << endl;
-   cout << "   Author: " << author << endl;
-   cout << "   Publisher: " << publisher << endl;
-   cout << "   Publication Date: " << publicationDate << endl;
+    void Book::PrintInfo() {
+    cout << "Book Information: " << endl;
+    cout << "   Book Title: " << title << endl;
+    cout << "   Author: " << author << endl;
+    cout << "   Publisher: " << publisher << endl;
+    cout << "   Publication Date: " << publicationDate << endl;
 }
