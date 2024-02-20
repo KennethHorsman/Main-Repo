@@ -5,12 +5,26 @@
 using namespace std;
 
 // Define default constructor
+FoodItem::FoodItem() {
+   name = "Water";
+   fat = 0.0;
+   carbs = 0.0;
+   protein = 0.0;
+}
 
-// Define second constructor with parameters
-// to initialize private data members
+    // Define second constructor with parameters
+    // to initialize private data members
 
-string FoodItem::GetName() {
-   return name;
+FoodItem::FoodItem(const string &name, double fat, double carbs, double protein) {
+   this->name = name;
+   this->fat = fat;
+   this->carbs = carbs;
+   this->protein = protein;
+}
+
+string FoodItem::GetName()
+{
+    return name;
 }
 
 double FoodItem::GetFat() {

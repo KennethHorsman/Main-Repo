@@ -8,7 +8,7 @@ using namespace std;
 class FoodItem {
    public:
       // TODO: Declare default constructor
-      FoodItem myFoodItem;
+      FoodItem();
 
       // TODO: Declare second constructor with parameters
       // to initialize private data members
