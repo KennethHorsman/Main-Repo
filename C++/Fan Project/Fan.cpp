@@ -1,12 +1,12 @@
 #include "Fan.h"
 #include <iostream>
-#include <string?
+#include <string>
 
 using namespace std;
 
-const int SLOW = 1;
-const int MEDIUM = 2;
-const int FAST = 3;
+const int Fan::SLOW = 1;
+const int Fan::MEDIUM = 2;
+const int Fan::FAST = 3;
 int Fan::id = 0;
 
 Fan::Fan() {

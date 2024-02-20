@@ -3,27 +3,16 @@
 #include <vector>
 using namespace std;
 
-void PrintSize(vector<int> numsList) {
-   cout << "size " << numsList.size() << endl;   
+class Greet {
+   public:
+   Greet();
+};
+
+Greet::Greet() {
+   cout << "Hello";
 }
 
 int main() {
-   int currVal;
-   vector<int> intList(4);
-
-   PrintSize(intList); 
-   
-   cin >> currVal;
-   while (currVal >= 0) {
-      intList.push_back(currVal);
-      cin >> currVal;
-   }
-
-   PrintSize(intList);
-
-   intList.clear();
-
-   PrintSize(intList);
-
+   Greet greeting;
    return 0;
 }
