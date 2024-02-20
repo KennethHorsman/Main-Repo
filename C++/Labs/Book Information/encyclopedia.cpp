@@ -1,24 +1,26 @@
 #include "Encyclopedia.h"
 #include <iostream>
-#include "encyclopedia.h"
 
 // Define functions declared in Encyclopedia.h
-void Encyclopedia::SetEdition() {
-    
+void Encyclopedia::SetEdition(string edition) {
+    this->edition = edition;
 }
 
-void Encyclopedia::SetNumPages() {
+void Encyclopedia::SetNumPages(int numPages) {
+    this->numPages = numPages;
 }
 
 string Encyclopedia::GetEdition() {
-    return string();
+    return edition;
 }
 
-string Encyclopedia::GetNumPages() {
-    return string();
+int Encyclopedia::GetNumPages() {
+    return numPages;
 }
 
 void Encyclopedia::PrintInfo() {
-    
+    Book::PrintInfo();
+    cout << "   Edition: " << edition << endl;
+    cout << "   Number of Pages: " << numPages << endl;
 }
 

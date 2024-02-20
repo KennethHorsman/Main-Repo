@@ -1,35 +1,36 @@
 #include "Book.h"
 #include <iostream>
 
+
 void Book::SetTitle(string userTitle) {
     title = userTitle;
 }
 
-    string Book::GetTitle() {
+string Book::GetTitle() {
     return title;
 }
 
-    void Book::SetAuthor(string userAuthor) {
+void Book::SetAuthor(string userAuthor) {
     author = userAuthor;
 }
 
-    string Book::GetAuthor() {
+string Book::GetAuthor() {
     return author;
 }
 
-    void Book::SetPublisher(string userPublisher) {
+void Book::SetPublisher(string userPublisher) {
     publisher = userPublisher;
 }
 
-    string Book::GetPublisher() {
+string Book::GetPublisher() {
     return publisher;
 }
 
-    void Book::SetPublicationDate(string userPublicationDate) {
+void Book::SetPublicationDate(string userPublicationDate) {
     publicationDate = userPublicationDate;
 }
 
-    string Book::GetPublicationDate() {
+string Book::GetPublicationDate() {
     return publicationDate;
 }
 
