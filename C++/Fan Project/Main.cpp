@@ -5,13 +5,13 @@
 
 int main() {
     Fan fan1; 
-    fan1.setSpeed(FAST); 
+    fan1.setSpeed(Fan::FAST); 
     fan1.setRadius(10.0); 
     fan1.setColor("yellow"); 
     fan1.setState(true); 
 
     Fan fan2; 
-    fan2.setSpeed(MEDIUM); 
+    fan2.setSpeed(Fan::MEDIUM); 
     fan2.setRadius(5.0);
     fan2.setColor("blue"); 
     fan2.setState(false); 

@@ -3,10 +3,6 @@
 using namespace std;
 
 // Define constants in the global scope
-const int SLOW;
-const int MEDIUM;
-const int FAST;
-
 class Fan {
     public:
         Fan(); 
@@ -16,9 +12,13 @@ class Fan {
         bool getState() const; 
         void setRadius(double newRadius); 
         double getRadius() const; 
-        void setColor(string &newColor); 
+        void setColor(string newColor); 
         string getColor() const; 
         void displayFan() const; 
+        
+        static const int SLOW;
+        static const int MEDIUM;
+        static const int FAST;
     
     private:
         int speed;

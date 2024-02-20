@@ -1,13 +1,13 @@
 #include "Fan.h"
 #include <iostream>
+#include <string?
 
 using namespace std;
 
-SLOW = 1;
-MEDIUM = 2;
-FAST = 3;
-
-id = 0;
+const int SLOW = 1;
+const int MEDIUM = 2;
+const int FAST = 3;
+int Fan::id = 0;
 
 Fan::Fan() {
     speed = SLOW;
@@ -42,7 +42,7 @@ double Fan::getRadius() const {
 } // End of radius accessor
 
 
-void Fan::setColor(string &newColor) {
+void Fan::setColor(string newColor) {
     color = newColor;
 } // End of color mutator
 string Fan::getColor() const {
