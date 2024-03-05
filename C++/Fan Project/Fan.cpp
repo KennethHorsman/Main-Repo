@@ -7,14 +7,16 @@ using namespace std;
 const int Fan::SLOW = 1;
 const int Fan::MEDIUM = 2;
 const int Fan::FAST = 3;
-int Fan::id = 0;
+int Fan::nextID = 0;
 
 Fan::Fan() {
     speed = SLOW;
     isOn = false;
     radius = 5.0;
     color = "blue";
-    id++; // Increments id for each fan created
+
+    nextID++;
+    id = nextID; // Increments id for each fan created. doing just id++ does not correctly count ID number
 } // End of constructor
 
 

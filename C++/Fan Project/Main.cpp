@@ -4,7 +4,7 @@
 #include "Fan.cpp"
 
 int main() {
-    Fan fan1; 
+    Fan fan1; // Could do Fan *fan1 = new Fan;
     fan1.setSpeed(Fan::FAST); 
     fan1.setRadius(10.0); 
     fan1.setColor("Yellow"); 

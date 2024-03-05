@@ -17,7 +17,7 @@ class Fan {
         void displayFan() const; 
         
         static const int SLOW; // static indicates that this data member belongs to the class rather than the instance
-        static const int MEDIUM;
+        static const int MEDIUM; // Could use enum SPEED {SLOW=1, MEDIUM=2, FAST=3};
         static const int FAST;
     
     private:
@@ -25,5 +25,6 @@ class Fan {
         bool isOn;
         double radius;
         string color;
-        static int id;
+        static int nextID;
+        int id;
 }; // End of class defintion for Fan
