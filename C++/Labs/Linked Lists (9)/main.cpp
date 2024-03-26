@@ -26,30 +26,30 @@ void printList(Node* list) {
 }
 
 int addLists(Node* listA, Node* listB) {
-    // Initialize carry as a static variable
-    static int carry = 0; // 
+    static int carry = 0; // Initialize carry as a static variable to retain its value
 
-    // Base case: If both lists are nullptr and there is no carry, return 0
-    if (listA == nullptr && listB == nullptr && carry == 0) {
-        // Reset carry after computation
-        // carry = 0;
-        return 0;
+    if (listA == nullptr && listB == nullptr && carry == 0) { // If both lists are empty & no carry...
+        return 0; // Exit function
     }
 
-    // Initialize sum as the sum of the digits in the current nodes and the carry
-    int sum = carry;
-    if (listA != nullptr)
-        sum += listA->data;
-    if (listB != nullptr)
-        sum += listB->data;
+    int sum = carry; // Initialize sum with the curr value of carry
 
-    // Calculate carry
-    carry = sum / 10;
-    sum %= 10;
+    if (listA != nullptr) // If listA is not empty...
+        sum += listA->data; // Add listA's data value to sum
 
-    // Return the sum modulo 10 to get the current digit of the result
+    if (listB != nullptr) // If listA is not empty...
+        sum += listB->data; // Add listB's data value to sum
+
+    carry = sum / 10; // Calculate carry for next operation (since data must be a single digit)
+    sum %= 10; // Calculate the curr value of the result by taking the remainder of dividing sum by 10
+
     return sum + addLists(listA != nullptr ? listA->next : nullptr, listB != nullptr ? listB->next : nullptr) * 10;
+	// Returning "sum +" ensures the resulting values after each call get added together
+	// Recursively call addLists with the next nodes of listA and listB if they are not nullptr, otherwise simply pass nullptr
+		// Passing nullptr instead of the node itself prevents dereferencing of nullptr
+    // Multiply the recursive result by 10 to shift the digit to its correct place in the final result since the nodes are divided by 10
 }
+
 
 Node* genList(int number) {
 	Node* headOfList = new Node(number%10);

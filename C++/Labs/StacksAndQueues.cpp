@@ -57,7 +57,7 @@ int evalPostfix(queue<char> expression) {
             cout << "Invalid character in postfix expression." << endl; 
             return 0;
         } /* End of else */
-    } /* End of While loop */
+    } /* End of while */
 
     
     if (operands.size() != 1) { // After evaluating the expression, the only element in operands should be the result
