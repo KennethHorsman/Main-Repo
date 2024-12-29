@@ -34,9 +34,7 @@ def main():
             else:
                 total_losses += 1
             play_again = ask_to_play_again()
-        print(f"Total Wins: {total_wins}\nTotal Losses: {total_losses}")
-
-    print("Thanks for playing!")
+        print(f"Total Wins: {total_wins}    Total Losses: {total_losses}")
 
 def get_match_length():
     "Determines if match is indefinite or until a certain number of wins"
