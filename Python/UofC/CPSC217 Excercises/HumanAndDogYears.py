@@ -7,20 +7,30 @@ in dog years. Ensure that your program works correctly for both integer and real
 def main():
     getting_age = True
 
+    print('This program...')
+
     while getting_age:    
-        get_age()
+        age = get_age()
+        if age:
+            getting_age = False
+
+    age_dog = age * 7
+
+    print("Age: {:.6g}".format(age_dog)) #skipping number 5 in result and is one digit short?
+
+    if age > 120:
+        print("Is this person a vampire?")
 
 def get_age():
+    age = input("Enter the persons age: ")
+    
+    try:
+        float(age)
+        return float(age)
 
-        print('This program...')
-        age = input("Enter the persons age: ")
-        
-        try:
-            float(age)
-
-        except ValueError:
-            print("Please enter a number.")
-
+    except ValueError:
+        print("Please enter a number.")
+        return None
 
 if __name__=="__main__": # Instead of calling all the functions in the main program, I use this and only call main()
     main()
