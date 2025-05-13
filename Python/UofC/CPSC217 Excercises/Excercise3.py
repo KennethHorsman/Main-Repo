@@ -1,4 +1,6 @@
 '''
+Kenneth Horsman (UCID: 30260797)
+
 The first two human years each count as 10.5 dog years and each subsequent human year counts as
 only 4 dog years.
 Create a program that reads an age in human years and converts it to dog years using the better

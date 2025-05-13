@@ -1,4 +1,6 @@
 '''
+Kenneth Horsman (UCID: 30260797)
+
 Create a program that reads a persons name and age. Display the persons name and age, along with
 their age in dog years as part of the output message. Multiply a persons age by 7 to determine the age
 in dog years. Ensure that your program works correctly for both integer and real number ages. 
