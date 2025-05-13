@@ -9,7 +9,9 @@ in dog years. Ensure that your program works correctly for both integer and real
 def main():
     getting_age = True # sentinel used to determine loop status
 
-    print('This program takes a human age as input and displays it in dog years.')
+    print("This program determines how old a person is in dog years.")
+
+    name = input("Enter the persons name: ")
 
     while getting_age:     
         age_human = get_age()
@@ -18,13 +20,13 @@ def main():
 
     age_dog = age_human * 7
 
-    print(f"Age in dog years: {age_dog}")
-
+    print(f"{name} is {age_human} in human years and {age_dog} in dog years.")
+    
     if age_human > 120:
-        print("Is this person a vampire?")
+        print(f"Is {name} a vampire?")
 
 def get_age(): # Good practice to create functions for a singular purpose
-    age = input("Enter a persons age: ")
+    age = input("Enter the persons age: ")
     
     try:
         float(age) # attempts to convert the string into a float (numbers / periods only)
