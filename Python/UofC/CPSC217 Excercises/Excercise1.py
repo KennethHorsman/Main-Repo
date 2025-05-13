@@ -5,32 +5,36 @@ in dog years. Ensure that your program works correctly for both integer and real
 '''
 
 def main():
-    getting_age = True
+    getting_age = True # sentinel used to determine loop status
 
-    print('This program...')
+    print('This program takes a human age as input and displays it in dog years.')
 
-    while getting_age:    
-        age = get_age()
-        if age:
-            getting_age = False
+    while getting_age:     
+        age_human = get_age()
+        if age_human: # if the value returned was not None...
+            getting_age = False # exit loop
 
-    age_dog = age * 7
+    age_dog = age_human * 7
 
-    print("Age: {:.6g}".format(age_dog)) #skipping number 5 in result and is one digit short?
+    print(f"Age in human years: {age_human}")
+    print(f"Age in dog years: {age_dog}")
 
-    if age > 120:
+    if age_human > 120:
         print("Is this person a vampire?")
 
-def get_age():
+def get_age(): # Good practice to create functions for a singular purpose
     age = input("Enter the persons age: ")
     
     try:
-        float(age)
-        return float(age)
+        float(age) # attempts to convert the string into a float (numbers / periods only)
+        if float(age) % 1 == 0: # if successful, determines if the number is whole or not by whether there's any remainder
+            return int(age)
+        else:
+            return float(age)
 
-    except ValueError:
-        print("Please enter a number.")
+    except ValueError: # This is the error that occurs when the value entered is not a numer or a period
+        print("Please enter a number.") # I am not using raise() so I can return None and continue loop in main()
         return None
 
-if __name__=="__main__": # Instead of calling all the functions in the main program, I use this and only call main()
+if __name__=="__main__": # By only calling main(), I can organize my code top-down
     main()
