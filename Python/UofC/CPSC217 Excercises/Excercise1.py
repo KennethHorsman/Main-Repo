@@ -16,14 +16,13 @@ def main():
 
     age_dog = age_human * 7
 
-    print(f"Age in human years: {age_human}")
     print(f"Age in dog years: {age_dog}")
 
     if age_human > 120:
         print("Is this person a vampire?")
 
 def get_age(): # Good practice to create functions for a singular purpose
-    age = input("Enter the persons age: ")
+    age = input("Enter a persons age: ")
     
     try:
         float(age) # attempts to convert the string into a float (numbers / periods only)
