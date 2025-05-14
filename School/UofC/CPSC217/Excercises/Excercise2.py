@@ -12,31 +12,31 @@ from SimpleGraphics import *
 
 def main():
     # SKY BACKGROUND
-    setOutline(244, 160, 175)
-    setFill(244, 160, 175)
+    setOutline(244,160,175)
+    setFill(244,160,175)
     rect(0,0, 800, 100) # top
 
-    setOutline(246, 155, 170)
-    setFill(246, 155, 170)
+    setOutline(246,155,170)
+    setFill(246,155,170)
     rect(0,100, 800, 100)
 
-    setOutline(248, 150, 165)
-    setFill(248, 150, 165)
+    setOutline(248,150,165)
+    setFill(248,150,165)
     rect(0,200, 800, 75)
 
-    setOutline(250, 145, 160)
-    setFill(250, 145, 160)
+    setOutline(250,145,160)
+    setFill(250,145,160)
     rect(0,275, 800, 125) # bottom
 
 
     # SUN
-    setOutline(255, 205, 0)
-    setFill(255, 205, 0)
-    ellipse(595, 295, 85, 85) # outer edge
+    setOutline(255,205,0)
+    setFill(255,205,0)
+    ellipse(595,295, 85, 85) # outer edge
 
-    setOutline(255, 210, 0)
-    setFill(255, 210, 0)
-    ellipse(600, 300, 75, 75) # inner circle
+    setOutline(255,210,0)
+    setFill(255,210, 0)
+    ellipse(600,300, 75, 75) # inner circle
 
 
     # CLOUDS
@@ -46,11 +46,11 @@ def main():
     blob(650,50, 700,100, 545,80, 750,75, 675,125, 575,90, 625,95) # upper right
     blob(500,125, 425,120, 500,140, 350,130) # middle
     blob(50,80, 250,100, 275,75, 400, 90) # top left
-    blob(20, 210, 60, 220, 70, 230, 160, 215) # left of house
+    blob(20,210, 60,220, 70,230, 160,215) # left of house
 
     setOutline(210,170,190)
     setFill(210,170,190)
-    blob(550, 210, 600,200, 700,220, 750, 210, 775, 210, 575,175, 800, 180, 650, 225) # just above sun
+    blob(550,210, 600,200, 700,220, 750,210, 775,210, 575,175, 800,180, 650,225) # just above sun
 
     setOutline(215,160,195)
     setFill(215,160,195)
@@ -59,19 +59,19 @@ def main():
 
     # GRASS
     setOutline("dark olive green") # (85,107,47)
-    setFill(85, 105, 45)
-    rect(0, 400, 800, 200) # base layer
+    setFill(85,105,45)
+    rect(0,400, 800, 200) # base layer
 
-    setFill(80, 100, 40)
-    ellipse(0, 399, 100, 10) # just left of house
-    ellipse(300, 398, 250, 22) # just right of house
-    ellipse(500, 399, 225, 10) # under sun
-    ellipse(640, 395, 300, 20) # right edge
+    setFill(80,100,40)
+    ellipse(0,399, 100, 10) # just left of house
+    ellipse(300,398, 250, 22) # just right of house
+    ellipse(500,399, 225, 10) # under sun
+    ellipse(640,395, 300, 20) # right edge
 
-    setFill(75, 95, 35)
+    setFill(75,95,35)
     polygon(0,580, 50,550, 475,550, 435,600, 0,600) # house shadow
 
-    setFill(85, 105, 45)
+    setFill(85,105,45)
     polygon(390,560, 445,560, 410,600, 350,600) # gap in shadow
 
 
@@ -90,6 +90,22 @@ def main():
     setFill("light steel blue")
     blob(715,460, 720,410, 825,415, 900,550, 850,700, 800,700, 750,600, 760,500) # highlight
 
+
+    # BASE OF HOUSE
+    setOutline("wheat4") # (139,126,102)
+    setFill(145,130,105)
+    rect(50,300, 350, 250) # base from (50,300) to (400, 550)
+    
+    setFill(135,125,100)
+    rect(65,305,335,5) # roof shadow
+    rect(200,350,7,185) # vertical door shadow
+    rect(100,345,105,7) # horizontal door shadow
+    rect(365,370,5,80) # vertical window shadow
+    rect(245,365,125,5) # horiztonal window shadow
+
+    setOutline(150,135,110)
+    setFill(150,135,110)
+    rect(400,300, 5, 250) # right highlight
 
     # ROOF
     setOutline(90, 90, 90)
@@ -111,74 +127,74 @@ def main():
     setFill(105,105,100)
     polygon(500,300, 505,300, 355,175, 350,175) # roof highlight
 
-    # BASE OF HOUSE
-    setOutline("wheat4") # (139,126,102)
-    setFill(145, 130, 105)
-    rect(50, 300, 350, 250) # (50,300) to (400, 550) - use this for CONST's?
-    
-    setFill(135,125,100)
-    rect(65,305,335,5) # roof shadow
-    rect(200,350,5,185) # vertical door shadow
-    rect(100,345,105,5) # horizontal door shadow
-    rect(365,370,5,80) # vertical window shadow
-    rect(245,365,125,5) # horiztonal window shadow
-
-    setOutline(150,135,110)
-    setFill(150,135,110)
-    rect(400,300,5,250) # right highlight
 
     # DOOR
     setOutline("Black") # (0,0,0)
     setFill(30, 30, 30)
-    rect(100, 350, 100, 185) # base of door
+    rect(100,350, 100, 185) # base from (100,350) to (200,535)
 
     setOutline(25,27,27)
     setFill(25, 27, 27)
-    rect(110, 365, 37, 80) # upper left indent
-    rect(153, 365, 37, 80) # upper right indent
-    rect(110, 450, 80, 75) # bottom indent
+    rect(110,365, 37, 80) # upper left indent
+    rect(153,365, 37, 80) # upper right indent
+    rect(110,450, 80, 75) # bottom indent
 
     setOutline("tan4") # (139,90,43)
     setFill(90, 65, 50)
-    ellipse(185, 440, 10, 10) # knob
+    ellipse(185,440, 10, 10) # knob
 
 
     # WINDOW
     setOutline(30, 30, 30)
     setFill(205, 200, 115)
-    rect(245, 370, 120, 80) # base
+    rect(245,370, 120, 80) # base from (245,370) to (365,450)
 
     setOutline(210, 205, 120)
     setFill(215, 210, 125)
     polygon(246,411, 246,448, 286,448, 363,409, 363,371, 324,371, 246,411) # highlight
     
     setOutline(30, 30, 30)
-    line(245, 410, 365, 410) # horizontal line
-    line(305, 370, 305, 450) # vertical line
+    line(245,410, 365,410) # horizontal line
+    line(305,370, 305,450) # vertical line
+
+    # KITTY!
+    setOutline(50,50,50)
+    setFill(50,50,50)
+    polygon(331,447, 339,444, 330,440) # left ear
+    polygon(344,447, 336,444, 345,440) # right ear
+    pieSlice(324,446, 5, 3, 0, 180) # left paw
+    pieSlice(347,446, 5, 3, 0, 180) # right paw
+    pieSlice(330,442, 15,14, 0, 180) # head
+
+    setOutline(110,110,110)
+    blob(336,448, 336,447, 337,448, 338,449, 339,447, 337,448) # moustache
+
+    setFill(150,100,75)
+    ellipse(334,445, 2, 2) # left eye
+    ellipse(340,445, 2, 2) # right eye
+
+    # BALCONY
+    setOutline("azure4") # (131,139,139)
+    setFill("azure4")
+    rect(50,535, 425, 15) # base from (50,535) to (475,550)
+
+    setFill(125,135,135)
+    rect(65,530, 330, 5) # shadow
+
+    setFill(135,145,145)
+    rect(395,530, 65, 5) # highlight
 
 
     # BALCONY POSTS
     setOutline("burlywood4") # (139,115,85)
-    setFill(140, 115, 85)
-    rect(50, 300, 15, 250) # left post
-    rect(460, 300, 15, 250) # right post
-    rect(50, 300, 425, 5) # top post
-
-
-    # BASE OF BALCONY
-    setOutline("azure4") # (131,139,139)
-    setFill("azure4")
-    rect(50, 535, 425, 15)
-
-    setFill(125,135,135)
-    rect(65,530,330,5) # shadow
-
-    setFill(135,145,145)
-    rect(395,530,65,5) # highlight
-
+    setFill(140,115,85)
+    rect(50,300, 15, 235) # left post
+    rect(460,300, 15, 235) # right post
+    rect(50,300, 425, 5) # horizonal post
 
     # NAME
-    setFont("Times","8", "bold")
+    setOutline("black")
+    setFont("montserratsemibold","8.5")
     text(5, 590, "Made by Kenneth Horsman", "w")
 
 if __name__=="__main__":
