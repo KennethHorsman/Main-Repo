@@ -11,6 +11,19 @@ your name in the lower right corner of the image.
 from SimpleGraphics import *
 
 def main():
+    ### DIMENSIONS ###
+
+    HOUSE_X = 50
+    HOUSE_Y = 300
+    HOUSE_WIDTH = 350
+    HOUSE_LENGTH = 250
+    BALCONY_Y = HOUSE_Y + HOUSE_LENGTH
+    BALCONY_WIDTH = HOUSE_WIDTH + 75
+    BALCONY_LENGTH = 15
+    POST_WIDTH = 15
+    POST_LENGTH = HOUSE_LENGTH - BALCONY_LENGTH
+
+
     # SKY BACKGROUND
     setOutline(244,160,175)
     setFill(244,160,175)
@@ -84,7 +97,7 @@ def main():
     blob(900,400, 710,400, 695,450, 715,500, 710,600, 800,700) # wet sand
 
     setOutline("light steel blue") # (176,196,222)
-    setFill(173,193,219)
+    setFill(172,192,218)
     blob(900,410, 725,400, 700,450, 725,500, 725,600, 900,700) # base water
 
     setFill("light steel blue")
@@ -94,10 +107,10 @@ def main():
     # BASE OF HOUSE
     setOutline("wheat4") # (139,126,102)
     setFill(145,130,105)
-    rect(50,300, 350, 250) # base from (50,300) to (400, 550)
+    rect(HOUSE_X,HOUSE_Y, HOUSE_WIDTH, HOUSE_LENGTH) # base from (50,300) to (400, 550)
     
     setFill(135,125,100)
-    rect(65,305,335,5) # roof shadow
+    rect((HOUSE_X + POST_WIDTH),HOUSE_Y + 5,(HOUSE_WIDTH - HOUSE_X - POST_WIDTH), 5) # roof shadow
     rect(200,350,7,185) # vertical door shadow
     rect(100,345,105,7) # horizontal door shadow
     rect(365,370,5,80) # vertical window shadow
@@ -105,12 +118,12 @@ def main():
 
     setOutline(150,135,110)
     setFill(150,135,110)
-    rect(400,300, 5, 250) # right highlight
+    rect(HOUSE_X + HOUSE_WIDTH,HOUSE_Y, 5, HOUSE_LENGTH) # right wall highlight
 
     # ROOF
     setOutline(90, 90, 90)
     setFill(90, 90, 90)
-    polygon(25,300, 500,300, 350,175, 150,175, 25,300)
+    polygon((HOUSE_X - 25),HOUSE_Y,  (HOUSE_X + HOUSE_WIDTH + 100),HOUSE_Y,  (HOUSE_X + HOUSE_WIDTH - 50),(HOUSE_Y - 125),  (HOUSE_X + 100),(HOUSE_Y - 125))
 
     setOutline(80,80,80)
     roof_top = 175
