@@ -27,16 +27,17 @@ def main():
     BALCONY_WIDTH = HOUSE_WIDTH + 75
     BALCONY_LENGTH = 15
     POST_WIDTH = 15
-    POST_LENGTH = HOUSE_LENGTH - BALCONY_LENGTH
+    POST_LENGTH = HOUSE_LENGTH
     DOOR_X = HOUSE_X + 50
     DOOR_Y = HOUSE_Y + 50
+    DOOR_WIDTH = 100
     DOOR_LENGTH = HOUSE_LENGTH - 50
     WINDOW_X = HOUSE_X + 195
     WINDOW_Y = HOUSE_Y + 70
     WINDOW_WIDTH = 120
     WINDOW_LENGTH = 80
-    WINDOW_CENTER_VER = WINDOW_Y + (WINDOW_LENGTH / 2)
-    WINDOW_CENTER_HOR = WINDOW_X + (WINDOW_WIDTH / 2)
+    WINDOW_CENTER_X = WINDOW_X + (WINDOW_WIDTH // 2)
+    WINDOW_CENTER_Y = WINDOW_Y + (WINDOW_LENGTH // 2)
 
 
     # SKY BACKGROUND
@@ -97,11 +98,19 @@ def main():
     ellipse(640,395, 300, 20) ## right edge
 
     setFill(75,95,35)
-    polygon(0,580, 50,550, 475,550, 435,600, 0,600) ## house shadow
-    # polygon(bottom left corner, top left corner, top right corner, bottom right corner, lower bottom left corner)
+    polygon(0,580, # above bottom left
+            HOUSE_X,HOUSE_Y+HOUSE_LENGTH+BALCONY_LENGTH, # top left
+            HOUSE_X+BALCONY_WIDTH,HOUSE_Y+HOUSE_LENGTH+BALCONY_LENGTH, # top right
+            HOUSE_X+BALCONY_WIDTH-35,600, # bottom right
+            0,600) # bottom left
+            ## house shadow
 
     setFill(85,105,45)
-    polygon(390,560, 445,560, 410,600, 350,600) ## gap in house shadow
+    polygon(HOUSE_X+HOUSE_WIDTH-10,HOUSE_Y+HOUSE_LENGTH+BALCONY_LENGTH+15,  # top left
+        HOUSE_X+BALCONY_WIDTH-35,HOUSE_Y+HOUSE_LENGTH+BALCONY_LENGTH+15,  # top right
+        HOUSE_X+BALCONY_WIDTH-65,600,  # bottom right
+        HOUSE_X+HOUSE_WIDTH-55,600)  # bottom left
+        ## gap in house shadow
 
 
     # POND
@@ -127,11 +136,11 @@ def main():
     
     setOutline(125,115,90)
     setFill(125,115,90)
-    rect(HOUSE_X+POST_WIDTH,HOUSE_Y+5,  HOUSE_WIDTH-POST_WIDTH, 5) ## roof shadow
-    rect(200,350,7,185) ## vertical door shadow
-    rect(100,345,107,7) ## horizontal door shadow
-    rect(365,370,5,82) ## vertical window shadow
-    rect(245,365,125,5) ## horiztonal window shadow
+    rect(HOUSE_X+POST_WIDTH,HOUSE_Y+5, HOUSE_WIDTH-POST_WIDTH, 5) ## horizontal post shadow
+    rect(DOOR_X+DOOR_WIDTH,DOOR_Y, 5, DOOR_LENGTH) ## vertical door shadow
+    rect(DOOR_X,DOOR_Y-5, DOOR_WIDTH+5, 5) ## horizontal door shadow
+    rect(WINDOW_X+WINDOW_WIDTH,WINDOW_Y, 5, WINDOW_LENGTH+2) ## vertical window shadow
+    rect(WINDOW_X,WINDOW_Y-5, WINDOW_WIDTH+5, 5) ## horiztonal window shadow
 
     setOutline(150,135,110)
     setFill(150,135,110)
@@ -144,7 +153,7 @@ def main():
     # polygon(bottom left corner, bottom right corner, top right corner, top left corner)
 
     setOutline(60,60,60)
-    line_height = HOUSE_Y - 10
+    line_height = HOUSE_Y - 10 # I could/should have made more of these variables for other elements but I didn't feel like it
     line_start = ROOF_LEFT + 10
     line_end = ROOF_RIGHT - 10
     while line_height >= ROOF_TOP: 
@@ -159,25 +168,25 @@ def main():
 
 
     # DOOR
-    setOutline(10,10,10) # Black is (0,0,0)
+    setOutline(35,35,35) # Black is (0,0,0)
     setFill(40, 40, 40)
-    rect(DOOR_X,DOOR_Y, 100, DOOR_LENGTH) ## base from (100,350) to (200,535)
+    rect(DOOR_X,DOOR_Y, DOOR_WIDTH, DOOR_LENGTH) ## base from (100,350) to (200,535)
 
-    setOutline(38,38,38)
-    setFill(37,37,37)
+    setOutline(40,40,40)
+    setFill(38,38,38)
     rect(DOOR_X+10,DOOR_Y+15, 35, 80) # upper left indent outline
     rect(DOOR_X+55,DOOR_Y+15, 35, 80) # upper right indent outilne
     rect(DOOR_X+10,DOOR_Y+100, 80, 75) # bottom indent outline
 
-    setOutline(36,36,36)
-    setFill(35,35,35)
+    setOutline(39,39,39)
+    setFill(38,38,38)
     rect(DOOR_X+15,DOOR_Y+20, 25, 70) # upper left indent
     rect(DOOR_X+60,DOOR_Y+20, 25, 70) # upper right indent
     rect(DOOR_X+15,DOOR_Y+105, 70, 65) # bottom indent
 
     setOutline(100,60,20) # tan4 is (139,90,43)
     setFill(80, 55, 40)
-    ellipse(DOOR_X+85,DOOR_Y+90, 10, 10) ## knob
+    ellipse(DOOR_X+DOOR_WIDTH-15,DOOR_Y+90, 10, 10) ## knob
 
 
     # WINDOW
@@ -187,72 +196,93 @@ def main():
 
     setOutline(210, 205, 120)
     setFill(215, 210, 125)
-    polygon(WINDOW_X+1,411, WINDOW_X+1,448, 286,448, 363,409, 363,371, 324,371) # highlight
+    polygon(246,411, 246,448, 286,448, 363,409, 363,371, 324,371) # highlight
     # polygon(bottom upper, bottom corner, bottom right, top lower, top corner, top left)
     
     setOutline(30, 30, 30)
-    line(WINDOW_X,WINDOW_CENTER_VER,  WINDOW_X+WINDOW_WIDTH,WINDOW_CENTER_VER) ## horizontal line
-    line(WINDOW_CENTER_HOR,WINDOW_Y,  WINDOW_CENTER_HOR,WINDOW_Y+WINDOW_LENGTH) ## vertical line
+    line(WINDOW_X,WINDOW_CENTER_Y,  WINDOW_X+WINDOW_WIDTH,WINDOW_CENTER_Y) ## horizontal line
+    line(WINDOW_CENTER_X,WINDOW_Y,  WINDOW_CENTER_X,WINDOW_Y+WINDOW_LENGTH) ## vertical line
 
 
     # MY KITTY!
     setOutline(50,50,50)
     setFill(50,50,50)
-    polygon(331,447, 339,444, 330,440) ## left ear
-    polygon(344,447, 336,444, 345,440) ## right ear
-    pieSlice(324,447, 5, 3, 0, 180) ## left paw
-    pieSlice(347,447, 5, 3, 0, 180) ## right paw
-    pieSlice(330,442, 15,14, 0, 180) ## head
+    pieSlice(WINDOW_CENTER_X+25,WINDOW_Y+WINDOW_LENGTH-8, 15, 14, 0, 180) ## head
 
-    setOutline(120,120,120)
-    blob(336,449, 336,448, 337,449, 338,450, 339,448, 337,449) ## moustache
+    pieSlice(WINDOW_CENTER_X+19,WINDOW_Y+WINDOW_LENGTH-3, 5, 3, 0, 180) ## left paw
+    pieSlice(WINDOW_CENTER_X+42,WINDOW_Y+WINDOW_LENGTH-3, 5, 3, 0, 180) ## right paw
 
-    setFill(150,100,75)
-    ellipse(334,445, 2, 2) ## left eye
-    ellipse(340,445, 2, 2) ## right eye
+    polygon(WINDOW_CENTER_X+26,WINDOW_Y+WINDOW_LENGTH-3, 
+        WINDOW_CENTER_X+34,WINDOW_Y+WINDOW_LENGTH-6, 
+        WINDOW_CENTER_X+25,WINDOW_Y+WINDOW_LENGTH-10) ## left ear
+    
+    polygon(WINDOW_CENTER_X+39,WINDOW_Y+WINDOW_LENGTH-3, 
+            WINDOW_CENTER_X+31,WINDOW_Y+WINDOW_LENGTH-6, 
+            WINDOW_CENTER_X+40,WINDOW_Y+WINDOW_LENGTH-10) ## right ear
+
+    setOutline(140,140,140)
+    line(WINDOW_CENTER_X+21,WINDOW_Y+WINDOW_LENGTH-2, WINDOW_CENTER_X+24,WINDOW_Y+WINDOW_LENGTH-2) ## left mitten
+    line(WINDOW_CENTER_X+44,WINDOW_Y+WINDOW_LENGTH-2, WINDOW_CENTER_X+47,WINDOW_Y+WINDOW_LENGTH-2) ## right mitten
+
+    blob(WINDOW_CENTER_X+31,WINDOW_Y+WINDOW_LENGTH-1,
+        WINDOW_CENTER_X+31,WINDOW_Y+WINDOW_LENGTH-2,
+        WINDOW_CENTER_X+32,WINDOW_Y+WINDOW_LENGTH-1,
+        WINDOW_CENTER_X+33,WINDOW_Y+WINDOW_LENGTH,
+        WINDOW_CENTER_X+34,WINDOW_Y+WINDOW_LENGTH-2,
+        WINDOW_CENTER_X+32,WINDOW_Y+WINDOW_LENGTH-1) ## moustache
+
+    setOutline(110,125,50) # subtle greenish color
+    setFill(150,160,80) # yellower-highlight
+    ellipse(WINDOW_CENTER_X+29,WINDOW_Y+WINDOW_LENGTH-5, 2, 2)  ## left eye
+    ellipse(WINDOW_CENTER_X+35,WINDOW_Y+WINDOW_LENGTH-5, 2, 2)  ## right eye
 
     setOutline(30,30,30)
-    line(245,450, 365,450) ## thickened windowsill to cover moustache pixel
+    rect(WINDOW_X, WINDOW_Y+WINDOW_LENGTH-1, WINDOW_WIDTH, 2)  ## thickened windowsill
 
 
     # BALCONY
     setOutline("azure4") # (131,139,139)
     setFill("azure4")
-    rect(50,535, 425, 15) ## base from (50,535) to (475,550)
+    rect(HOUSE_X,BALCONY_Y, BALCONY_WIDTH, BALCONY_LENGTH) ## base from (50,535) to (475,550)
 
     setFill(125,135,135)
-    rect(65,530, 330, 5) ## shadow
+    rect(HOUSE_X + POST_WIDTH,BALCONY_Y - 5, HOUSE_WIDTH, 5) ## top shadow
 
     setFill(135,145,145)
-    rect(395,530, 65, 5) ## highlight
+    rect(HOUSE_X+HOUSE_WIDTH-5,HOUSE_Y+HOUSE_LENGTH-5, 65, 5) ## gap highlight
+    line(HOUSE_X+BALCONY_WIDTH-1,HOUSE_Y+HOUSE_LENGTH+1, HOUSE_X+BALCONY_WIDTH-1,HOUSE_Y+HOUSE_LENGTH+BALCONY_LENGTH) ## right highlight
 
 
-    # BALCONY POSTS
+    # POSTS
     setOutline("burlywood4") # (139,115,85)
     setFill(140,115,85)
-    rect(50,301, 15, 235) ## left post
-    rect(460,301, 15, 235) ## right post
-    rect(50,301, 425, 5) ## horizonal post
+    rect(HOUSE_X,HOUSE_Y+1, POST_WIDTH, POST_LENGTH) ## left post
+    rect(HOUSE_X+BALCONY_WIDTH-POST_WIDTH,HOUSE_Y+1, POST_WIDTH, POST_LENGTH) ## right post
+    rect(HOUSE_X,HOUSE_Y+1, BALCONY_WIDTH, 5) ## horizonal post
 
     setOutline(155,130,100)
-    line(65,310, 65,535) ## left post highlight
-    line(474,301, 474,535) ## right post highilght
+    line(HOUSE_X+POST_WIDTH,HOUSE_Y+10, HOUSE_X+POST_WIDTH,HOUSE_Y+HOUSE_LENGTH) ## left post highlight
+    line(HOUSE_X+BALCONY_WIDTH-1,HOUSE_Y+1, HOUSE_X+BALCONY_WIDTH-1,HOUSE_Y+HOUSE_LENGTH) ## right post highilght
+
+    setOutline(125,100,70)
+    setFill(125,100,70)
+    rect(HOUSE_X,HOUSE_Y+1, BALCONY_WIDTH, 2) ## roof shadow
 
 
     # BENCH
     setOutline(110,85,55)
     setFill(110,85,55)
-    rect(250,500, 110, 10) ## bench seat
-    rect(250,510, 10, 22) ## left leg
-    rect(350,510, 10, 22) ## right leg
+    rect(WINDOW_X+5,BALCONY_Y-35, 110, 10) ## bench seat
+    rect(WINDOW_X+5,BALCONY_Y-25, 10, 22) ## left leg
+    rect(WINDOW_X+105,BALCONY_Y-25, 10, 22) ## right leg
 
     setOutline(95,70,40)
-    line(249,500, 249,532) ## left leg shadow
-    line(349,510, 349,532) ## right leg shadow
+    line(WINDOW_X+4,BALCONY_Y-35, WINDOW_X+4,BALCONY_Y-3) ## left leg shadow
+    line(WINDOW_X+104,BALCONY_Y-25, WINDOW_X+104,BALCONY_Y-3) ## right leg shadow
 
     # NAME
     setOutline("black")
-    setFont("montserratsemibold","8.5")
+    setFont("montserrat","8.5") # my favorite font!
     text(5, 590, "Made by Kenneth Horsman", "w")
 
 if __name__=="__main__":
