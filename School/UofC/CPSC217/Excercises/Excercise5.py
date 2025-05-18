@@ -8,10 +8,10 @@ def main():
     list_of_values = []
     getting_values = True
 
-    print('This program...')
+    print('This program takes a list of values and displays them in reverse order.')
 
     while getting_values:
-        value = input("Enter value (or nothing to quit): ")
+        value = input("Enter a value (or nothing to quit): ")
         
         if value:
             list_of_values.append(value)

@@ -106,10 +106,10 @@ def main():
             ## house shadow
 
     setFill(85,105,45)
-    polygon(HOUSE_X+HOUSE_WIDTH-10,HOUSE_Y+HOUSE_LENGTH+BALCONY_LENGTH+15,  # top left
+    polygon(HOUSE_RIGHT-10,HOUSE_Y+HOUSE_LENGTH+BALCONY_LENGTH+15,  # top left
         HOUSE_X+BALCONY_WIDTH-35,HOUSE_Y+HOUSE_LENGTH+BALCONY_LENGTH+15,  # top right
         HOUSE_X+BALCONY_WIDTH-65,600,  # bottom right
-        HOUSE_X+HOUSE_WIDTH-55,600)  # bottom left
+        HOUSE_RIGHT-55,600)  # bottom left
         ## gap in house shadow
 
 
@@ -144,7 +144,7 @@ def main():
 
     setOutline(150,135,110)
     setFill(150,135,110)
-    rect(HOUSE_X+HOUSE_WIDTH,HOUSE_Y,  5, HOUSE_LENGTH) ## right wall highlight
+    rect(HOUSE_RIGHT,HOUSE_Y,  5, HOUSE_LENGTH) ## right wall highlight
 
     # ROOF
     setOutline(80, 80, 80)
@@ -249,7 +249,7 @@ def main():
     rect(HOUSE_X + POST_WIDTH,BALCONY_Y - 5, HOUSE_WIDTH, 5) ## top shadow
 
     setFill(135,145,145)
-    rect(HOUSE_X+HOUSE_WIDTH-5,HOUSE_Y+HOUSE_LENGTH-5, 65, 5) ## gap highlight
+    rect(HOUSE_RIGHT-5,HOUSE_Y+HOUSE_LENGTH-5, 65, 5) ## gap highlight
     line(HOUSE_X+BALCONY_WIDTH-1,HOUSE_Y+HOUSE_LENGTH+1, HOUSE_X+BALCONY_WIDTH-1,HOUSE_Y+HOUSE_LENGTH+BALCONY_LENGTH) ## right highlight
 
 
