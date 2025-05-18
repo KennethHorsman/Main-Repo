@@ -20,7 +20,7 @@ def main():
 
     age_dog = age_human * 7
 
-    print(f"{name} is {age_human} in human years and {age_dog} in dog years.")
+    print(f"{name} is {int(age_human) if age_human % 1 == 0 else age_human} in human years and {int(age_dog) if age_dog % 1 == 0 else age_dog} in dog years.")
     
     if age_human > 120:
         print(f"Is {name} a vampire?")
@@ -30,10 +30,7 @@ def get_age(): # Good practice to create functions for a singular purpose
     
     try:
         float(age) # attempts to convert the string into a float (numbers / periods only)
-        if float(age) % 1 == 0: # if successful, determines if the number is whole or not by whether there's any remainder
-            return int(age)
-        else:
-            return float(age)
+        return float(age)
 
     except ValueError: # This is the error that occurs when the value entered is not a numer or a period
         print("Please enter a number.") # I am not using raise() so I can return None and continue loop in main()
