@@ -19,14 +19,14 @@ def main():
 
         while getting_age:     
             age_human = get_age()
-            if age_human:
+            if age_human != None:
                 getting_age = False 
         
         if age_human < 0:
             get_new_age = False
         else:
             age_dog = calc_age_dog(age_human)
-            print(f"This human is {int(age_dog) if age_dog % 1 == 0 else age_dog} in dog years.")
+            print(f"That age is equivalent to {int(age_dog) if age_dog % 1 == 0 else age_dog} dog years.")
 
     print("You are exiting the program.")
 
@@ -40,7 +40,7 @@ def calc_age_dog(age_human):
     return converted_years
 
 def get_age(): 
-    age = input("Enter a persons age (or a negative number to quit): ") # I know what the instructions said but I thought this made more sense.
+    age = input("Enter a persons age (or a negative number to quit): ") 
     
     try:
         float(age)

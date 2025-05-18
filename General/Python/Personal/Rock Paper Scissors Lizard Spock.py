@@ -62,17 +62,17 @@ def did_user_win_rpsls():
     "Determines if the user was the winner or loser in rock-paper-scissors-lizard-spock"
     user_hand, program_hand = compare_hands()
 
-    game_rules = {'rock': ['scissors', 'lizard'],
+    game_rules = {'rock': ['scissors', 'lizard'], # the values are the hands that the key will defeat
                 'paper': ['spock','rock'],
                 'scissors': ['lizard','paper'],
                 'lizard': ['paper','spock'],
                 'spock': ['rock','scissors']}
 
-    lose_to_program = game_rules[program_hand]
+    lose_to_program = game_rules[program_hand] # creates a list of the keys that the program hand will defeat
     lose_to_user = game_rules[user_hand]
 
-    if program_hand in lose_to_user:
-        print(f"{user_hand.title()} beats {program_hand}. You won that round!")
+    if program_hand in lose_to_user: # if the program's hand is in the list of hands that the user will defeat...
+        print(f"{user_hand.title()} beats {program_hand}. You won that round!") 
         return True
     if user_hand in lose_to_program:
         print(f"{program_hand.title()} beats {user_hand}. You lost that round!")
