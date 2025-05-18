@@ -1,11 +1,5 @@
-#
 #  CPSC 217 Exercise 4: Display a message that includes ordinal numbers
-#
-
-#
-#  Put your implementation for int2ordinal here.  My implementation was 10
-#  lines of code (not counting comments and blank lines).
-#
+# Kenneth Horsman (UCID: 30260797)
 
 def int2ordinal(integer):
   last_digit = integer % 100

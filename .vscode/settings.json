@@ -8,10 +8,14 @@
         "**/CVS": true,
         "C++/CarClass": true,
         ".vscode": true,
-        "Python/Projects/Project 4/__pycache__": true
+        "Python/Projects/Project 4/__pycache__": true,
+        "School/UofC/CPSC217/Asssignments/__pycache__": true,
+        "School/UofC/CPSC217/Excercises/__pycache__": true
     },
     "hide-files.files": [
         ".vscode",
-        "Python/Projects/Project 4/__pycache__"
+        "Python/Projects/Project 4/__pycache__",
+        "School/UofC/CPSC217/Asssignments/__pycache__",
+        "School/UofC/CPSC217/Excercises/__pycache__"
     ]
 }

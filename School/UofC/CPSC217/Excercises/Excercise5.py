@@ -1,4 +1,6 @@
 '''
+Kenneth Horsman (UCID: 30260797)
+
 Write a program that reads a collection of values from the user. After all of the values have been read,
 display all of the values in the opposite order from which they were entered, with one value appearing
 on each line. The user will indicate that no further values will be entered by entering a blank line.
