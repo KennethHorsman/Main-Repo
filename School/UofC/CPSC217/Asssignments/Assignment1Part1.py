@@ -32,10 +32,19 @@ def main():
     print('This program takes coordinates as input and display a smiley face at that location.\n'
     'Note: The default window size is 800 x 600.')
 
-    x_coord = get_coord("x")
-    y_coord = get_coord("y")
+    # x_coord = get_coord("x")
+    # y_coord = get_coord("y")
 
-    ellipse(x_coord-50, y_coord-50, 100, 100)
+    x_coord = 400
+    y_coord = 300
+
+    ### SHAPES ###
+    setOutline(222,184,135)
+    setFill(222,184,135)
+    polygon(x_coord-225,y_coord-225, x_coord-200,y_coord-150, x_coord-175,y_coord-25, x_coord-100,y_coord-175) # left ear
+
+    setFill(238,197,145)
+    ellipse(x_coord-200, y_coord-200, 400, 400) # base of head
 
 def get_coord(type):
     getting_coord = True
