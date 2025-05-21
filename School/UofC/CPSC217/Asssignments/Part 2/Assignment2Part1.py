@@ -30,7 +30,7 @@ while num_rings > 0:
     setWidth(curr_line_width)
     arc(circ_x,circ_y, curr_diameter, curr_diameter, 0,359.99999) # If I put 360, nothing is displayed
     curr_diameter += 35
-    circ_x -= 17.5
+    circ_x -= 17.5 # half of 35
     circ_y -= 17.5
     curr_line_width *= 1.1 # Ending line width will be just over 6.7
     num_rings -= 1
@@ -41,11 +41,11 @@ square_offset = 384 / 2
 
 setOutline(60,45,60)
 while num_squares > 0:
-    line(256-square_offset, 256-square_offset,
-         256+square_offset, 256-square_offset,
-         256+square_offset, 256+square_offset,
-         256-square_offset, 256+square_offset,
-         256-square_offset, 256-square_offset)
-    square_offset -= 64
+    line(256-square_offset, 256-square_offset, # top left
+         256+square_offset, 256-square_offset, # top right
+         256+square_offset, 256+square_offset, # bottom right
+         256-square_offset, 256+square_offset, # bottom left 
+         256-square_offset, 256-square_offset) # top left
+    square_offset -= 64 # half of distance between 384, 256, and 128
     curr_line_width -= 1
     num_squares -= 1

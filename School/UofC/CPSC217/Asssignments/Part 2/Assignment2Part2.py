@@ -15,5 +15,5 @@ is to draw 9 gray lines that stretch all the way across the window and 9 gray li
 way from its top to its bottom. The other option is to draw 64 black squares that each have a gray
 outline. Either approach is acceptable. The white circles are drawn after either all the lines or all of
 the squares are drawn. 
-
 '''
+
