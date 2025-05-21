@@ -17,6 +17,7 @@ outer square a line width of 4.
 from SimpleGraphics import *
 
 resize(512,512)
+background("white")
 clear()
 
 num_rings = 20
@@ -30,7 +31,7 @@ while num_rings > 0:
     setWidth(curr_line_width)
     arc(circ_x,circ_y, curr_diameter, curr_diameter, 0,359.99999) # If I put 360, nothing is displayed
     curr_diameter += 35
-    circ_x -= 17.5 # half of 35
+    circ_x -= 17.5 # half of 3
     circ_y -= 17.5
     curr_line_width *= 1.1 # Ending line width will be just over 6.7
     num_rings -= 1
@@ -39,8 +40,9 @@ num_squares = 3
 curr_line_width = 4
 square_offset = 384 / 2
 
-setOutline(60,45,60)
+setOutline(60,0,80)
 while num_squares > 0:
+    setWidth(curr_line_width)
     line(256-square_offset, 256-square_offset, # top left
          256+square_offset, 256-square_offset, # top right
          256+square_offset, 256+square_offset, # bottom right

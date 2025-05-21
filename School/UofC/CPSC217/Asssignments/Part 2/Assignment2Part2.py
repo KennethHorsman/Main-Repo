@@ -1,7 +1,6 @@
 '''
 Requirements for the Hermann Grid Illusion:
  Resize the window so that it is 512 pixels by 512 pixels by calling the resize function.
-3
  Clear the window so that any previous illusion is removed and the background is black by
 calling the clear function.
  A grid of 64 black squares is drawn, separated by gray (r: 128, g: 128, b: 128) lines. All lines
@@ -17,3 +16,44 @@ outline. Either approach is acceptable. The white circles are drawn after either
 the squares are drawn. 
 '''
 
+from SimpleGraphics import *
+
+def HermannGrid():
+    
+    resize(512,512)
+    background("black") # only works when called before clear
+    clear()
+
+    setOutline(128,128,128)
+    DrawLines(9, "vertical")
+    DrawLines(9, "horizontal") 
+
+def DrawLines(num_lines, type):
+    x1 = y1 = x2 = y2 = 0 # Setting all of these to 0 and updating them as required later
+
+    while num_lines > 0:
+        if num_lines == 1 or num_lines == 9:
+            width = 5
+        else:
+            width = 10
+
+        width_os = width / 2 # width offset is required because otherwise only half the line would show around the edges
+        setWidth(width)
+
+        if type == "vertical":
+            y2 = 512
+
+            line(x1+width_os,y1, x2+width_os,y2)
+            x1 += width + 54 # [512 - (7*10) - (2*5)] / 8 = 54. The 8 represents the number of squares.
+            x2 += width + 54
+            
+        else:
+            x2 = 512
+
+            line(x1,y1+width_os, x2,y2+width_os)
+            y1 += width + 54
+            y2 += width + 54
+
+        num_lines -= 1
+
+HermannGrid()
