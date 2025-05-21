@@ -12,4 +12,61 @@ with the left edge of the window.
 the window.
  In the third, seventh and eleventh rows, the first white square is 42 pixels from the left edge
 of the window. 
+
+*Question: Is it intentional that in the example photo, the left and bottom lines are cut off?
 '''
+
+from SimpleGraphics import *
+
+def CafeWall():
+
+    resize(800,572) # 598 only works if I add 2 to the curr_y after each iteration, but this leaves a gap between squares. I subtracted 13 rows * 2 pixels.
+    background("black")
+    clear()
+
+    num_rows = 13
+    curr_y = 1 # to show half of the line width
+    SQ_SIZE = 44 + 2 # square size plus half the line width from both sides
+    LINE_WIDTH = 2
+
+    aligned_left_rows = [1, 5, 9, 13]
+    even_rows = [2, 4, 6, 8, 10, 12]
+    # remaining_rows = [3, 7, 11]
+
+    setFill("white")
+    setOutline(128,128,128)
+    setWidth(LINE_WIDTH)
+
+    while num_rows > 0:
+        if num_rows in aligned_left_rows:
+            offset = 0
+            rect(offset,curr_y, SQ_SIZE, SQ_SIZE)
+            DrawSquares(offset + (SQ_SIZE * 2), curr_y, SQ_SIZE, LINE_WIDTH)
+
+        elif num_rows in even_rows:
+            offset = 27 - 1
+            rect(offset,curr_y, SQ_SIZE, SQ_SIZE)
+            DrawSquares(offset + (SQ_SIZE * 2), curr_y, SQ_SIZE, LINE_WIDTH)
+
+        else: # if num_rows in remaining_rows:
+            offset = 42 - 1
+            rect(offset,curr_y, SQ_SIZE, SQ_SIZE)
+            DrawSquares(offset + (SQ_SIZE * 2), curr_y, SQ_SIZE, LINE_WIDTH)
+
+        line_height = curr_y + SQ_SIZE - 1
+        line(0,line_height, 800,line_height)
+
+        curr_y += SQ_SIZE - 1
+        num_rows -= 1
+
+def DrawSquares(x_value, y_value, square_size, line_size):
+    # Draws 8 squares after the first square on the left   
+    num_squares = 8
+
+    while num_squares > 0:
+        rect(x_value,y_value, square_size, square_size)
+
+        x_value += (square_size * 2) + (line_size / 2)
+        num_squares -= 1
+
+CafeWall()
