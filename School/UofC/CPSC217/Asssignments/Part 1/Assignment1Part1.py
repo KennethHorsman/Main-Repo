@@ -1,4 +1,6 @@
 '''
+Kenneth Horsman (UCID: 30260797)
+
 In this part of the assignment, you will create a small graphical Python program. The program will read
 two integers as input from the user. Its output will be a “smiley” (loosely defined) centered on the
 position specified by the user. For example, if the user enters 400 and 300 as input, then the face

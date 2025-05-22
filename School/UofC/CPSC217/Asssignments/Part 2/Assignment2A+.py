@@ -1,4 +1,6 @@
 '''
+Kenneth Horsman (UCID: 30260797)
+
 The bulging checkerboard illusion consists of black and white squares in a checkerboard pattern,
 most of which have two small dots drawn on then. While all of the black and white regions in the
 board are square and have the same size, most people perceive that the board bulges at a

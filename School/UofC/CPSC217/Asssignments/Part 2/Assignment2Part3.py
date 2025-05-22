@@ -1,4 +1,5 @@
 '''
+Kenneth Horsman (UCID: 30260797)
 Requirements for the Café Wall Illusion:
  Resize the window so that it is 800 pixels by 598 pixels by calling the resize function.
  Clear the window so that any previous illusion is removed.

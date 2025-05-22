@@ -1,4 +1,6 @@
 '''
+Kenneth Horsman (UCID: 30260797)
+
 Requirements for the Curving Square illusion:
  Resize the window so that it is 512 pixels by 512 pixels by calling the resize function.
  Clear the window so that any previous illusion is removed and the background is white by
