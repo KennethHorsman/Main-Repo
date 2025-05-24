@@ -40,7 +40,7 @@ def DrawLines(num_lines, type):
             width = 10
 
         width_os = width / 2 # width offset is required because otherwise only half the line would show around the edges
-        setWidth(width)
+        setWidth(width) # Also, in the example, the top and left borders are half cut off but I kept mine symmetrical 
 
         if type == "vertical":
             y2 = 512
@@ -57,5 +57,8 @@ def DrawLines(num_lines, type):
             y2 += width + 54
 
         num_lines -= 1
+
+def DrawCircles():
+    print('')
 
 HermannGrid()

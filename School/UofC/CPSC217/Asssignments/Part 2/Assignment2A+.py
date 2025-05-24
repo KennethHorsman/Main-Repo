@@ -30,3 +30,4 @@ Resize the window so that it is 800 pixels wide and 600 pixels tall. Each square
 pixels by 50 pixels. Each of the circles has a diameter of 12 pixels. Each circle is 2 pixels from the
 two closest edges of the square in which it resides
 '''
+
