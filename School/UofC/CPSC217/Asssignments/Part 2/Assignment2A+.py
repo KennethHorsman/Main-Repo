@@ -31,3 +31,29 @@ pixels by 50 pixels. Each of the circles has a diameter of 12 pixels. Each circl
 two closest edges of the square in which it resides
 '''
 
+# using square width for column and row locations with two for loops
+# for all colums from x onward, for all rows in range y, use one of 4 offsets for circle (each corner, based on top or left of square border)
+
+from SimpleGraphics import *
+
+resize(800,600)
+clear()
+
+SQ_SIZE = 50 # The width / height of each square
+CIRC_DIAMETER = 12
+CIRC_OFFSET = 2 + (CIRC_DIAMETER / 2) # The center of each circle + 2 pixels from the edge of the square
+
+CIRC_TOPLEFT = [CIRC_OFFSET, CIRC_OFFSET] # [x, y] of circle center in each square
+CIRC_TOPRIGHT = [SQ_SIZE-CIRC_OFFSET, CIRC_OFFSET] # LISTS NOT ALLOWED THO
+CIRC__BOTTOMLEFT = [CIRC_OFFSET, SQ_SIZE-CIRC_OFFSET]
+
+input_row = 5
+input_col = 8
+
+# SQUARES
+
+
+# UPPER LEFT SECTOR
+for x in range(0,input_row):
+    for y in range(0,input_col):
+        print('')

@@ -21,7 +21,7 @@ from SimpleGraphics import *
 
 def CafeWall():
 
-    resize(800,572) # 598 only works if I add 2 to the curr_y after each iteration, but this leaves a gap between squares. I subtracted 13 rows * 2 pixels.
+    resize(800,598) # 598 only works if I add 2 to the curr_y after each iteration, but this leaves a gap between squares. I subtracted 13 rows * 2 pixels.
     background("black")
     clear()
 
@@ -30,7 +30,7 @@ def CafeWall():
     SQ_SIZE = 44 + 2 # square size plus half the line width from both sides
     LINE_WIDTH = 2
 
-    aligned_left_rows = [1, 5, 9, 13] # NOT ALLOWED!
+    aligned_left_rows = [1, 5, 9, 13]
     even_rows = [2, 4, 6, 8, 10, 12]
     # remaining_rows = [3, 7, 11]
 
@@ -41,7 +41,7 @@ def CafeWall():
     while num_rows > 0:
         if num_rows in aligned_left_rows:
             offset = 0
-            rect(offset,curr_y, SQ_SIZE, SQ_SIZE)
+            rect(offset,curr_y, SQ_SIZE, SQ_SIZE) # Can we not consolidate this into drawsquares?
             DrawSquares(offset + (SQ_SIZE * 2), curr_y, SQ_SIZE, LINE_WIDTH)
 
         elif num_rows in even_rows:
