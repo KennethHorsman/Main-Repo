@@ -29,6 +29,7 @@ def HermannGrid():
     setOutline(128,128,128)
     DrawLines(9, "vertical")
     DrawLines(9, "horizontal") 
+    # ADD CIRCLES!
 
 def DrawLines(num_lines, type):
     x1 = y1 = x2 = y2 = 0 # Setting all of these to 0 and updating them as required later

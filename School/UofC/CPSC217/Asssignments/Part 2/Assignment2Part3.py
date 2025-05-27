@@ -21,12 +21,12 @@ from SimpleGraphics import *
 
 def CafeWall():
 
-    resize(800,598) # 598 only works if I add 2 to the curr_y after each iteration, but this leaves a gap between squares. I subtracted 13 rows * 2 pixels.
+    resize(800,598) 
     background("black")
     clear()
 
-    num_rows = 13
-    curr_y = 1 # to show half of the line width
+    num_rows = int(598 / 44) # This only works because the thickness of all the lines added up is less than one square size
+    curr_y = 1 # to show half of the line width at the top
     SQ_SIZE = 44 + 2 # square size plus half the line width from both sides
     LINE_WIDTH = 2
 
@@ -57,7 +57,7 @@ def CafeWall():
         line_height = curr_y + SQ_SIZE - 1
         line(0,line_height, 800,line_height)
 
-        curr_y += SQ_SIZE - 1
+        curr_y += SQ_SIZE
         num_rows -= 1
 
 def DrawSquares(x_value, y_value, square_size, line_size):

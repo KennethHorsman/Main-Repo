@@ -37,23 +37,96 @@ two closest edges of the square in which it resides
 from SimpleGraphics import *
 
 resize(800,600)
+background("white")
 clear()
 
-SQ_SIZE = 50 # The width / height of each square
+SQ_SIZE = 50
 CIRC_DIAMETER = 12
-CIRC_OFFSET = 2 + (CIRC_DIAMETER / 2) # The center of each circle + 2 pixels from the edge of the square
+CIRC_OFFSET = 2
+ROWS = int(getHeight() / SQ_SIZE)
+COLS = int(getWidth() / SQ_SIZE)
 
-CIRC_TOPLEFT = [CIRC_OFFSET, CIRC_OFFSET] # [x, y] of circle center in each square
-CIRC_TOPRIGHT = [SQ_SIZE-CIRC_OFFSET, CIRC_OFFSET] # LISTS NOT ALLOWED THO
-CIRC__BOTTOMLEFT = [CIRC_OFFSET, SQ_SIZE-CIRC_OFFSET]
+#CIRC_TOPLEFT = [CIRC_OFFSET, CIRC_OFFSET] # [x, y] of circle center in each square
+#CIRC_TOPRIGHT = [SQ_SIZE-CIRC_OFFSET, CIRC_OFFSET] # LISTS NOT ALLOWED THO
+#CIRC__BOTTOMLEFT = [CIRC_OFFSET, SQ_SIZE-CIRC_OFFSET]
 
-input_row = 5
+def DrawSquares(x_value, y_value, square_size, line_size=0):
+    # Draws one row of squares
+    setColor("black")
+
+    num_squares = int(getWidth() / square_size) / 2
+    
+    while num_squares > 0:
+            rect(x_value,y_value, square_size, square_size)
+
+            x_value += (square_size * 2) + (line_size / 2)
+            num_squares -= 1
+
+
+def DrawCircles(start_row, end_row, start_col, end_col, x_offset, y_offset, diameter, square_size):
+    # Draws circles within the specified squares
+    setColor("red")
+
+    x_value = x_offset + (start_col * square_size)
+    y_value = y_offset + (start_row * square_size)
+
+    for row in range(start_row, end_row):
+        for col in range(start_col, end_col):
+            ellipse(x_value, y_value, diameter, diameter)
+            x_value += square_size
+
+        x_value = x_offset # resets the x value to start at the beginning of the row
+        y_value += square_size # moves the y value to move down the next row
+
+### SQUARES ###
+starting_y = 0
+rows = ROWS 
+
+while rows > 0:
+    if rows % 2 == 1:
+        DrawSquares(SQ_SIZE, starting_y, SQ_SIZE)
+    else:
+        DrawSquares(0, starting_y, SQ_SIZE)
+    rows -= 1
+    starting_y += SQ_SIZE
+
+
+input_row = 6
 input_col = 8
 
-# SQUARES
+### UPPER LEFT SECTOR ###
+#start_row = 0; end_row = input_row - 1
+#start_col = 0;  end_col = input_col - 1
+
+### UPPER RIGHT SECTOR ###
+start_row = 0; end_row = input_row - 1
+start_col = input_col + 1;  end_col = COLS
+
+### LOWER LEFT SECTOR ####
+#start_row = input_row + 1; end_row = ROWS
+#start_col = 0;  end_col = input_col - 1
+
+### LOWER RIGHT SECTOR ###
+#start_row = input_row + 1; end_row = ROWS
+#start_col = input_col + 1;  end_col = COLS
 
 
-# UPPER LEFT SECTOR
-for x in range(0,input_row):
-    for y in range(0,input_col):
-        print('')
+# Lower left circles
+x_offset = CIRC_OFFSET
+y_offset = SQ_SIZE - CIRC_OFFSET - CIRC_DIAMETER
+DrawCircles(start_row, end_row, start_col, end_col, x_offset, y_offset, CIRC_DIAMETER, SQ_SIZE)
+
+# Upper right circles
+x_offset = SQ_SIZE - CIRC_OFFSET - CIRC_DIAMETER
+y_offset = CIRC_OFFSET
+DrawCircles(start_row, end_row, start_col, end_col, x_offset, y_offset, CIRC_DIAMETER, SQ_SIZE)
+
+# Lower right circles
+x_offset = SQ_SIZE - CIRC_OFFSET - CIRC_DIAMETER
+y_offset = SQ_SIZE - CIRC_OFFSET - CIRC_DIAMETER
+DrawCircles(start_row, end_row, start_col, end_col, x_offset, y_offset, CIRC_DIAMETER, SQ_SIZE)
+
+# Upper left circles
+x_offset = CIRC_OFFSET
+y_offset = CIRC_OFFSET
+DrawCircles(start_row, end_row, start_col, end_col, x_offset, y_offset, CIRC_DIAMETER, SQ_SIZE)
