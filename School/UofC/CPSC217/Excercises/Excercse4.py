@@ -3,7 +3,10 @@
 
 def int2ordinal(integer):
   last_digit = integer % 100
-  suffix_dict = {(11,12,13) : "th", 1 : "st", 2 : "nd", 3 : "rd"} # Apparently only using a tuple will work for the first key, not a list
+  suffix_dict = {(11,12,13) : "th", 
+                 1 : "st", 
+                 2 : "nd", 
+                 3 : "rd"} # Apparently only using a tuple will work for the first key, not a list
 
   if last_digit in suffix_dict:
     return f"{integer}{suffix_dict[last_digit]}"

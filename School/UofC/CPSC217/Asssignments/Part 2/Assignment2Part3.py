@@ -30,7 +30,7 @@ def CafeWall():
     SQ_SIZE = 44 + 2 # square size plus half the line width from both sides
     LINE_WIDTH = 2
 
-    aligned_left_rows = [1, 5, 9, 13]
+    aligned_left_rows = [1, 5, 9, 13] # NOT ALLOWED!
     even_rows = [2, 4, 6, 8, 10, 12]
     # remaining_rows = [3, 7, 11]
 
