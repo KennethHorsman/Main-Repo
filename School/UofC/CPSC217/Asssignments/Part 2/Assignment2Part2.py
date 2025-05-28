@@ -26,40 +26,59 @@ def HermannGrid():
     background("black") # only works when called before clear
     clear()
 
-    setOutline(128,128,128)
-    DrawLines(9, "vertical")
-    DrawLines(9, "horizontal") 
-    # ADD CIRCLES!
+    SQUARE_SIZE = (512 - (7 * 10) - (2 * 5)) // 8
+    CIRC_DIAMETER = 12
+    LINE_SIZE = 10
 
-def DrawLines(num_lines, type):
+    setOutline(128,128,128)
+    DrawLines(9, "vertical", SQUARE_SIZE, LINE_SIZE)
+    DrawLines(9, "horizontal", SQUARE_SIZE, LINE_SIZE) 
+    
+    setColor("white")
+    HG_DrawCircles(CIRC_DIAMETER, SQUARE_SIZE, LINE_SIZE)
+
+def DrawLines(num_lines, type, square_size, line_size):
     x1 = y1 = x2 = y2 = 0 # Setting all of these to 0 and updating them as required later
 
     while num_lines > 0:
         if num_lines == 1 or num_lines == 9:
-            width = 5
+            curr_line_size = line_size / 2
         else:
-            width = 10
+            curr_line_size = line_size
 
-        width_os = width / 2 # width offset is required because otherwise only half the line would show around the edges
-        setWidth(width) # Also, in the example, the top and left borders are half cut off but I kept mine symmetrical 
+        width_os = curr_line_size / 2 # width offset is required because otherwise only half the line would show around the edges
+        setWidth(curr_line_size) # Also, in the example, the top and left borders are half cut off but I kept mine symmetrical 
 
         if type == "vertical":
             y2 = 512
-
             line(x1+width_os,y1, x2+width_os,y2)
-            x1 += width + 54 # [512 - (7*10) - (2*5)] / 8 = 54. The 8 represents the number of squares.
-            x2 += width + 54
+
+            x1 += curr_line_size + square_size # [512 - (7*10) - (2*5)] / 8 = SQ_SIZE. The 8 represents the number of squares.
+            x2 += curr_line_size + square_size
             
         else:
             x2 = 512
-
             line(x1,y1+width_os, x2,y2+width_os)
-            y1 += width + 54
-            y2 += width + 54
+
+            y1 += curr_line_size + square_size
+            y2 += curr_line_size + square_size
 
         num_lines -= 1
 
-def DrawCircles():
-    print('')
+def HG_DrawCircles(diameter, square_size, line_size):
+    # Draws circles for the Hermann Grid illusion
+
+    x_value = y_value = square_size + (line_size / 2) # Dividing the line size by 2 because the outer lines are half the width
+    num_rows = getHeight() // square_size
+    num_cols = getWidth() // square_size
+
+    for row in range(num_rows-1): # The -1 is needed to prevent drawing onto the bottom or rightmost lines
+        for col in range(num_cols-1): 
+
+            ellipse(x_value, y_value, diameter, diameter)
+            x_value += square_size + line_size
+
+        x_value = square_size + (line_size / 2) # resets the x value to start at the beginning of the row
+        y_value += square_size # moves the y value down the next row
 
 HermannGrid()
