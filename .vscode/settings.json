@@ -11,13 +11,15 @@
         "Python/Projects/Project 4/__pycache__": true,
         "School/UofC/CPSC217/Asssignments/__pycache__": true,
         "School/UofC/CPSC217/Excercises/__pycache__": true,
-        "School/UofC/CPSC217/__pycache__": true
+        "School/UofC/CPSC217/__pycache__": true,
+        "School/UofC/CPSC217/Asssignments/Part 2/__pycache__": true
     },
     "hide-files.files": [
         ".vscode",
         "Python/Projects/Project 4/__pycache__",
         "School/UofC/CPSC217/Asssignments/__pycache__",
         "School/UofC/CPSC217/Excercises/__pycache__",
-        "School/UofC/CPSC217/__pycache__"
+        "School/UofC/CPSC217/__pycache__",
+        "School/UofC/CPSC217/Asssignments/Part 2/__pycache__"
     ]
 }

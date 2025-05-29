@@ -27,7 +27,7 @@ def HermannGrid():
     clear()
 
     SQUARE_SIZE = (512 - (7 * 10) - (2 * 5)) // 8
-    CIRC_DIAMETER = 12
+    CIRC_DIAMETER = 11 # Diameter 12 circles do not look the same as in the example and are too big for a size 10 line
     LINE_SIZE = 10
 
     setOutline(128,128,128)
@@ -72,13 +72,13 @@ def HG_DrawCircles(diameter, square_size, line_size):
     num_rows = getHeight() // square_size
     num_cols = getWidth() // square_size
 
-    for row in range(num_rows-1): # The -1 is needed to prevent drawing onto the bottom or rightmost lines
-        for col in range(num_cols-1): 
+    for row in range(num_rows-2): # Not including the outermost lines
+        for col in range(num_cols-2): # 
 
             ellipse(x_value, y_value, diameter, diameter)
             x_value += square_size + line_size
 
         x_value = square_size + (line_size / 2) # resets the x value to start at the beginning of the row
-        y_value += square_size # moves the y value down the next row
+        y_value += square_size + line_size # moves the y value down the next row
 
 HermannGrid()
