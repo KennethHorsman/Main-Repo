@@ -52,9 +52,8 @@ def main():
 def getInteger(message, minimum, maximum):
     getting_input = True
     while getting_input:
-        user_input = input(message)
         try:
-            value = int(user_input) # I actually don't know why this worked perfectly because you CAN turn a float into an integer
+            value = int(input(message)) # I actually don't know why this worked perfectly because you CAN turn a float into an integer
             if value >= minimum and value <= maximum:
                 return value
             else:
@@ -76,8 +75,8 @@ def Curving_Squares():
     circ_x = CENTER_WIDTH - (curr_diameter / 2)
     circ_y = CENTER_WIDTH - (curr_diameter / 2)
 
-    setOutline(64,64,64); setFill("white") # Note to self: The fill color can be set to ‘blank’ by calling setFill(None)
-    while num_rings > 0:
+    setOutline(64,64,64); setFill(None)
+    for ring in range(0, num_rings):
         setWidth(curr_line_width)
         arc(circ_x,circ_y, curr_diameter, curr_diameter, 0,359.99) # If I put 360, nothing is displayed.
 
@@ -85,7 +84,6 @@ def Curving_Squares():
         circ_x -= (DIAMETER_INCREASE / 2)
         circ_y -= (DIAMETER_INCREASE / 2)
         curr_line_width *= 1.1 # Ending line width will be just over 6.7
-        num_rings -= 1
 
     ### SQUARES ###
     num_squares = 3
@@ -93,7 +91,7 @@ def Curving_Squares():
     square_offset = 384 / 2 # The 3 squares have a width of 384, 256, and 128.
 
     setOutline(60,0,80)
-    while num_squares > 0:
+    for square in range (0, num_squares):
         setWidth(curr_line_width)
         line(CENTER_WIDTH-square_offset, CENTER_WIDTH-square_offset, # Top left
             CENTER_WIDTH+square_offset, CENTER_WIDTH-square_offset, # Top right
@@ -103,7 +101,6 @@ def Curving_Squares():
         
         square_offset -= 64 # Half of the difference in width between each square (128).
         curr_line_width -= 1
-        num_squares -= 1
 
 def Hermann_Grid():
     resize(512,512)
@@ -180,19 +177,19 @@ def Cafe_Wall():
     setWidth(LINE_WIDTH)
     while num_rows > 0:
         if num_rows in aligned_left_rows:
-            offset = 0
+            offset = 0 - (LINE_WIDTH / 2)
             rect(offset,curr_y, SQ_SIZE, SQ_SIZE)
             DrawSquares(offset + (SQ_SIZE * 2), curr_y, SQ_SIZE, LINE_WIDTH)
         elif num_rows in even_rows:
-            offset = 27 - 1
+            offset = 27 - (LINE_WIDTH / 2)
             rect(offset,curr_y, SQ_SIZE, SQ_SIZE)
             DrawSquares(offset + (SQ_SIZE * 2), curr_y, SQ_SIZE, LINE_WIDTH)
         else: # if num_rows in remaining_rows:
-            offset = 42 - 1
+            offset = 42 - (LINE_WIDTH / 2)
             rect(offset,curr_y, SQ_SIZE, SQ_SIZE)
             DrawSquares(offset + (SQ_SIZE * 2), curr_y, SQ_SIZE, LINE_WIDTH)
 
-        line_height = curr_y + SQ_SIZE - 1
+        line_height = curr_y + SQ_SIZE - (LINE_WIDTH / 2) # The minus 1 is to counter the starting position of 1.
         line(0,line_height, getWidth(),line_height)
         curr_y += SQ_SIZE
         num_rows -= 1
