@@ -45,16 +45,18 @@ def main():
                 Bulging_Checkerboard()
             case 0:
                 print("You have exited the program.")
-                close() # Alternative solution: Set getting_selection to False and calling close() outside the loop.
+                getting_selection = False
+    
+    close() # Alternative solution: Set getting_selection to False and calling close() outside the loop.
 
 def getInteger(message, minimum, maximum):
     getting_input = True
     while getting_input:
         user_input = input(message)
         try:
-            int(user_input) # I actually don't know why this worked perfectly because you CAN turn a float into an integer
-            if int(user_input) >= minimum and int(user_input) <= maximum:
-                return int(user_input)
+            value = int(user_input) # I actually don't know why this worked perfectly because you CAN turn a float into an integer
+            if value >= minimum and value <= maximum:
+                return value
             else:
                 print(f"Error: Please enter a number between {minimum} and {maximum}.")
         except:
