@@ -74,7 +74,7 @@ def Curving_Squares():
     circ_x = CENTER_WIDTH - (curr_diameter / 2)
     circ_y = CENTER_WIDTH - (curr_diameter / 2)
 
-    setOutline(64,64,64); setFill("white")
+    setOutline(64,64,64); setFill("white") # Note to self: The fill color can be set to ‘blank’ by calling setFill(None)
     while num_rings > 0:
         setWidth(curr_line_width)
         arc(circ_x,circ_y, curr_diameter, curr_diameter, 0,359.99) # If I put 360, nothing is displayed.
