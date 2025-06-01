@@ -47,7 +47,7 @@ def main():
                 print("You have exited the program.")
                 getting_selection = False
     
-    close() # Alternative solution: Set getting_selection to False and calling close() outside the loop.
+    close()
 
 def getInteger(message, minimum, maximum):
     getting_input = True
@@ -92,7 +92,7 @@ def Curving_Squares():
 
     setOutline(60,0,80)
     for square in range (0, num_squares):
-        setWidth(curr_line_width)
+        setWidth(curr_line_width) ### Replace with a none fill rectangle
         line(CENTER_WIDTH-square_offset, CENTER_WIDTH-square_offset, # Top left
             CENTER_WIDTH+square_offset, CENTER_WIDTH-square_offset, # Top right
             CENTER_WIDTH+square_offset, CENTER_WIDTH+square_offset, # Bottom right
@@ -132,8 +132,8 @@ def HG_DrawLines(num_lines, type, square_size, line_size): # In the example, the
         setWidth(curr_line_size) 
         line_offset = curr_line_size / 2 # Line offset is required because otherwise only half the line would show around the edges.
 
-        if type == "vertical":
-            y2 = getHeight()
+        if type == "vertical": 
+            y2 = getHeight() # It would be more efficient to have two if statements outside the while loop that calculate this.
             line(x1+line_offset, y1,  x2+line_offset, y2)
             x1 += curr_line_size + square_size
             x2 += curr_line_size + square_size
@@ -204,7 +204,7 @@ def Bulging_Checkerboard():
     CIRC_OFFSET = 2
     ROWS = getHeight() // SQ_SIZE # Results in 12
     COLS = getWidth() // SQ_SIZE # Results in 16
-    CIRCLES_DICT = {"UPPERLEFT" : ("BOTTOMLEFT", "TOPRIGHT"),
+    CIRCLES_DICT = {"UPPERLEFT" : ("BOTTOMLEFT", "TOPRIGHT"), # Sector : Circles Location
                     "UPPERRIGHT" : ("TOPLEFT", "BOTTOMRIGHT"),
                     "LOWERLEFT" : ("TOPLEFT", "BOTTOMRIGHT"),
                     "LOWERRIGHT" : ("TOPRIGHT", "BOTTOMLEFT"),

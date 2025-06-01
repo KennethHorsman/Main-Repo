@@ -21,6 +21,7 @@ def main():
             getting_values = False
     
     list_of_values.reverse()
+    
     print("Values listed in reverse order:")
     for value in list_of_values:
         print(value)

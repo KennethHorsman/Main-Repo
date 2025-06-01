@@ -1,12 +1,17 @@
-#  CPSC 217 Exercise 4: Display a message that includes ordinal numbers
+# CPSC 217 Exercise 4: Display a message that includes ordinal numbers
 # Kenneth Horsman (UCID: 30260797)
 
 def int2ordinal(integer):
-  last_digit = integer % 100
-  suffix_dict = {(11,12,13) : "th", 
+  special_numbers = (11,12,13)
+
+  last_digit = integer % 100 
+  if last_digit not in special_numbers:
+    last_digit %= 10 
+
+  suffix_dict = {special_numbers : "th", # Apparently only using a tuple will work and not a list
                  1 : "st", 
                  2 : "nd", 
-                 3 : "rd"} # Apparently only using a tuple will work for the first key, not a list
+                 3 : "rd"} 
 
   if last_digit in suffix_dict:
     return f"{integer}{suffix_dict[last_digit]}"
