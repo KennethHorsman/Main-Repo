@@ -1,3 +1,4 @@
+'Kenneth Horsman (UCID: 30260797)'
 #
 #  Viper: A competative variant of Snake 
 #
@@ -599,12 +600,73 @@ def loadImages():
 ##
 ###############################################################################
 
+#
+# Restrict the length of the snake to its maximum length.
+#
+# Parameters:
+#   queue: The queue of (x, y) coordinate pairs for the snake.
+#   max_length: The maximum length of the snake.
+#
+# Returns:
+#   queue[2:]: The provided queue, excluding the first (x, y) coordinate pair, if 
+#   the length of the snake was calculated as being greater than the maximum length.
+#   queue: The provided queue with no modifications, if the length of the snake was 
+#   calculated as being less than the maximum length.
+#
+def restrictLength(queue, max_length):
+  # new (x,y) coords are added to the end of the queue
+  # This might be horribly inefficient but it seems to be an accurate measurement?
 
+  x_movement = 0
+  y_movement = 0
+  prev_x = queue[0]
+  prev_y = queue[1]
 
-
-
-
-
+  for x in queue[::2]: # The ::2 takes every second element until the end of the list
+    if x != prev_x:
+      x_movement += abs(x - prev_x) # the abs prevents accidentally subtracting from the movement
+      prev_x = x
+  
+  for y in queue[1::2]:
+    if y != prev_y:
+      y_movement += abs(y - prev_y)
+      prev_y = y
+    
+  if (x_movement + y_movement) > max_length:
+    return queue[2:] # removes first two elements (if its checking every time a new pair is added)
+  else:
+    return queue
+  
+  #
+  # Does line segment (ax, ay, bx, by) collide with any line segments 
+  # that connect adjacent points in the list of points?
+  #
+  # Parameters:
+  #   (ax, ay, bx, by): The head of the snake, where (ax, ay) is the same as (bx, by).
+  #   queue: The list of (x, y) coordinate pairs for the snake.
+  #   
+  # Returns:
+  #   True: A boolean used for updating the p1_lost variable if the snake
+  #   collides with itself.
+  #   False: A boolean used to indicate that the p1_lost variable does 
+  #   not need to be updated.
+  #
+def CollisionTest(ax, ay, bx, by, queue): # This took so long
+  if len(queue) <= 3: # This will only ever be the case when passing 1-3 lists from e_queues
+    for list in queue:
+      for pos in range(0, len(list) - 6, 2): # excluding the last two pairs, advancing the pos by 2 to get to the next pair (-6 prevents the +2 from reaching the neck)
+        cx = list[pos]; cy = list[pos+1]
+        dx = list[pos+2]; dy = list[pos+3]
+        if doIntersect(ax,ay, bx,by, cx,cy, dx,dy):
+          return True
+  else: 
+    for pos in range(0, len(queue) - 6, 2): # excluding the last two pairs, advancing the pos by 2 to get to the next pair (-6 prevents the +2 from reaching the neck)
+      cx = queue[pos]; cy = queue[pos+1]
+      dx = queue[pos+2]; dy = queue[pos+3]
+      if doIntersect(ax,ay, bx,by, cx,cy, dx,dy):
+        return True
+  
+  return False
 
 
 ###############################################################################
@@ -767,26 +829,46 @@ def main():
     #
     # Part 1: A Moving Dot...
     #
+    if not p1_lost:
+      p1_x = p1_x + cos(p1_heading) * speed * elapsed
+      p1_y = p1_y + sin(p1_heading) * speed * elapsed
 
     #
     # Part 2: A Long and Permanent Line
     #
+    if not p1_lost:
+      p1_queue.append(p1_x)
+      p1_queue.append(p1_y)
 
     #
     # Part 3: A Growing Snake
     #
+    if not p1_lost:
+      p1_queue = restrictLength(p1_queue, max_length)
 
     #
     # Part 4: Colliding with Walls
     #
+    if p1_x > 799 or p1_x < 0:
+      p1_lost = True
+    
+    if p1_y > 599 or p1_y < 0:
+      p1_lost = True
 
     #
     # Part 5: Colliding with Yourself
     #
+    if not p1_lost:
+      if len(p1_queue) >= 10: # waiting until theres two pairs at the back to form a line plus the head and the point behind it, with a gap in between
+        p1_lost = CollisionTest(p1_x,p1_y, p1_queue[-4],p1_queue[-3],  p1_queue[:-2])
 
     #
     # Part 6: Colliding with Other Snakes
     #
+    if not p1_lost:
+      if len(p1_queue) >= 10:
+        p1_lost = CollisionTest(p1_x,p1_y, p1_queue[-4],p1_queue[-3],  e_queues)
+
 
 ###############################################################################
 ##
@@ -1025,4 +1107,3 @@ def main():
         i = 0
 
 main()
-

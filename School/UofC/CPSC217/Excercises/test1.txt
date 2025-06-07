@@ -1,0 +1,6 @@
+carrot
+celery
+pepper
+onion
+cauliflower
+tomato

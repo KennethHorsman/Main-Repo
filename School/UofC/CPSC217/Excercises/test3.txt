@@ -1,0 +1,6 @@
+X, Midterm, Final, Course
+Bob, 25, 60, 85
+John, 0, 55, 55
+Sarah, 35, 65, 100
+Jonathan, 35, 65, 100
+Jen, 1, 2, 3
