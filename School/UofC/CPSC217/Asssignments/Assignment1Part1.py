@@ -1,6 +1,4 @@
 '''
-Kenneth Horsman (UCID: 30260797)
-
 In this part of the assignment, you will create a small graphical Python program. The program will read
 two integers as input from the user. Its output will be a “smiley” (loosely defined) centered on the
 position specified by the user. For example, if the user enters 400 and 300 as input, then the face
@@ -34,19 +32,54 @@ def main():
     print('This program takes coordinates as input and display a smiley face at that location.\n'
     'Note: The default window size is 800 x 600.')
 
-    # x_coord = get_coord("x")
-    # y_coord = get_coord("y")
+    x = get_coord("x")
+    y = get_coord("y")
 
-    x_coord = 400
-    y_coord = 300
+    ### REFERENCES ###
+    HEAD_OFFSET = 150
+    HEAD_SIZE = HEAD_OFFSET * 2
+
+    # Ear Offset
+    EO1 = 175; EO2 = 125; EO3 = 100
+
+    # Eye Offset
+    I_WIDTH = 50; I_HEIGHT = 40
+    IO1 = 100
+    IO2 = 50
 
     ### SHAPES ###
-    setOutline(222,184,135)
-    setFill(222,184,135)
-    polygon(x_coord-225,y_coord-225, x_coord-200,y_coord-150, x_coord-175,y_coord-25, x_coord-100,y_coord-175) # left ear
+    setFill(0,0, 150)
+    rect(0,0, 800,600)
+
+    setOutline(225,190,135)
+    setFill(225,190,135)
+    polygon(x-EO1,y-EO1, x-EO2,y, x,y-EO3) # left ear
+    polygon(x+EO1,y-EO1, x+EO2,y, x,y-EO3) # right ear
 
     setFill(238,197,145)
-    ellipse(x_coord-200, y_coord-200, 400, 400) # base of head
+    ellipse(x-HEAD_OFFSET, y-HEAD_OFFSET, HEAD_SIZE, HEAD_SIZE) # base of head
+
+    #setFill(135,200,135)
+    #pieSlice(x-IO1,y-I_HEIGHT, I_WIDTH,y-I_HEIGHT, 180, 180)
+
+    setFill(255,255,255)
+    pieSlice(x-IO1,y-IO2, I_WIDTH,I_HEIGHT, 180, 180) # left eye
+    pieSlice(x+IO1-I_WIDTH,y-IO2, I_WIDTH,I_HEIGHT, 180, 180) # right eye
+
+    setOutline(255,255,255); setFill(135,200,135)
+    ellipse(x-IO1+20,y-IO2+20, 20, 20) # left iris
+    ellipse(x+IO1-30,y-IO2+20, 20, 20) # right iris
+
+    setOutline(0,0,0), setFill(0,0,0)
+    ellipse(x-IO1+30,y-IO2+25, 5, 5) # left iris
+    ellipse(x+IO1-20,y-IO2+25, 5, 5) # right iris
+
+    polygon(x-20,y, x+20,y, x,y+30) # nose
+    line(x,y+30, x-50,y+30) # left whisker 1
+    line(x,y+30, x-50,y+40) # left whisker 1
+    line(x,y+30, x+50,y+30) # right whisker 1
+    line(x,y+30, x+50,y+40) # right whisker 2
+
 
 def get_coord(type):
     getting_coord = True

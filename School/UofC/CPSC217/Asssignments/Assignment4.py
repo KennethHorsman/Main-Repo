@@ -1,3 +1,6 @@
+import tkinter
+import SimpleGraphics
+
 """
 Kenneth Horsman (UCID: 30260797)
 """
