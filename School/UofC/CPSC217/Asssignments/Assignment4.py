@@ -2,6 +2,9 @@ from SimpleGraphics import *
 import _tkinter
 import math # It doesn't say we cant!
 
+import os
+os.chdir(os.path.dirname(__file__))  # changes cwd to the script’s folder
+
 """
 Kenneth Horsman (UCID: 30260797)
 """
@@ -14,10 +17,11 @@ Kenneth Horsman (UCID: 30260797)
 # use constants where helpful and do NOT ever use break or continue
 def main():
     output_name = "output.okti"
-    image = "tiny.png"
+    input_file = "differences_small.ppm"
 
     try:
-        loadImage(image)
+        image = loadImage(input_file)
+        drawImage(image, 0, 0)
     except _tkinter.TclError:
         print("Error: File unsupported or not found. Please try a diffferent file.")
         close()
@@ -25,14 +29,15 @@ def main():
         print("Unknown error. Please try again.")
         close()
 
-    drawImage(image) # No idea why we're drawing the image
     encodeOKTI(image, output_name)
+
+    print("output.okti successfully created.")
 
     return
 
 def encodeOKTI(image, fname):
-    WIDTH = image.getWidth()
-    HEIGHT = image.getHeight()
+    WIDTH = getWidth(image)
+    HEIGHT = getHeight(image)
     seen_colors = [(0,0,0)]
     prev_pixel = (0,0,0)
     x = 0; y = 0
@@ -41,10 +46,9 @@ def encodeOKTI(image, fname):
         file.write("okti\n")
         file.write(f"{WIDTH} {HEIGHT}\n")
 
-        while x <= WIDTH: # starting at top row and going left to right
-            while y <= HEIGHT:
+        while y < HEIGHT: # starting at top row and going left to right
+            while x < WIDTH:
                 pixel = getPixel(image, x, y)
-                red, green, blue = pixel[0], pixel[1], pixel[2]
 
                 method = determineMethod(pixel, seen_colors, prev_pixel)
 
@@ -54,9 +58,9 @@ def encodeOKTI(image, fname):
                     case 2:
                         'def seen color'
                     case 3:
-                        'def difference'
+                        newline = smallDifference(pixel, prev_pixel)
                     case 4:
-                        newline = fullRGB(red, green, blue)
+                        newline = fullRGB(pixel)
                     
                 file.write(f"{newline}\n")
                 x += 1
@@ -64,16 +68,23 @@ def encodeOKTI(image, fname):
             x = 0
 
 def determineMethod(pixel, seen_colors, prev_pixel):
+    red, green, blue = unpackRGB(pixel)
+    prev_red, prev_green, prev_blue = unpackRGB(prev_pixel)
+
     if pixel == prev_pixel:
         return 1
     elif pixel in seen_colors:
         return 2
-    elif math.isclose(pixel[0], prev_pixel, 7) and math.isclose(pixel[1], prev_pixel, 7) and math.isclose(pixel[2], prev_pixel, 7):
+    elif (-8 <= (red - prev_red) <= 7 and # because f - 8 = 7, but 0 - 8 = -8
+        -8 <= (green - prev_green) <= 7 and
+        -8 <= (blue - prev_blue) <= 7):
         return 3
     else:
         return 4
 
-def fullRGB(red, green, blue):
+def fullRGB(pixel):
+    red, green, blue = unpackRGB(pixel)
+
     red_hex = "%02x" % red
     green_hex = "%02x" % green
     blue_hex = "%02x" % blue
@@ -81,19 +92,23 @@ def fullRGB(red, green, blue):
     newline = f"p{red_hex}{green_hex}{blue_hex}"
     return newline
 
-# test using PNG ideally or PPM if this doesnt work
-# hexadecimal conversation can be done b %x to indicated integer should be in base 16, or %02x to account for leading 0
-# concatenate strings when constructing character sequences needed for some/all of the pixel types
+def smallDifference(pixel, prev_pixel):
+    red, green, blue = unpackRGB(pixel)
+    prev_red, prev_green, prev_blue = unpackRGB(prev_pixel)
 
-# FULL RGB
-# 7 characters starting with a 'p' followed by 6 hexadecimal digits
-# 2 red, 2 green, 2 blue, ranging from 0 to 255 (ff)
+    diff_red = "%x" % ((red - prev_red) + 8) # 42 - 50 = -8 and +8 turns into 0 (0 - 8 = -8)
+    diff_green = "%x" % ((green - prev_green) + 8) # 57 - 50 = 7 and +8 turns into f/15 (f - 8 = 7)
+    diff_blue = "%x" % ((blue - prev_blue) + 8) # 46 - 50 = -4 and +8 turns into 4 (4 - 8 = -4)
 
-# DIFFERENCE
-# begins with 'd' followed by 3 hexadecimal digits
-# curr pixel intalized to black (0,0,0) before loading begins to allow first pixel in image to be a difference from previous 
-# difference in red, green, blue where the curr pixel is 8 bits smaller than the difference
-# so if you do d0f4, the curr pixel is 8 less red (0 - 8 = -8), 7 more green (f - 8 = 7), and 4 less blue (4 - 8 = -4)
+    newline = f"d{diff_red}{diff_green}{diff_blue}"
+    return newline
+
+def unpackRGB(pixel):
+    red = pixel[0]
+    green = pixel[1]
+    blue = pixel[2]
+
+    return (red, green, blue)
 
 # RUN
 # two variations: 'r' plus single hex digit to represent number of additional copies to be included (up to 15)

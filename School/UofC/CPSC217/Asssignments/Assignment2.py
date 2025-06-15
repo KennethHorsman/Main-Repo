@@ -47,7 +47,7 @@ def main():
                 print("You have exited the program.")
                 getting_selection = False
     
-    close() # Alternative solution: Set getting_selection to False and calling close() outside the loop.
+    close()
 
 def getInteger(message, minimum, maximum):
     getting_input = True

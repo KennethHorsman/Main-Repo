@@ -1,4 +1,7 @@
 'Kenneth Horsman (UCID: 30260797)'
+import os
+os.chdir(os.path.dirname(__file__))  # changes cwd to the script’s folder
+
 #
 #  Viper: A competative variant of Snake 
 #
