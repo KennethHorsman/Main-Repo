@@ -1,17 +1,39 @@
+from SimpleGraphics import *
 import tkinter
-import SimpleGraphics
 
 """
 Kenneth Horsman (UCID: 30260797)
 """
 
 # load image object
-# draw image
+# draw image (drawImage(img, UL x, UL y) to display the chosen file for some reason)
 # if error, tkinter tclerror exception raised with error message and quit
 # make sure to close every opened file
 # each func needs description and parameters and result
 # use constants where helpful and do NOT ever use break or continue
+def main():
+    output_name = "output.okti"
+    input_file = "tiny.png"
 
+    with open(input_file) as image:
+        drawImage(loadImage(image)) # No idea why we're drawing the image
+        encodeOKTI(image, output_name)
+
+    return
+
+def encodeOKTI(image, fname):
+    width = image.getWidth()
+    height = image.getHeight()
+    seen_colors = [(0,0,0)]
+    prev_pixel = (0,0,0)
+    x = 0; y = 0
+
+    with open(fname, "w") as file: # Automatically closes when done
+        file.write("okti\n")
+        file.write(f"{width} {height}\n")
+
+        # use getpixel and putpixel?
+        # unpack the rgb tuple provided by getpixel
 
 # test using PNG ideally or PPM if this doesnt work
 # hexadecimal conversation can be done b %x to indicated integer should be in base 16, or %02x to account for leading 0
@@ -76,3 +98,6 @@ Kenneth Horsman (UCID: 30260797)
 
 # always output to output.okti
 # websites or fc command can be used to check difference in files
+
+if __name__ == "__main__":
+    main()
