@@ -15,7 +15,7 @@ def main():
     output_name = "output.okti"
     input_file = "tiny.png"
 
-    with open(input_file) as image:
+    with open(input_file) as image: # Not sure if the file needs to be opened
         drawImage(loadImage(image)) # No idea why we're drawing the image
         encodeOKTI(image, output_name)
 
@@ -31,6 +31,10 @@ def encodeOKTI(image, fname):
     with open(fname, "w") as file: # Automatically closes when done
         file.write("okti\n")
         file.write(f"{width} {height}\n")
+
+        while x <= width:
+            while y <= height:
+                print('')
 
         # use getpixel and putpixel?
         # unpack the rgb tuple provided by getpixel
