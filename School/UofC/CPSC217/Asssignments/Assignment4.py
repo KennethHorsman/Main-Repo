@@ -1,5 +1,5 @@
 from SimpleGraphics import *
-import tkinter
+import _tkinter
 import math # It doesn't say we cant!
 
 """
@@ -14,11 +14,19 @@ Kenneth Horsman (UCID: 30260797)
 # use constants where helpful and do NOT ever use break or continue
 def main():
     output_name = "output.okti"
-    input_file = "tiny.png"
+    image = "tiny.png"
 
-    with open(input_file) as image: # Not sure if the file needs to be opened
-        drawImage(loadImage(image)) # No idea why we're drawing the image
-        encodeOKTI(image, output_name)
+    try:
+        loadImage(image)
+    except _tkinter.TclError:
+        print("Error: File unsupported or not found. Please try a diffferent file.")
+        close()
+    except:
+        print("Unknown error. Please try again.")
+        close()
+
+    drawImage(image) # No idea why we're drawing the image
+    encodeOKTI(image, output_name)
 
     return
 
@@ -48,8 +56,9 @@ def encodeOKTI(image, fname):
                     case 3:
                         'def difference'
                     case 4:
-                        fullRGB(red, green, blue)
+                        newline = fullRGB(red, green, blue)
                     
+                file.write(f"{newline}\n")
                 x += 1
             y += 1
             x = 0
@@ -63,39 +72,18 @@ def determineMethod(pixel, seen_colors, prev_pixel):
         return 3
     else:
         return 4
-    
+
 def fullRGB(red, green, blue):
     red_hex = "%02x" % red
     green_hex = "%02x" % green
     blue_hex = "%02x" % blue
 
-    new_string = f"p{red_hex}{green_hex}{blue_hex}"
-    return new_string
+    newline = f"p{red_hex}{green_hex}{blue_hex}"
+    return newline
 
 # test using PNG ideally or PPM if this doesnt work
 # hexadecimal conversation can be done b %x to indicated integer should be in base 16, or %02x to account for leading 0
 # concatenate strings when constructing character sequences needed for some/all of the pixel types
-
-# create encoding function with image and name of new file
-
-# get WIDTH
-# get HEIGHT
-
-# get prev pixel
-# list of seen colors
-
-# for each pixel in the image
-# get pixel function with getred etc?????
-
-# write okti
-# write WIDTH and HEIGHT
-# each line is a pixel reference, starting upper left and ending lower right, moving left to right
-
-# ORDER:
-# IF color matches prev pixel, use a run if one or more copies of the prev pixel
-# IF color matches one of prev encountered pixels, use one of those
-# IF difference is sufficiently small, use rgb difference method
-# IF none, use full set of RGB values
 
 # FULL RGB
 # 7 characters starting with a 'p' followed by 6 hexadecimal digits
