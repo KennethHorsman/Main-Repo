@@ -63,6 +63,7 @@ def encodeOKTI(image, fname):
                         newline = fullRGB(pixel)
                     
                 file.write(f"{newline}\n")
+                prev_pixel = pixel
                 x += 1
             y += 1
             x = 0
@@ -101,6 +102,16 @@ def smallDifference(pixel, prev_pixel):
     diff_blue = "%x" % ((blue - prev_blue) + 8) # 46 - 50 = -4 and +8 turns into 4 (4 - 8 = -4)
 
     newline = f"d{diff_red}{diff_green}{diff_blue}"
+    return newline
+
+def seenColor(pixel, seen_colors):
+    index = seen_colors.index(pixel)
+
+    if index <= 15:
+        newline = f"i{"%02x" % index}"
+    else:
+        newline = f"I{"%x" % index}"    
+    
     return newline
 
 def unpackRGB(pixel):
