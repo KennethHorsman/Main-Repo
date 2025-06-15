@@ -1,5 +1,6 @@
 from SimpleGraphics import *
 import tkinter
+import math # It doesn't say we cant!
 
 """
 Kenneth Horsman (UCID: 30260797)
@@ -22,22 +23,54 @@ def main():
     return
 
 def encodeOKTI(image, fname):
-    width = image.getWidth()
-    height = image.getHeight()
+    WIDTH = image.getWidth()
+    HEIGHT = image.getHeight()
     seen_colors = [(0,0,0)]
     prev_pixel = (0,0,0)
     x = 0; y = 0
 
     with open(fname, "w") as file: # Automatically closes when done
         file.write("okti\n")
-        file.write(f"{width} {height}\n")
+        file.write(f"{WIDTH} {HEIGHT}\n")
 
-        while x <= width:
-            while y <= height:
-                print('')
+        while x <= WIDTH: # starting at top row and going left to right
+            while y <= HEIGHT:
+                pixel = getPixel(image, x, y)
+                red, green, blue = pixel[0], pixel[1], pixel[2]
 
-        # use getpixel and putpixel?
-        # unpack the rgb tuple provided by getpixel
+                method = determineMethod(pixel, seen_colors, prev_pixel)
+
+                match method:
+                    case 1:
+                        'def prev color'
+                    case 2:
+                        'def seen color'
+                    case 3:
+                        'def difference'
+                    case 4:
+                        fullRGB(red, green, blue)
+                    
+                x += 1
+            y += 1
+            x = 0
+
+def determineMethod(pixel, seen_colors, prev_pixel):
+    if pixel == prev_pixel:
+        return 1
+    elif pixel in seen_colors:
+        return 2
+    elif math.isclose(pixel[0], prev_pixel, 7) and math.isclose(pixel[1], prev_pixel, 7) and math.isclose(pixel[2], prev_pixel, 7):
+        return 3
+    else:
+        return 4
+    
+def fullRGB(red, green, blue):
+    red_hex = "%02x" % red
+    green_hex = "%02x" % green
+    blue_hex = "%02x" % blue
+
+    new_string = f"p{red_hex}{green_hex}{blue_hex}"
+    return new_string
 
 # test using PNG ideally or PPM if this doesnt work
 # hexadecimal conversation can be done b %x to indicated integer should be in base 16, or %02x to account for leading 0
@@ -45,8 +78,8 @@ def encodeOKTI(image, fname):
 
 # create encoding function with image and name of new file
 
-# get width
-# get height
+# get WIDTH
+# get HEIGHT
 
 # get prev pixel
 # list of seen colors
@@ -55,7 +88,7 @@ def encodeOKTI(image, fname):
 # get pixel function with getred etc?????
 
 # write okti
-# write width and height
+# write WIDTH and HEIGHT
 # each line is a pixel reference, starting upper left and ending lower right, moving left to right
 
 # ORDER:
