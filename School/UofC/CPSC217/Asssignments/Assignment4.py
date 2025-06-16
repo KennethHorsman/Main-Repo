@@ -1,23 +1,28 @@
 from SimpleGraphics import *
 import _tkinter
-import math # It doesn't say we cant!
+import sys # Since we need to check for command line arguments
 
 import os
-os.chdir(os.path.dirname(__file__))  # changes cwd to the script’s folder
+os.chdir(os.path.dirname(__file__))  # changes cwd to the script’s folder if you're not working off root directory
 
 """
 Kenneth Horsman (UCID: 30260797)
+
+ENCOUNTERED PROBLEM:
+1. The smallindices_small.okti file should only use p and i pixels, but it has one r pixel.
+
 """
 
-# load image object
-# draw image (drawImage(img, UL x, UL y) to display the chosen file for some reason)
-# if error, tkinter tclerror exception raised with error message and quit
-# make sure to close every opened file
-# each func needs description and parameters and result
-# use constants where helpful and do NOT ever use break or continue
 def main():
     output_name = "output.okti"
-    input_file = "differences_small.ppm"
+
+    if len(sys.argv) == 2:
+        input_file = sys.argv[1] # Second line of the arguments, the first being the script name
+    elif len(sys.argv) > 2:
+        print("Error: Too many arguments provided.")
+        quit() # I could loop this error, and the below two errors, but the instructions say to quit.
+    else:
+        input_file = input("Enter a file name (including extension): ")
 
     try:
         image = loadImage(input_file)
@@ -25,16 +30,27 @@ def main():
     except _tkinter.TclError:
         print("Error: File unsupported or not found. Please try a diffferent file.")
         close()
+        quit()
     except:
         print("Unknown error. Please try again.")
         close()
+        quit()
 
     encodeOKTI(image, output_name)
 
     print("output.okti successfully created.")
+    quit()
 
-    return
+"""
+Encodes the provided image into OKTI format.
 
+Paramters:
+    image - the provided image to encode.
+    fname - the name of the file to output to.
+
+Returns:
+    N/A
+"""
 def encodeOKTI(image, fname):
     WIDTH = getWidth(image)
     HEIGHT = getHeight(image)
@@ -54,23 +70,49 @@ def encodeOKTI(image, fname):
 
                 match method:
                     case 1:
-                        'def prev color'
+                        newline, skips = copyColor(pixel, x, y, image, WIDTH, HEIGHT)
+                        file.write(f"{newline}\n")
+                        for _ in range(skips):
+                            x += 1
+
                     case 2:
-                        'def seen color'
+                        newline = seenColor(pixel, seen_colors)
+                        file.write(f"{newline}\n")
                     case 3:
                         newline = smallDifference(pixel, prev_pixel)
+                        file.write(f"{newline}\n")
                     case 4:
                         newline = fullRGB(pixel)
-                    
-                file.write(f"{newline}\n")
+                        file.write(f"{newline}\n")
+                        
+                if pixel not in seen_colors:
+                    seen_colors.insert(0, pixel)
+
+                if len(seen_colors) > 256:
+                    seen_colors.pop()
+
                 prev_pixel = pixel
                 x += 1
             y += 1
             x = 0
 
+"""
+Determines which of the four methods to use to encode a specific pixel.
+
+Parameters:
+    pixel - The current pixel to test.
+    seen_colors - The list of previously seen pixels.
+    prev_pixel - The previous pixel.
+
+Returns:
+    1 - Indicates a copy of the previous pixel.
+    2 - Indicates a previously seen pixel.
+    3 - Indicates a similar pixel to the previous one.
+    4 - Indicates none of the above are applicable.
+"""
 def determineMethod(pixel, seen_colors, prev_pixel):
-    red, green, blue = unpackRGB(pixel)
-    prev_red, prev_green, prev_blue = unpackRGB(prev_pixel)
+    red, green, blue = pixel
+    prev_red, prev_green, prev_blue = prev_pixel
 
     if pixel == prev_pixel:
         return 1
@@ -83,8 +125,17 @@ def determineMethod(pixel, seen_colors, prev_pixel):
     else:
         return 4
 
+"""
+Translates the current pixel into a full set of RGB values.
+
+Parameters:
+    pixel - The current pixel to test.
+
+Returns:
+    newline - The fully translated line to be inserted into the OKTI file.
+"""
 def fullRGB(pixel):
-    red, green, blue = unpackRGB(pixel)
+    red, green, blue = pixel
 
     red_hex = "%02x" % red
     green_hex = "%02x" % green
@@ -93,62 +144,89 @@ def fullRGB(pixel):
     newline = f"p{red_hex}{green_hex}{blue_hex}"
     return newline
 
-def smallDifference(pixel, prev_pixel):
-    red, green, blue = unpackRGB(pixel)
-    prev_red, prev_green, prev_blue = unpackRGB(prev_pixel)
+"""
+Translates the current pixel and the previous pixel into a difference of RGB values.
 
-    diff_red = "%x" % ((red - prev_red) + 8) # 42 - 50 = -8 and +8 turns into 0 (0 - 8 = -8)
-    diff_green = "%x" % ((green - prev_green) + 8) # 57 - 50 = 7 and +8 turns into f/15 (f - 8 = 7)
-    diff_blue = "%x" % ((blue - prev_blue) + 8) # 46 - 50 = -4 and +8 turns into 4 (4 - 8 = -4)
+Parameters:
+    pixel - The current pixel to test.
+    prev_pixel - The previous pixel.
+
+Returns:
+    newline - The fully translated line to be inserted into the OKTI file.
+"""
+def smallDifference(pixel, prev_pixel):
+    red, green, blue = pixel
+    prev_red, prev_green, prev_blue = prev_pixel
+
+    diff_red = "%x" % ((red - prev_red) + 8) 
+    diff_green = "%x" % ((green - prev_green) + 8) 
+    diff_blue = "%x" % ((blue - prev_blue) + 8)
 
     newline = f"d{diff_red}{diff_green}{diff_blue}"
     return newline
 
+"""
+Translates the current pixel into a full set of RGB values for the OKTI file.
+
+Parameters:
+    pixel - The current pixel to test.
+    seen_colors - The list of previously seen pixels.
+
+Returns:
+    newline - The fully translated line to be inserted into the OKTI file.
+"""
 def seenColor(pixel, seen_colors):
     index = seen_colors.index(pixel)
 
     if index <= 15:
-        newline = f"i{"%02x" % index}"
+        newline = f"i{"%x" % index}"
     else:
-        newline = f"I{"%x" % index}"    
+        newline = f"I{"%02x" % index}"    
     
     return newline
 
-def unpackRGB(pixel):
-    red = pixel[0]
-    green = pixel[1]
-    blue = pixel[2]
+"""
+Translates the current pixel into a full set of RGB values for the OKTI file.
 
-    return (red, green, blue)
+Parameters:
+    pixel - The current pixel to test.
+    x - The x position of the current pixel.
+    y - The y position of the current pixel.
+    image - The provided image to encode.
+    width - The width of the image.
+    height - The height of the image.
 
-# RUN
-# two variations: 'r' plus single hex digit to represent number of additional copies to be included (up to 15)
-# "R" with 2 hex digits that represent number of additional copies, being up to 255. Could span several rows.
-# intialize to black
+Returns:
+    newline - The fully translated line to be inserted into the OKTI file.
+    skips - The number of x coordinates to skip, based on the number of identical pixels.
+"""
+def copyColor(pixel, x, y, image, width, height):
+    run = 1 # Accounting for the initial run
+    temp_x = x; temp_y = y
+    get_next = True
 
-# COPY OF PREV
-# color inserted to front of list of previous colours (initalize with black), IF NOT IN LIST ALREADY
-# if length greater than 256, last color should be discarded to make room
-# 'i' plus single hex, being the index into the list of prev colors
-# 'I' two hex digits which ref the list of colors
+    while get_next:
+        temp_x += 1
 
-# use while loop instead of for loop
-# intitalize variables that represent x and y ahead of the loop
-# body of loop increases the pixels 
-# not sure how a run works because it may skip forward??
+        if temp_x == width:
+            temp_x = 0
+            temp_y += 1 # Simulating moving to the next row
 
-# if command line arg provided, that will be the name
-# if no cmd line, read name with input function
-# else, too many args provided and quit??
+        if temp_y == height:
+            get_next = False
+        
+        if getPixel(image, temp_x, temp_y) == pixel:
+            run += 1
+        else:
+            get_next = False
 
-# use the tiny files first
-# start with support for full RGB values
-# then diff from prev pixel
-# then run of identical pixels
-# then list of prev pixels
-
-# always output to output.okti
-# websites or fc command can be used to check difference in files
+    if run <= 15:
+        newline = f"r{"%x" % run}"
+    else:
+        newline = f"R{"%02x" % run}"
+    
+    skips = run - 1
+    return newline, skips
 
 if __name__ == "__main__":
     main()
