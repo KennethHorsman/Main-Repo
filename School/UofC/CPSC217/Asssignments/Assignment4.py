@@ -2,11 +2,10 @@ from SimpleGraphics import *
 import _tkinter
 import sys # Since we need to check for command line arguments
 
-import os
-os.chdir(os.path.dirname(__file__))  # changes cwd to the script’s folder if you're not working off root directory
-
 """
 Kenneth Horsman (UCID: 30260797)
+
+This program takes a .png or .ppm file as input and converts it into a .okti file.
 
 ENCOUNTERED PROBLEM:
 1. The smallindices_small.okti file should only use p and i pixels, but it has one r pixel.
