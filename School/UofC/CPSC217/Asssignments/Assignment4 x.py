@@ -61,7 +61,6 @@ Returns:
     N/A
 """
 def encodeOKTI(image, fname):
-    SCRIPT_TYPE = 0 ### ADDED: SET TO 0 FOR NORMAL, OR 1 FOR A+ ###
     WIDTH = getWidth(image)
     HEIGHT = getHeight(image)
     seen_colors = [(0,0,0)]
@@ -94,16 +93,11 @@ def encodeOKTI(image, fname):
                     case 4:
                         pixel_to_write = fullRGB(pixel)
 
-                if SCRIPT_TYPE == 1: ## ADDED ##
-                    if len((current_line + pixel_to_write)) < LINE_MAX:    
-                        current_line += pixel_to_write
-                    else:
-                        file.write(current_line + "\n")
-                        current_line = f"{pixel_to_write}"
-
-                if SCRIPT_TYPE == 0: ## ADDED ##
-                    file.write(pixel_to_write + "\n")  ## ADDED ##
-
+                if len((current_line + pixel_to_write)) < LINE_MAX:    
+                    current_line += pixel_to_write
+                else:
+                    file.write(current_line + "\n")
+                    current_line = f"{pixel_to_write}"
 
                 if pixel not in seen_colors:
                     seen_colors.insert(0, pixel)
@@ -115,11 +109,9 @@ def encodeOKTI(image, fname):
                 x += 1
             y += 1
             x = 0
-
-        if SCRIPT_TYPE == 1:  ## ADDED ##
-            if current_line: # The last line gets skipped without adding this
-                file.write(current_line + "\n")
-
+    
+        if current_line: # The last line gets skipped without adding this
+            file.write(current_line + "\n")
 
 """
 Determines which of the four methods to use to encode a specific pixel.
